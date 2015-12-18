@@ -1,47 +1,14 @@
 apply plugin: 'com.android.library'
 
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'xc-recycler-view'
-
-    publishedGroupId = 'com.xclib'
-    libraryName = 'XCRecyclerView'
-    artifact = 'xc-recycler-view'
-
-    libraryDescription = 'A expression for recycler view'
-
-    siteUrl = 'https://github.com/xiechao/XCRecyclerView'
-    gitUrl = 'https://github.com/xiechao/XCRecyclerView.git'
-
-    libraryVersion = '0.1.0'
-
-    developerId = 'xiechao'
-    developerName = 'Xie Chao'
-    developerEmail = 'xc9898@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
-
-//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
-
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion Integer.parseInt(COMPILE_SDK)
+    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+        versionName VERSION_NAME
+        versionCode Integer.parseInt(VERSION_CODE)
+        targetSdkVersion Integer.parseInt(TARGET_SDK)
+        minSdkVersion Integer.parseInt(MIN_SDK_LIBRARY)
     }
 }
 
@@ -55,5 +22,4 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
 }
 
-
-
+apply from: 'gradle-mvn-push.gradle'

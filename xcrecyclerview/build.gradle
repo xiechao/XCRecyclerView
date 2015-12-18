@@ -23,4 +23,3 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
 }
 
-apply from: './gradle-mvn-push.gradle'

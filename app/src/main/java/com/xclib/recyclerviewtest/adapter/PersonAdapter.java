@@ -17,10 +17,10 @@ public class PersonAdapter extends XCRecyclerViewBaseAdapter<Person> {
         setHasStableIds(true);
     }
 
-    @Override
-    public long getItemId(int position) {
-        return getItem(position).hashCode();
-    }
+//    @Override
+//    public long getItemId(int position) {
+//        return getItem(position).hashCode();
+//    }
 
     @Override
     public int getCommonItemViewType(int position, Person data) {

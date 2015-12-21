@@ -1,4 +1,4 @@
-package com.xclib.recyclerviewtest.model;
+package com.xclib.recyclerview;
 
 public interface ISectionData {
     String getSortKey();

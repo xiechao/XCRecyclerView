@@ -22,10 +22,8 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
     private static final int VIEW_TYPE_LOAD_MORE = 3000;
     private static final int LOAD_MORE_ANI_TIME = 300;
 
-    protected Context context;
     private boolean mIsLoading;
     private ArrayList<T> dataArrayList = new ArrayList<>();
-    private LayoutInflater inflater;
     private XCRecycleView.OnLoadMoreListener onLoadMoreListener;
     private ArrayList<View> headerViewList = new ArrayList<>();
     private ArrayList<View> footerViewList = new ArrayList<>();
@@ -34,8 +32,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
 
     @SuppressLint("InflateParams")
     public XCRecyclerViewBaseAdapter(Context context) {
-        this.context = context;
-        this.inflater = (LayoutInflater) context.getSystemService(
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
 
         loadMoreViewContainer = (RelativeLayout) inflater.inflate(R.layout.item_loading_container, null, false);
@@ -95,12 +92,12 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         } else if (viewType == VIEW_TYPE_LOAD_MORE) {
             return new LoadMoreViewHolder(loadMoreViewContainer);
         } else {
-            return onCommonCreateViewHolder(inflater.inflate(getViewResourceId(viewType), parent, false));
+            return onCommonCreateViewHolder(LayoutInflater.from(parent.getContext()).inflate(getCommonViewResourceId(viewType), parent, false));
         }
     }
 
 
-    protected abstract int getViewResourceId(int viewType);
+    protected abstract int getCommonViewResourceId(int viewType);
 
     protected abstract GTViewHolderBase onCommonCreateViewHolder(View view);
 
@@ -228,7 +225,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
 
         TranslateAnimation anim;
         // if (expand) {
-        anim = new TranslateAnimation(0.0f, 0.0f, 40 * context.getResources().getDisplayMetrics().scaledDensity, 0.0f);
+        anim = new TranslateAnimation(0.0f, 0.0f, 40 * v.getContext().getResources().getDisplayMetrics().scaledDensity, 0.0f);
         v.setVisibility(View.VISIBLE);
 
         anim.setAnimationListener(collapseListener);
@@ -246,7 +243,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         }
 
 
-        final int initialHeight = (int) (40 * context.getResources().getDisplayMetrics().scaledDensity);
+        final int initialHeight = (int) (40 * v.getContext().getResources().getDisplayMetrics().scaledDensity);
 
         Animation anim = new Animation() {
             @Override

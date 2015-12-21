@@ -2,19 +2,18 @@ package com.xclib.recyclerviewtest.model;
 
 import android.text.TextUtils;
 
+import com.xclib.recyclerview.ISectionData;
+
 public class Person implements ISectionData {
-        private String name;
-        private String email;
+    private String name;
 
-        public Person()
-        {
+    public Person() {
 
-        }
+    }
 
-        public Person(String name, String email) {
-            this.name = name;
-            this.email = email;
-        }
+    public Person(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -22,14 +21,6 @@ public class Person implements ISectionData {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     @Override

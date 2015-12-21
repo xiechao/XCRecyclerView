@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerviewtest.R;
-import com.xclib.recyclerviewtest.adapter.RecycleViewAdapter;
+import com.xclib.recyclerviewtest.adapter.TestRecycleViewAdapter;
 import com.xclib.recyclerviewtest.model.Person;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class ManagerGridLayoutActivity extends AppCompatActivity {
     XCRecycleView recycleView;
 
 
-    private RecycleViewAdapter recycleViewAdapter;
+    private TestRecycleViewAdapter testRecycleViewAdapter;
     private XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
         @Override
         public void onLoadMore() {
@@ -64,9 +64,7 @@ public class ManagerGridLayoutActivity extends AppCompatActivity {
 
         List<Person> users = new ArrayList<>();
         for (int i = 0; i < 29; i++) {
-            Person person = new Person();
-            person.setName("Name " + i);
-            person.setEmail("alibaba" + i + "@gmail.com");
+            Person person = new Person("Name " + i);
             users.add(person);
         }
 
@@ -75,9 +73,9 @@ public class ManagerGridLayoutActivity extends AppCompatActivity {
 
         recycleView.setLayoutManager(gridLayoutManager);
 
-        recycleViewAdapter = new RecycleViewAdapter(this, users);
+        testRecycleViewAdapter = new TestRecycleViewAdapter(this, users);
 
-        recycleView.setAdapter(recycleViewAdapter);
+        recycleView.setAdapter(testRecycleViewAdapter);
 
         recycleView.setOnLoadMoreListener(onLoadMoreListener);
     }
@@ -98,14 +96,12 @@ public class ManagerGridLayoutActivity extends AppCompatActivity {
                 Log.e("haint", "Load More 2");
 
                 List<Person> personList = new ArrayList<>();
-                for (int i = recycleViewAdapter.getCommonItemCount(); i < recycleViewAdapter.getCommonItemCount() + 30; i++) {
-                    Person person = new Person();
-                    person.setName("Name " + i);
-                    person.setEmail("alibaba" + i + "@gmail.com");
+                for (int i = testRecycleViewAdapter.getCommonItemCount(); i < testRecycleViewAdapter.getCommonItemCount() + 30; i++) {
+                    Person person = new Person("Name " + i);
                     personList.add(person);
                 }
 
-                recycleViewAdapter.addAll(personList);
+                testRecycleViewAdapter.addAll(personList);
 
                 recycleView.setLoadMoreEnd(true);
             }

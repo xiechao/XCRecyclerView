@@ -13,8 +13,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class RecycleViewAdapter  extends XCRecyclerViewBaseAdapter<Person> {
-    public RecycleViewAdapter(Context context, List<Person> personList) {
+public class TestRecycleViewAdapter extends XCRecyclerViewBaseAdapter<Person> {
+
+    public TestRecycleViewAdapter(Context context, List<Person> personList) {
         super(context);
 
         resetData(personList);
@@ -26,7 +27,7 @@ public class RecycleViewAdapter  extends XCRecyclerViewBaseAdapter<Person> {
     }
 
     @Override
-    protected int getViewResourceId(int viewType) {
+    protected int getCommonViewResourceId(int viewType) {
         return R.layout.item_layout_user;
     }
 
@@ -36,10 +37,8 @@ public class RecycleViewAdapter  extends XCRecyclerViewBaseAdapter<Person> {
     }
 
     public class TestViewHolder extends GTViewHolderBase {
-        @Bind(R.id.tvName)
+        @Bind(R.id.tv_name)
         TextView tvName;
-        @Bind(R.id.tvEmailId)
-        TextView tvEmailId;
 
         public TestViewHolder(View itemView) {
             super(itemView);
@@ -50,7 +49,6 @@ public class RecycleViewAdapter  extends XCRecyclerViewBaseAdapter<Person> {
         @Override
         public void render(Person data) {
             tvName.setText(data.getName());
-            tvEmailId.setText(data.getEmail());
         }
     }
 }

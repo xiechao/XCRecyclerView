@@ -1,26 +1,27 @@
-package com.xclib.recyclerviewtest;
+package com.xclib.recyclerviewtest.adapter;
 
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
 import com.xclib.recyclerview.XCRecyclerViewBaseAdapter;
-import com.xclib.recyclerviewtest.model.User;
+import com.xclib.recyclerviewtest.R;
+import com.xclib.recyclerviewtest.model.Person;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class RecycleViewAdapter extends XCRecyclerViewBaseAdapter<User> {
-    public RecycleViewAdapter(Context context, List<User> userList) {
+public class RecycleViewAdapter  extends XCRecyclerViewBaseAdapter<Person> {
+    public RecycleViewAdapter(Context context, List<Person> personList) {
         super(context);
 
-        resetData(userList);
+        resetData(personList);
     }
 
     @Override
-    public int getCommonItemViewType(int position, User data) {
+    public int getCommonItemViewType(int position, Person data) {
         return 0;
     }
 
@@ -47,7 +48,7 @@ public class RecycleViewAdapter extends XCRecyclerViewBaseAdapter<User> {
         }
 
         @Override
-        public void render(User data) {
+        public void render(Person data) {
             tvName.setText(data.getName());
             tvEmailId.setText(data.getEmail());
         }

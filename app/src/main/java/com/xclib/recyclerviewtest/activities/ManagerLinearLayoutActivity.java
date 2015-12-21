@@ -1,16 +1,18 @@
-package com.xclib.recyclerviewtest;
+package com.xclib.recyclerviewtest.activities;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.xclib.recyclerview.XCRecycleView;
-import com.xclib.recyclerviewtest.model.User;
+import com.xclib.recyclerviewtest.R;
+import com.xclib.recyclerviewtest.adapter.RecycleViewAdapter;
+import com.xclib.recyclerviewtest.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +20,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * Created by xiechao on 21/12/15.
- */
-public class ManagerGridLayoutActivity extends AppCompatActivity {
+public class ManagerLinearLayoutActivity extends AppCompatActivity {
 
     @Bind(R.id.recycleView)
     XCRecycleView recycleView;
@@ -63,20 +62,18 @@ public class ManagerGridLayoutActivity extends AppCompatActivity {
         recycleView.addFooterView(footerView2);
 
 
-        List<User> users = new ArrayList<>();
-        for (int i = 0; i < 29; i++) {
-            User user = new User();
+        List<Person> personList = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            Person user = new Person();
             user.setName("Name " + i);
             user.setEmail("alibaba" + i + "@gmail.com");
-            users.add(user);
+            personList.add(user);
         }
 
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        recycleView.setLayoutManager(new LinearLayoutManager(this));
 
-        recycleView.setLayoutManager(gridLayoutManager);
-
-        recycleViewAdapter = new RecycleViewAdapter(this, users);
+        recycleViewAdapter = new RecycleViewAdapter(this, personList);
 
         recycleView.setAdapter(recycleViewAdapter);
 
@@ -98,15 +95,15 @@ public class ManagerGridLayoutActivity extends AppCompatActivity {
 
                 Log.e("haint", "Load More 2");
 
-                List<User> users = new ArrayList<>();
+                List<Person> personList = new ArrayList<>();
                 for (int i = recycleViewAdapter.getCommonItemCount(); i < recycleViewAdapter.getCommonItemCount() + 30; i++) {
-                    User user = new User();
-                    user.setName("Name " + i);
-                    user.setEmail("alibaba" + i + "@gmail.com");
-                    users.add(user);
+                    Person person = new Person();
+                    person.setName("Name " + i);
+                    person.setEmail("alibaba" + i + "@gmail.com");
+                    personList.add(person);
                 }
 
-                recycleViewAdapter.addAll(users);
+                recycleViewAdapter.addAll(personList);
 
                 recycleView.setLoadMoreEnd(true);
             }

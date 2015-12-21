@@ -29,5 +29,6 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile project(':xcrecyclerview')
-//    compile 'com.xclib:xcrecyclerview:0.2.0@aar'
+    //    compile 'com.xclib:xcrecyclerview:0.2.0@aar'
+    compile 'com.eowise:recyclerview-stickyheaders:0.5.2'
 }

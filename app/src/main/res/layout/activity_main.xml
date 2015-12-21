@@ -21,4 +21,10 @@
         android:text="Relative Layout Manager"
         tools:ignore="HardcodedText" />
 
+    <Button
+        android:id="@+id/btn_header_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Header Section"
+        tools:ignore="HardcodedText" />
 </LinearLayout>

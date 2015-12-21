@@ -6,6 +6,7 @@ import com.xclib.recyclerview.ISectionData;
 
 public class Person implements ISectionData {
     private String name;
+    private String sectionHeader;
 
     public Person() {
 
@@ -29,19 +30,29 @@ public class Person implements ISectionData {
 
     }
 
+
+
     @Override
     public String getSectionHeader() {
-        String sectionHeader = "#";
+        if (TextUtils.isEmpty(sectionHeader)) {
+            sectionHeader = "#";
 
-        String nameValue = name;
-        if (!TextUtils.isEmpty(nameValue)) {
-            nameValue = nameValue.trim();
-
+            String nameValue = name;
             if (!TextUtils.isEmpty(nameValue)) {
-                sectionHeader = String.valueOf(nameValue.charAt(0));
+                nameValue = nameValue.trim();
+
+                if (!TextUtils.isEmpty(nameValue)) {
+                    sectionHeader = String.valueOf(nameValue.charAt(0));
+                }
             }
+
         }
 
         return sectionHeader;
+    }
+
+    @Override
+    public long getSectionHeaderId() {
+        return getSectionHeader().hashCode();
     }
 }

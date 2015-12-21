@@ -30,4 +30,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile project(':xcrecyclerview')
     //    compile 'com.xclib:xcrecyclerview:0.2.0@aar'
+    compile 'xyz.danoz:recyclerviewfastscroller:0.1.3'
 }

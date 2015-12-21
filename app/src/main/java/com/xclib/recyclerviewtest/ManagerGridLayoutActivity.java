@@ -64,7 +64,7 @@ public class ManagerGridLayoutActivity extends AppCompatActivity {
 
 
         List<User> users = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 29; i++) {
             User user = new User();
             user.setName("Name " + i);
             user.setEmail("alibaba" + i + "@gmail.com");

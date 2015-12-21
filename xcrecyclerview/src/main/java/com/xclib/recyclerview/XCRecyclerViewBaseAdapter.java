@@ -72,6 +72,18 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         }
     }
 
+    public boolean isNeedShowOneSpanCount(int position) {
+        if (position >= 0 && position < headerViewList.size()) {
+            return true;
+        } else if (position >= headerViewList.size() + dataArrayList.size() && position < headerViewList.size() + dataArrayList.size() + footerViewList.size()) {
+            return true;
+        } else if (mIsLoading && position == headerViewList.size() + dataArrayList.size() + footerViewList.size()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public abstract int getCommonItemViewType(int position, T data);
 
     @Override
@@ -86,6 +98,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
             return onCommonCreateViewHolder(inflater.inflate(getViewResourceId(viewType), parent, false));
         }
     }
+
 
     protected abstract int getViewResourceId(int viewType);
 

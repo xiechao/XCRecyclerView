@@ -1,4 +1,4 @@
-package com.xclib.recyclerviewtest;
+package com.xclib.recyclerviewtest.model;
 
 public class User {
     private String name;

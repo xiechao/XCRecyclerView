@@ -5,14 +5,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.xclib.recyclerview.XCRecyclerViewBaseAdapter;
+import com.xclib.recyclerviewtest.model.User;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TestRecycleViewAdapter extends XCRecyclerViewBaseAdapter<User> {
-    public TestRecycleViewAdapter(Context context, List<User> userList) {
+public class RecycleViewAdapter extends XCRecyclerViewBaseAdapter<User> {
+    public RecycleViewAdapter(Context context, List<User> userList) {
         super(context);
 
         resetData(userList);

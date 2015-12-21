@@ -1,6 +1,7 @@
 package com.xclib.recyclerview;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -28,7 +29,7 @@ public class XCRecycleView extends RecyclerView {
 
 //            linearLayoutManager.findLastVisibleItemPosition()
 
-            if (totalItemCount <= (lastVisibleItem + 2)) {
+            if (totalItemCount <= (lastVisibleItem + 3)) {
                 tryDoLoadMore();
             }
         }
@@ -192,23 +193,27 @@ public class XCRecycleView extends RecyclerView {
         }
     }
 
+    @Override
+    public void setLayoutManager(LayoutManager layout) {
+        super.setLayoutManager(layout);
 
-    //    if (type == TYPE_GRID_LAYOUT) {
-//        gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-//        mRecyclerView.setLayoutManager(gridLayoutManager);//这里用线性宫格显示 类似于grid view
-//    } else if (type == TYPE_STAGGERED_GRID_LAYOUT) {
-//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));//这里用线性宫格显示 类似于瀑布流
-//    } else {
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));//这里用线性显示 类似于list view
-//    }
-//    mAdapter = new HeaderBottomItemAdapter(getActivity());
-//    mRecyclerView.setAdapter(mAdapter);
-//    if (gridLayoutManager != null) {//设置头部及底部View占据整行空间
-//        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-//            @Override
-//            public int getSpanSize(int position) {
-//                return (mAdapter.isHeaderView(position) || mAdapter.isBottomView(position)) ? gridLayoutManager.getSpanCount() : 1;
-//            }
-//        });
-//    }
+        if (layout != null && layout instanceof GridLayoutManager) {
+            GridLayoutManager gridLayoutManager = (GridLayoutManager) layout;
+
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    GridLayoutManager gridLayoutManager = (GridLayoutManager) getLayoutManager();
+
+                    if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
+                        XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
+
+                        return XCRecyclerViewBaseAdapter.isNeedShowOneSpanCount(position) ? gridLayoutManager.getSpanCount() : 1;
+                    }
+
+                    return gridLayoutManager.getSpanCount();
+                }
+            });
+        }
+    }
 }

@@ -72,7 +72,7 @@ public class ManagerGridLayoutActivity extends AppCompatActivity {
         }
 
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
 
         recycleView.setLayoutManager(gridLayoutManager);
 

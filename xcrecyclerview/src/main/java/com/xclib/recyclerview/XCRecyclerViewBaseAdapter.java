@@ -118,7 +118,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         }
     }
 
-    private T getItem(int position) {
+    protected T getItem(int position) {
         return dataArrayList.get(position - headerViewList.size());
     }
 

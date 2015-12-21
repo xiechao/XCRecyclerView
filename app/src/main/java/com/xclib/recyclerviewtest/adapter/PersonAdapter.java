@@ -1,57 +1,93 @@
 package com.xclib.recyclerviewtest.adapter;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.content.Context;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.xclib.recyclerview.XCRecyclerViewBaseAdapter;
 import com.xclib.recyclerviewtest.R;
+import com.xclib.recyclerviewtest.model.Person;
 
-import java.util.List;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
-public class PersonAdapter <T> extends RecyclerView.Adapter<PersonAdapter.ViewHolder> {
-    private List<T> items;
-
-    public PersonAdapter(List<T> dataList) {
-        this.items = dataList;
-
+public class PersonAdapter extends XCRecyclerViewBaseAdapter<Person> {
+    public PersonAdapter(Context context) {
+        super(context);
         setHasStableIds(true);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, viewGroup, false);
-
-        return new ViewHolder(itemView);
-    }
-
-    @Override
     public long getItemId(int position) {
-        return items.get(position).hashCode();
+        return getItem(position).hashCode();
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.label.setText(items.get(position).toString());
+    public int getCommonItemViewType(int position, Person data) {
+        return 0;
     }
 
     @Override
-    public int getItemCount() {
-        return items.size();
+    protected int getViewResourceId(int viewType) {
+        return R.layout.list_item;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    protected GTViewHolderBase onCommonCreateViewHolder(View view) {
+        return new ViewHolder(view);
+    }
 
-        TextView label;
+    public class ViewHolder extends GTViewHolderBase {
+        @Bind(R.id.name)
+        TextView name;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.label = (TextView) itemView.findViewById(R.id.name);
 
+            ButterKnife.bind(this, itemView);
+        }
+
+        @Override
+        public void render(Person data) {
+            name.setText(data.getName());
         }
     }
+
+    //
+//    @Override
+//    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+//        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, viewGroup, false);
+//
+//        return new ViewHolder(itemView);
+//    }
+//
+//    @Override
+//    public long getItemId(int position) {
+//        return items.get(position).hashCode();
+//    }
+//
+//    @Override
+//    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+//        viewHolder.label.setText(items.get(position).toString());
+//    }
+//
+//    @Override
+//    public int getItemCount() {
+//        return items.size();
+//    }
+//
+//    public static class ViewHolder extends RecyclerView.ViewHolder {
+//
+//        TextView label;
+//
+//
+//        public ViewHolder(View itemView) {
+//            super(itemView);
+//            this.label = (TextView) itemView.findViewById(R.id.name);
+//
+//        }
+//    }
 
 
 }

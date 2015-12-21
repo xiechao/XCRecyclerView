@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class HeaderSectionActivity  extends AppCompatActivity {
+public class HeaderSectionActivity extends AppCompatActivity {
 
 
     @Override
@@ -70,7 +70,8 @@ public class HeaderSectionActivity  extends AppCompatActivity {
 
         list.setLayoutManager(new LinearLayoutManager(HeaderSectionActivity.this, LinearLayoutManager.VERTICAL, false));
 
-        PersonAdapter<Person> personAdapter = new PersonAdapter<>(personList);
+        PersonAdapter personAdapter = new PersonAdapter(this);
+        personAdapter.resetData(personList);
 
         StickyHeadersItemDecoration top = new StickyHeadersBuilder()
                 .setAdapter(personAdapter)

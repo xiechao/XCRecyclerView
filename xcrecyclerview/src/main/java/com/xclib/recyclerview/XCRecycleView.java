@@ -208,7 +208,14 @@ public class XCRecycleView extends RecyclerView {
                     if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
                         XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
 
-                        return XCRecyclerViewBaseAdapter.isNeedShowOneSpanCount(position) ? gridLayoutManager.getSpanCount() : 1;
+                        if (
+                                XCRecyclerViewBaseAdapter.isHeaderView(position) ||
+                                        XCRecyclerViewBaseAdapter.isFooterView(position) ||
+                                        XCRecyclerViewBaseAdapter.isLoadMoreView(position)) {
+                            return gridLayoutManager.getSpanCount();
+                        } else {
+                            return 1;
+                        }
                     }
 
                     return gridLayoutManager.getSpanCount();

@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.xclib.recyclerviewtest.activities.HeaderSectionActivity;
 import com.xclib.recyclerviewtest.activities.ManagerGridLayoutActivity;
 import com.xclib.recyclerviewtest.activities.ManagerLinearLayoutActivity;
+import com.xclib.recyclerviewtest.activities.ManagerLinearLayoutSwipeActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
     Button btnRelativeLayoutManager;
     @Bind(R.id.btn_header_section)
     Button btnHeaderSection;
+    @Bind(R.id.btn_linear_layout_swipe_manager)
+    Button btnLinearLayoutSwipeManager;
+    @Bind(R.id.btn_header_section_swipe)
+    Button btnHeaderSectionSwipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,20 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick({R.id.btn_header_section})
     public void onClickHeaderSection(View view) {
+        Intent intent = new Intent(this, HeaderSectionActivity.class);
+
+        startActivity(intent);
+    }
+
+    @OnClick({R.id.btn_linear_layout_swipe_manager})
+    public void onClickLinearLayoutSwipe(View view) {
+        Intent intent = new Intent(this, ManagerLinearLayoutSwipeActivity.class);
+
+        startActivity(intent);
+    }
+
+    @OnClick({R.id.btn_header_section_swipe})
+    public void onClickHeaderSectionSwipe(View view) {
         Intent intent = new Intent(this, HeaderSectionActivity.class);
 
         startActivity(intent);

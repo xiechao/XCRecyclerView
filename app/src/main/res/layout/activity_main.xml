@@ -27,4 +27,19 @@
         android:layout_height="wrap_content"
         android:text="Header Section"
         tools:ignore="HardcodedText" />
+
+
+    <Button
+        android:id="@+id/btn_linear_layout_swipe_manager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Linear Layout Swipe Manager"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn_header_section_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Header Section Swipe"
+        tools:ignore="HardcodedText" />
 </LinearLayout>

@@ -31,4 +31,5 @@ dependencies {
     compile project(':xcrecyclerview')
     //    compile 'com.xclib:xcrecyclerview:0.2.0@aar'
     compile 'xyz.danoz:recyclerviewfastscroller:0.1.3'
+    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
 }

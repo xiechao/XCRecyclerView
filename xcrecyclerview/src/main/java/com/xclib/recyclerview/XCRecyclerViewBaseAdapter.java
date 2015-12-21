@@ -69,16 +69,16 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         }
     }
 
-    public boolean isNeedShowOneSpanCount(int position) {
-        if (position >= 0 && position < headerViewList.size()) {
-            return true;
-        } else if (position >= headerViewList.size() + dataArrayList.size() && position < headerViewList.size() + dataArrayList.size() + footerViewList.size()) {
-            return true;
-        } else if (mIsLoading && position == headerViewList.size() + dataArrayList.size() + footerViewList.size()) {
-            return true;
-        } else {
-            return false;
-        }
+    boolean isHeaderView(int position) {
+        return position >= 0 && position < headerViewList.size();
+    }
+
+    boolean isFooterView(int position) {
+        return position >= headerViewList.size() + dataArrayList.size() && position < headerViewList.size() + dataArrayList.size() + footerViewList.size();
+    }
+
+    boolean isLoadMoreView(int position) {
+        return mIsLoading && position == headerViewList.size() + dataArrayList.size() + footerViewList.size();
     }
 
     public abstract int getCommonItemViewType(int position, T data);
@@ -113,6 +113,10 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         } else {
             holder.render(getItem(position));
         }
+    }
+
+    protected void onBindViewHolderSuccess(View view, int position) {
+
     }
 
     protected T getItem(int position) {

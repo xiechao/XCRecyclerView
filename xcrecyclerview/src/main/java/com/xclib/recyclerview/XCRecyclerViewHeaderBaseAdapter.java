@@ -2,7 +2,6 @@ package com.xclib.recyclerview;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,8 +89,6 @@ public abstract class XCRecyclerViewHeaderBaseAdapter<T extends ISectionData> ex
         }
 
         super.resetData(dataList);
-
-        Log.d("xxxxxxxxxx", "sectionList.size() = " + sectionList.size() + "; getItemCount() = " + getItemCount());
     }
 
     private ArrayList<T> sectionList = new ArrayList<>();
@@ -123,9 +120,6 @@ public abstract class XCRecyclerViewHeaderBaseAdapter<T extends ISectionData> ex
                 break;
             }
         }
-
-
-        Log.d("xxxxxxxxxx", "getSectionForPosition sectionIndex = " + sectionIndex + "; position = " + position);
 
         return sectionIndex;
     }

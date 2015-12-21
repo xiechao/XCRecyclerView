@@ -44,7 +44,7 @@ public class HeaderSectionActivity extends AppCompatActivity {
         fastScroller.setRecyclerView(recyclerView);
 
         // Connect the scroller to the recycler (to let the recycler scroll the scroller's handle)
-        recyclerView.setOnScrollListener(fastScroller.getOnScrollListener());
+        recyclerView.addOnScrollListener(fastScroller.getOnScrollListener());
 
         // Connect the section indicator to the scroller
         fastScroller.setSectionIndicator(fastScrollerSectionTitleIndicator);
@@ -81,22 +81,10 @@ public class HeaderSectionActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(top);
     }
 
-//    /**
-//     * Set RecyclerView's LayoutManager
-//     */
-//    public void setRecyclerViewLayoutManager(RecyclerView recyclerView) {
-//        int scrollPosition = 0;
-//
-//        // If a layout manager has already been set, get current scroll position.
-//        if (recyclerView.getLayoutManager() != null) {
-//            scrollPosition =
-//                    ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-//        }
-//
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//
-//        recyclerView.setLayoutManager(linearLayoutManager);
-//        recyclerView.scrollToPosition(scrollPosition);
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
+        recyclerView.removeOnScrollListener(fastScroller.getOnScrollListener());
+    }
 }

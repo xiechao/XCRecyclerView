@@ -21,7 +21,6 @@
         android:paddingEnd="@dimen/margin_small"
         android:paddingRight="@dimen/margin_small"
         recyclerviewfastscroller:rfs_handleBackground="@drawable/fast_scroller_handle_rounded" />
-    <!--recyclerviewfastscroller:rfs_barColor="@color/fastScrollBarColor"-->
 
 
     <com.xclib.recyclerview.ColorGroupSectionTitleIndicator
@@ -31,7 +30,7 @@
         android:layout_toLeftOf="@id/fast_scroller"
         android:layout_toStartOf="@id/fast_scroller"
 
-        recyclerviewfastscroller:rfs_backgroundColor="@android:color/white"
-        recyclerviewfastscroller:rfs_textColor="@android:color/black" />
+        recyclerviewfastscroller:rfs_backgroundColor="@color/primary"
+        recyclerviewfastscroller:rfs_textColor="@android:color/white" />
 
 </RelativeLayout>

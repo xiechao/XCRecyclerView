@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <color name="primary" tools:ignore="ResourceName">#Be009688</color>
+    <color name="primary" tools:ignore="ResourceName">#009688</color>
 
 </resources>

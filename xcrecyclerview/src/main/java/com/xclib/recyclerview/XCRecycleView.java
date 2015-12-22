@@ -58,10 +58,10 @@ public class XCRecycleView extends RecyclerView {
             return;
         }
 
-        if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
-            XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
+        if (getAdapter() instanceof RecyclerViewBaseAdapter) {
+            RecyclerViewBaseAdapter RecyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
 
-            XCRecyclerViewBaseAdapter.setOnLoadMoreListener(onLoadMoreListener);
+            RecyclerViewBaseAdapter.setOnLoadMoreListener(onLoadMoreListener);
         }
     }
 
@@ -70,10 +70,10 @@ public class XCRecycleView extends RecyclerView {
     }
 
     private void tryDoLoadMore() {
-        if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
-            XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
+        if (getAdapter() instanceof RecyclerViewBaseAdapter) {
+            RecyclerViewBaseAdapter RecyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
 
-            XCRecyclerViewBaseAdapter.tryDoLoadMore();
+            RecyclerViewBaseAdapter.tryDoLoadMore();
         }
     }
 
@@ -81,10 +81,10 @@ public class XCRecycleView extends RecyclerView {
         this.post(new Runnable() {
             @Override
             public void run() {
-                if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
-                    XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
+                if (getAdapter() instanceof RecyclerViewBaseAdapter) {
+                    RecyclerViewBaseAdapter RecyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
 
-                    XCRecyclerViewBaseAdapter.setLoadMoreEnd(isImmediate);
+                    RecyclerViewBaseAdapter.setLoadMoreEnd(isImmediate);
                 }
             }
         });
@@ -93,30 +93,30 @@ public class XCRecycleView extends RecyclerView {
     public void addHeaderView(View v) {
         headerViewArrayList.add(v);
 
-        if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
-            XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
+        if (getAdapter() instanceof RecyclerViewBaseAdapter) {
+            RecyclerViewBaseAdapter RecyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
 
-            XCRecyclerViewBaseAdapter.addHeaderView(v);
+            RecyclerViewBaseAdapter.addHeaderView(v);
         }
     }
 
     public boolean removeHeaderView(View v) {
         headerViewArrayList.remove(v);
 
-        if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
-            XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
+        if (getAdapter() instanceof RecyclerViewBaseAdapter) {
+            RecyclerViewBaseAdapter RecyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
 
-            return XCRecyclerViewBaseAdapter.removeHeaderView(v);
+            return RecyclerViewBaseAdapter.removeHeaderView(v);
         }
 
         return false;
     }
 
     public int getHeaderViewsCount() {
-        if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
-            XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
+        if (getAdapter() instanceof RecyclerViewBaseAdapter) {
+            RecyclerViewBaseAdapter RecyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
 
-            return XCRecyclerViewBaseAdapter.getHeaderViewsCount();
+            return RecyclerViewBaseAdapter.getHeaderViewsCount();
         }
 
         return headerViewArrayList.size();
@@ -125,30 +125,30 @@ public class XCRecycleView extends RecyclerView {
     public void addFooterView(View v) {
         footerViewArrayList.add(v);
 
-        if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
-            XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
+        if (getAdapter() instanceof RecyclerViewBaseAdapter) {
+            RecyclerViewBaseAdapter RecyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
 
-            XCRecyclerViewBaseAdapter.addFooterView(v);
+            RecyclerViewBaseAdapter.addFooterView(v);
         }
     }
 
     public boolean removeFooterView(View v) {
         footerViewArrayList.remove(v);
 
-        if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
-            XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
+        if (getAdapter() instanceof RecyclerViewBaseAdapter) {
+            RecyclerViewBaseAdapter RecyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
 
-            return XCRecyclerViewBaseAdapter.removeFooterView(v);
+            return RecyclerViewBaseAdapter.removeFooterView(v);
         }
 
         return false;
     }
 
     public int getFooterViewsCount() {
-        if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
-            XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
+        if (getAdapter() instanceof RecyclerViewBaseAdapter) {
+            RecyclerViewBaseAdapter RecyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
 
-            return XCRecyclerViewBaseAdapter.getFooterViewsCount();
+            return RecyclerViewBaseAdapter.getFooterViewsCount();
         }
 
         return footerViewArrayList.size();
@@ -158,11 +158,11 @@ public class XCRecycleView extends RecyclerView {
     public void setAdapter(Adapter adapter) {
         super.setAdapter(adapter);
 
-        if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
-            XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
+        if (getAdapter() instanceof RecyclerViewBaseAdapter) {
+            RecyclerViewBaseAdapter RecyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
 
-            XCRecyclerViewBaseAdapter.resetHeaderViewsCount(headerViewArrayList);
-            XCRecyclerViewBaseAdapter.resetFooterViewsCount(footerViewArrayList);
+            RecyclerViewBaseAdapter.resetHeaderViewsCount(headerViewArrayList);
+            RecyclerViewBaseAdapter.resetFooterViewsCount(footerViewArrayList);
         }
     }
 
@@ -178,13 +178,13 @@ public class XCRecycleView extends RecyclerView {
                 public int getSpanSize(int position) {
                     GridLayoutManager gridLayoutManager = (GridLayoutManager) getLayoutManager();
 
-                    if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
-                        XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
+                    if (getAdapter() instanceof RecyclerViewBaseAdapter) {
+                        RecyclerViewBaseAdapter RecyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
 
                         if (
-                                XCRecyclerViewBaseAdapter.isHeaderView(position) ||
-                                        XCRecyclerViewBaseAdapter.isFooterView(position) ||
-                                        XCRecyclerViewBaseAdapter.isLoadMoreView(position)) {
+                                RecyclerViewBaseAdapter.isHeaderView(position) ||
+                                        RecyclerViewBaseAdapter.isFooterView(position) ||
+                                        RecyclerViewBaseAdapter.isLoadMoreView(position)) {
                             return gridLayoutManager.getSpanCount();
                         } else {
                             return 1;

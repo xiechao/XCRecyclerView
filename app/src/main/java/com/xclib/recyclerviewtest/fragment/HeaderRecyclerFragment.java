@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.xclib.recyclerview.XCRecycleView;
-import com.xclib.recyclerview.XCRecyclerViewBaseAdapter;
+import com.xclib.recyclerview.RecyclerViewBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.views.ListEmptyView;
 
@@ -33,8 +33,8 @@ public abstract class HeaderRecyclerFragment extends Fragment {
     protected XCRecycleView xcRecycleView;
     protected ListEmptyView listEmptyView;
     private LinearLayout headerView;
-    private XCRecyclerViewBaseAdapter baseAdapter;
-    private XCRecyclerViewBaseAdapter adapter;
+    private RecyclerViewBaseAdapter baseAdapter;
+    private RecyclerViewBaseAdapter adapter;
     private final RecyclerView.AdapterDataObserver adapterDataObserver = new RecyclerView.AdapterDataObserver() {
         @Override
         public void onChanged() {
@@ -119,7 +119,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         xcRecycleView.removeOnScrollListener(onScrollListener);
     }
 
-    protected abstract XCRecyclerViewBaseAdapter getAdapter();
+    protected abstract RecyclerViewBaseAdapter getAdapter();
 
     protected abstract RecyclerView.LayoutManager getLayoutManager();
 
@@ -139,13 +139,13 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         void onScrolled(RecyclerView recyclerView, int dx, int dy);
     }
 
-    public class HeaderListAdapter extends XCRecyclerViewBaseAdapter {
+    public class HeaderListAdapter extends RecyclerViewBaseAdapter {
         private static final int VIEW_TYPE_OBSERVABLE_SCROLL_HEADER = 5000;
         private static final int VIEW_TYPE_EMPTY_VIEW = VIEW_TYPE_OBSERVABLE_SCROLL_HEADER + 1;
-        final XCRecyclerViewBaseAdapter mListAdapter;
+        final RecyclerViewBaseAdapter mListAdapter;
 
 
-        private HeaderListAdapter(XCRecyclerViewBaseAdapter listAdapter) {
+        private HeaderListAdapter(RecyclerViewBaseAdapter listAdapter) {
             super(getContext());
             mListAdapter = listAdapter;
         }
@@ -168,7 +168,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         }
 
         @Override
-        public GTViewHolderBase onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolderBase onCreateViewHolder(ViewGroup parent, int viewType) {
             if (viewType == VIEW_TYPE_OBSERVABLE_SCROLL_HEADER) {
                 return new ObservableScrollHeaderViewHolder(headerView);
             } else if (viewType == VIEW_TYPE_EMPTY_VIEW) {
@@ -184,7 +184,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         }
 
         @Override
-        protected GTViewHolderBase onCommonCreateViewHolder(View view) {
+        protected ViewHolderBase onCommonCreateViewHolder(View view) {
             return null;
         }
 
@@ -216,7 +216,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
             return position - (mListAdapter.getItemCount() == 0 ? 1 : 0) - 1;
         }
 
-        private class ObservableScrollHeaderViewHolder extends GTViewHolderBase {
+        private class ObservableScrollHeaderViewHolder extends ViewHolderBase {
 
             public ObservableScrollHeaderViewHolder(View itemView) {
                 super(itemView);
@@ -228,7 +228,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
             }
         }
 
-        private class EmptyViewHolder extends GTViewHolderBase {
+        private class EmptyViewHolder extends ViewHolderBase {
 
             public EmptyViewHolder(View itemView) {
                 super(itemView);

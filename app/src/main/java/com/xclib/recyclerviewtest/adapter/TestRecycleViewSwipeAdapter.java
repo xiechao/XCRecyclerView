@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.xclib.recyclerview.XCRecyclerViewSwipeBaseAdapter;
+import com.xclib.recyclerview.RecyclerViewSwipeBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
 
@@ -15,7 +15,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TestRecycleViewSwipeAdapter extends XCRecyclerViewSwipeBaseAdapter<Person> {
+public class TestRecycleViewSwipeAdapter extends RecyclerViewSwipeBaseAdapter<Person> {
 
     public TestRecycleViewSwipeAdapter(Context context, List<Person> personList) {
         super(context);
@@ -44,11 +44,11 @@ public class TestRecycleViewSwipeAdapter extends XCRecyclerViewSwipeBaseAdapter<
     }
 
     @Override
-    protected GTViewHolderBase onCommonCreateViewHolder(View view) {
+    protected ViewHolderBase onCommonCreateViewHolder(View view) {
         return new TestViewHolder(view);
     }
 
-    public class TestViewHolder extends GTViewHolderBase {
+    public class TestViewHolder extends ViewHolderBase {
         @Bind(R.id.btn_delete)
         Button btnDelete;
         @Bind(R.id.tv_name)

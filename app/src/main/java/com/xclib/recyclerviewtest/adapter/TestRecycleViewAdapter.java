@@ -4,14 +4,14 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import com.xclib.recyclerview.XCRecyclerViewBaseAdapter;
+import com.xclib.recyclerview.RecyclerViewBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TestRecycleViewAdapter extends XCRecyclerViewBaseAdapter<Person> {
+public class TestRecycleViewAdapter extends RecyclerViewBaseAdapter<Person> {
 
     public TestRecycleViewAdapter(Context context) {
         super(context);
@@ -28,11 +28,11 @@ public class TestRecycleViewAdapter extends XCRecyclerViewBaseAdapter<Person> {
     }
 
     @Override
-    protected GTViewHolderBase onCommonCreateViewHolder(View view) {
+    protected ViewHolderBase onCommonCreateViewHolder(View view) {
         return new TestViewHolder(view);
     }
 
-    public class TestViewHolder extends GTViewHolderBase {
+    public class TestViewHolder extends ViewHolderBase {
         @Bind(R.id.tv_name)
         TextView tvName;
 

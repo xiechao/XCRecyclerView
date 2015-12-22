@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<XCRecyclerViewBaseAdapter.GTViewHolderBase> {
+public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<RecyclerViewBaseAdapter.ViewHolderBase> {
     private static final int VIEW_TYPE_HEADER_BASE = 1000;
     private static final int VIEW_TYPE_FOOTER_BASE = 2000;
     private static final int VIEW_TYPE_LOAD_MORE = 3000;
@@ -30,7 +30,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
     private View loadMoreViewContent = null;
 
     @SuppressLint("InflateParams")
-    public XCRecyclerViewBaseAdapter(Context context) {
+    public RecyclerViewBaseAdapter(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
 
@@ -88,7 +88,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
     public abstract int getCommonItemViewType(int position, T data);
 
     @Override
-    public GTViewHolderBase onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolderBase onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType >= VIEW_TYPE_HEADER_BASE && viewType < VIEW_TYPE_FOOTER_BASE) {
             return new HeaderViewHolder(headerViewList.get(viewType - VIEW_TYPE_HEADER_BASE));
         } else if (viewType >= VIEW_TYPE_FOOTER_BASE && viewType < VIEW_TYPE_LOAD_MORE) {
@@ -108,11 +108,11 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
 
     protected abstract int getCommonViewResourceId(int viewType);
 
-    protected abstract GTViewHolderBase onCommonCreateViewHolder(View view);
+    protected abstract ViewHolderBase onCommonCreateViewHolder(View view);
 
     @Override
     @SuppressWarnings("unchecked")
-    public void onBindViewHolder(XCRecyclerViewBaseAdapter.GTViewHolderBase holder, int position) {
+    public void onBindViewHolder(ViewHolderBase holder, int position) {
         if (position >= 0 && position < headerViewList.size()) {
             holder.render(null);
         } else if (position >= headerViewList.size() + dataArrayList.size() && position < headerViewList.size() + dataArrayList.size() + footerViewList.size()) {
@@ -307,15 +307,15 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         notifyItemRangeInserted(headerViewList.size() + dataArrayList.size(), footerViewList.size());
     }
 
-    public abstract class GTViewHolderBase extends RecyclerView.ViewHolder {
-        public GTViewHolderBase(View itemView) {
+    public abstract class ViewHolderBase extends RecyclerView.ViewHolder {
+        public ViewHolderBase(View itemView) {
             super(itemView);
         }
 
         public abstract void render(T data);
     }
 
-    private class HeaderViewHolder extends GTViewHolderBase {
+    private class HeaderViewHolder extends ViewHolderBase {
 
         public HeaderViewHolder(View itemView) {
             super(itemView);
@@ -327,7 +327,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         }
     }
 
-    private class FooterViewHolder extends GTViewHolderBase {
+    private class FooterViewHolder extends ViewHolderBase {
 
         public FooterViewHolder(View itemView) {
             super(itemView);
@@ -339,7 +339,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         }
     }
 
-    private class LoadMoreViewHolder extends GTViewHolderBase {
+    private class LoadMoreViewHolder extends ViewHolderBase {
 
         public LoadMoreViewHolder(View itemView) {
             super(itemView);

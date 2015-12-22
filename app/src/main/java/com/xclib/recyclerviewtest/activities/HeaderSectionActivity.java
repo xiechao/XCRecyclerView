@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.eowise.recyclerview.stickyheaders.OnHeaderClickListener;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersBuilder;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
-import com.xclib.recyclerview.ColorGroupSectionTitleIndicator;
+import com.xclib.recyclerview.GroupSectionTitleIndicator;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.adapter.TestHeaderSectionAdapter;
 import com.xclib.recyclerviewtest.model.Person;
@@ -31,7 +31,7 @@ public class HeaderSectionActivity extends AppCompatActivity {
     @Bind(R.id.fast_scroller)
     VerticalRecyclerViewFastScroller fastScroller;
     @Bind(R.id.fast_scroller_section_title_indicator)
-    ColorGroupSectionTitleIndicator fastScrollerSectionTitleIndicator;
+    GroupSectionTitleIndicator fastScrollerSectionTitleIndicator;
 
 
     @Override

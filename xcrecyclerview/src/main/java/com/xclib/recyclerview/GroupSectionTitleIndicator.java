@@ -5,17 +5,17 @@ import android.util.AttributeSet;
 
 import xyz.danoz.recyclerviewfastscroller.sectionindicator.title.SectionTitleIndicator;
 
-public class ColorGroupSectionTitleIndicator extends SectionTitleIndicator<ISectionData> {
+public class GroupSectionTitleIndicator extends SectionTitleIndicator<ISectionData> {
 
-    public ColorGroupSectionTitleIndicator(Context context) {
+    public GroupSectionTitleIndicator(Context context) {
         super(context);
     }
 
-    public ColorGroupSectionTitleIndicator(Context context, AttributeSet attrs) {
+    public GroupSectionTitleIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public ColorGroupSectionTitleIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
+    public GroupSectionTitleIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

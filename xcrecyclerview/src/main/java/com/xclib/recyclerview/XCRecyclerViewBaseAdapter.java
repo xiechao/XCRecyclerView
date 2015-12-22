@@ -113,6 +113,8 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         } else {
             holder.render(getItem(position));
         }
+
+        onBindViewHolderSuccess(holder.itemView, position);
     }
 
     protected void onBindViewHolderSuccess(View view, int position) {

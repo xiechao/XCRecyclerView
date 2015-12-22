@@ -9,9 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.daimajia.swipe.util.Attributes;
 import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerviewtest.R;
-import com.xclib.recyclerviewtest.adapter.TestRecycleViewAdapter;
+import com.xclib.recyclerviewtest.adapter.TestRecycleViewSwipeAdapter;
 import com.xclib.recyclerviewtest.model.Person;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class ManagerLinearLayoutSwipeActivity extends AppCompatActivity {
     XCRecycleView recycleView;
 
 
-    private TestRecycleViewAdapter testRecycleViewAdapter;
+    private TestRecycleViewSwipeAdapter testRecycleViewAdapter;
     private XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
         @Override
         public void onLoadMore() {
@@ -71,11 +72,13 @@ public class ManagerLinearLayoutSwipeActivity extends AppCompatActivity {
 
         recycleView.setLayoutManager(new LinearLayoutManager(this));
 
-        testRecycleViewAdapter = new TestRecycleViewAdapter(this, personList);
+        testRecycleViewAdapter = new TestRecycleViewSwipeAdapter(this, personList);
+        testRecycleViewAdapter.setMode(Attributes.Mode.Single);
 
         recycleView.setAdapter(testRecycleViewAdapter);
 
         recycleView.setOnLoadMoreListener(onLoadMoreListener);
+
     }
 
     @Override

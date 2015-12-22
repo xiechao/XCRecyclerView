@@ -29,11 +29,6 @@ public class TestHeaderSectionSwipeAdapter extends XCRecyclerViewHeaderSwipeBase
     }
 
     @Override
-    protected long getHeaderId(Person data) {
-        return data.getSectionHeader().hashCode();
-    }
-
-    @Override
     public int getCommonItemViewType(int position, Person data) {
         return 0;
     }

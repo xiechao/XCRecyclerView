@@ -35,15 +35,13 @@ public abstract class XCRecyclerViewHeaderBaseAdapter<T extends ISectionData> ex
 
         @Override
         public long getHeaderId(int position) {
-            return XCRecyclerViewHeaderBaseAdapter.this.getHeaderId(getItem(position));
+            return getItem(position).getSectionHeaderId();
         }
     };
 
     protected abstract int getHeaderViewResourceId();
 
     protected abstract GTViewHolderBase onHeaderCreateViewHolder(View view);
-
-    protected abstract long getHeaderId(T data);
 
     public StickyHeadersAdapter<GTViewHolderBase> getStickyHeadersAdapter() {
         return stickyHeadersAdapter;

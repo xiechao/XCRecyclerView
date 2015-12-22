@@ -17,11 +17,6 @@ public class TestHeaderSectionAdapter extends XCRecyclerViewHeaderBaseAdapter<Pe
     }
 
     @Override
-    protected long getHeaderId(Person data) {
-        return data.getSectionHeader().hashCode();
-    }
-
-    @Override
     public int getCommonItemViewType(int position, Person data) {
         return 0;
     }

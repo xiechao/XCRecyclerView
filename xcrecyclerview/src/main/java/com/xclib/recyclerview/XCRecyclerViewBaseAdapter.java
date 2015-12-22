@@ -69,6 +69,11 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         }
     }
 
+    @Override
+    public long getItemId(int position) {
+        return getItem(position).hashCode();
+    }
+
     boolean isHeaderView(int position) {
         return position >= 0 && position < headerViewList.size();
     }

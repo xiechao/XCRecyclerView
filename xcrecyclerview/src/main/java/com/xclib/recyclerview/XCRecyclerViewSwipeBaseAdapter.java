@@ -11,10 +11,10 @@ import com.daimajia.swipe.util.Attributes;
 
 import java.util.List;
 
-public abstract class RecyclerViewSwipeBaseAdapter<T> extends RecyclerViewBaseAdapter<T> implements SwipeItemMangerInterface, SwipeAdapterInterface {
+public abstract class XCRecyclerViewSwipeBaseAdapter<T> extends XCRecyclerViewBaseAdapter<T> implements SwipeItemMangerInterface, SwipeAdapterInterface {
     private final SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
 
-    protected RecyclerViewSwipeBaseAdapter(Context context) {
+    protected XCRecyclerViewSwipeBaseAdapter(Context context) {
         super(context);
     }
 

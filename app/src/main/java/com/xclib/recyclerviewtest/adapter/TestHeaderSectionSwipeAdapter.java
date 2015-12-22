@@ -6,14 +6,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.xclib.recyclerview.RecyclerViewHeaderSwipeBaseAdapter;
+import com.xclib.recyclerview.XCRecyclerViewHeaderSwipeBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TestHeaderSectionSwipeAdapter extends RecyclerViewHeaderSwipeBaseAdapter<Person> {
+public class TestHeaderSectionSwipeAdapter extends XCRecyclerViewHeaderSwipeBaseAdapter<Person> {
     public TestHeaderSectionSwipeAdapter(Context context) {
         super(context);
     }
@@ -45,16 +45,16 @@ public class TestHeaderSectionSwipeAdapter extends RecyclerViewHeaderSwipeBaseAd
     }
 
     @Override
-    protected ViewHolderBase onHeaderCreateViewHolder(View view) {
+    protected GTViewHolderBase onHeaderCreateViewHolder(View view) {
         return new HeaderViewHolder(view);
     }
 
     @Override
-    protected ViewHolderBase onCommonCreateViewHolder(View view) {
+    protected GTViewHolderBase onCommonCreateViewHolder(View view) {
         return new ViewHolder(view);
     }
 
-    public class HeaderViewHolder extends ViewHolderBase {
+    public class HeaderViewHolder extends GTViewHolderBase {
         @Bind(R.id.title)
         TextView title;
 
@@ -70,7 +70,7 @@ public class TestHeaderSectionSwipeAdapter extends RecyclerViewHeaderSwipeBaseAd
         }
     }
 
-    public class ViewHolder extends ViewHolderBase {
+    public class ViewHolder extends GTViewHolderBase {
         @Bind(R.id.btn_delete)
         Button btnDelete;
         @Bind(R.id.tv_name)

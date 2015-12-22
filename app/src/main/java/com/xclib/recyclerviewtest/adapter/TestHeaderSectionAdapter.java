@@ -4,14 +4,14 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import com.xclib.recyclerview.RecyclerViewHeaderBaseAdapter;
+import com.xclib.recyclerview.XCRecyclerViewHeaderBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TestHeaderSectionAdapter extends RecyclerViewHeaderBaseAdapter<Person> {
+public class TestHeaderSectionAdapter extends XCRecyclerViewHeaderBaseAdapter<Person> {
     public TestHeaderSectionAdapter(Context context) {
         super(context);
     }
@@ -33,16 +33,16 @@ public class TestHeaderSectionAdapter extends RecyclerViewHeaderBaseAdapter<Pers
     }
 
     @Override
-    protected ViewHolderBase onHeaderCreateViewHolder(View view) {
+    protected GTViewHolderBase onHeaderCreateViewHolder(View view) {
         return new HeaderViewHolder(view);
     }
 
     @Override
-    protected ViewHolderBase onCommonCreateViewHolder(View view) {
+    protected GTViewHolderBase onCommonCreateViewHolder(View view) {
         return new ViewHolder(view);
     }
 
-    public class HeaderViewHolder extends ViewHolderBase {
+    public class HeaderViewHolder extends GTViewHolderBase {
         @Bind(R.id.title)
         TextView title;
 
@@ -58,7 +58,7 @@ public class TestHeaderSectionAdapter extends RecyclerViewHeaderBaseAdapter<Pers
         }
     }
 
-    public class ViewHolder extends ViewHolderBase {
+    public class ViewHolder extends GTViewHolderBase {
         @Bind(R.id.tv_name)
         TextView tvName;
 

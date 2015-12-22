@@ -14,16 +14,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class RecyclerViewHeaderBaseAdapter<T extends ISectionData> extends RecyclerViewBaseAdapter<T> implements SectionIndexer {
-    private final StickyHeadersAdapter<ViewHolderBase> stickyHeadersAdapter = new StickyHeadersAdapter<ViewHolderBase>() {
+public abstract class XCRecyclerViewHeaderBaseAdapter<T extends ISectionData> extends XCRecyclerViewBaseAdapter<T> implements SectionIndexer {
+    private final StickyHeadersAdapter<GTViewHolderBase> stickyHeadersAdapter = new StickyHeadersAdapter<GTViewHolderBase>() {
         @Override
-        public ViewHolderBase onCreateViewHolder(ViewGroup parent) {
+        public GTViewHolderBase onCreateViewHolder(ViewGroup parent) {
             return onHeaderCreateViewHolder(LayoutInflater.from(parent.getContext()).inflate(getHeaderViewResourceId(), parent, false));
         }
 
         @Override
-        public void onBindViewHolder(ViewHolderBase viewHolderBase, int position) {
-            viewHolderBase.render(getItem(position));
+        public void onBindViewHolder(GTViewHolderBase gtViewHolderBase, int position) {
+            gtViewHolderBase.render(getItem(position));
         }
 
         @Override
@@ -33,7 +33,7 @@ public abstract class RecyclerViewHeaderBaseAdapter<T extends ISectionData> exte
     };
     private final ArrayList<T> sectionList = new ArrayList<>();
 
-    protected RecyclerViewHeaderBaseAdapter(Context context) {
+    protected XCRecyclerViewHeaderBaseAdapter(Context context) {
         super(context);
 
         setHasStableIds(true);
@@ -42,9 +42,9 @@ public abstract class RecyclerViewHeaderBaseAdapter<T extends ISectionData> exte
     @SuppressWarnings("SameReturnValue")
     protected abstract int getHeaderViewResourceId();
 
-    protected abstract ViewHolderBase onHeaderCreateViewHolder(View view);
+    protected abstract GTViewHolderBase onHeaderCreateViewHolder(View view);
 
-    public StickyHeadersAdapter<ViewHolderBase> getStickyHeadersAdapter() {
+    public StickyHeadersAdapter<GTViewHolderBase> getStickyHeadersAdapter() {
         return stickyHeadersAdapter;
     }
 

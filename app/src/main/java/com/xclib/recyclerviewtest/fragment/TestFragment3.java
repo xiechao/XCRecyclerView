@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xclib.recyclerview.RecyclerViewBaseAdapter;
+import com.xclib.recyclerview.XCRecyclerViewBaseAdapter;
 import com.xclib.recyclerviewtest.adapter.TestRecycleViewAdapter;
 import com.xclib.recyclerviewtest.model.Person;
 
@@ -28,7 +28,7 @@ public class TestFragment3 extends HeaderRecyclerFragment {
 
 
     @Override
-    protected RecyclerViewBaseAdapter getAdapter() {
+    protected XCRecyclerViewBaseAdapter getAdapter() {
         return testRecycleViewAdapter;
     }
 

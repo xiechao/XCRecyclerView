@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<XCRecyclerViewBaseAdapter.GTViewHolderBase> {
+public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<RecyclerViewBaseAdapter.GTViewHolderBase> {
     private static final int VIEW_TYPE_HEADER_BASE = 1000;
     private static final int VIEW_TYPE_FOOTER_BASE = 2000;
     private static final int VIEW_TYPE_LOAD_MORE = 3000;
@@ -30,7 +30,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
     private View loadMoreViewContent = null;
 
     @SuppressLint("InflateParams")
-    public XCRecyclerViewBaseAdapter(Context context) {
+    public RecyclerViewBaseAdapter(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
 
@@ -112,7 +112,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
 
     @Override
     @SuppressWarnings("unchecked")
-    public void onBindViewHolder(XCRecyclerViewBaseAdapter.GTViewHolderBase holder, int position) {
+    public void onBindViewHolder(RecyclerViewBaseAdapter.GTViewHolderBase holder, int position) {
         if (position >= 0 && position < headerViewList.size()) {
             holder.render(null);
         } else if (position >= headerViewList.size() + dataArrayList.size() && position < headerViewList.size() + dataArrayList.size() + footerViewList.size()) {

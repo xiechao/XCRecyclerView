@@ -6,14 +6,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.xclib.recyclerview.XCRecyclerViewHeaderSwipeBaseAdapter;
+import com.xclib.recyclerview.RecyclerViewHeaderSwipeBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TestHeaderSectionSwipeAdapter extends XCRecyclerViewHeaderSwipeBaseAdapter<Person> {
+public class TestHeaderSectionSwipeAdapter extends RecyclerViewHeaderSwipeBaseAdapter<Person> {
     public TestHeaderSectionSwipeAdapter(Context context) {
         super(context);
     }

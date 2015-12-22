@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.xclib.recyclerview.XCRecyclerViewSwipeBaseAdapter;
+import com.xclib.recyclerview.RecyclerViewSwipeBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
 
@@ -15,7 +15,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TestRecycleViewSwipeAdapter extends XCRecyclerViewSwipeBaseAdapter<Person> {
+public class TestRecycleViewSwipeAdapter extends RecyclerViewSwipeBaseAdapter<Person> {
 
     public TestRecycleViewSwipeAdapter(Context context, List<Person> personList) {
         super(context);

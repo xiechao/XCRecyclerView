@@ -4,14 +4,14 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import com.xclib.recyclerview.XCRecyclerViewBaseAdapter;
+import com.xclib.recyclerview.RecyclerViewBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TestRecycleViewAdapter extends XCRecyclerViewBaseAdapter<Person> {
+public class TestRecycleViewAdapter extends RecyclerViewBaseAdapter<Person> {
 
     public TestRecycleViewAdapter(Context context) {
         super(context);

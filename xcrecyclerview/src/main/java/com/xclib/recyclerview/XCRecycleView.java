@@ -18,12 +18,8 @@ public class XCRecycleView extends RecyclerView {
 
             final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) getLayoutManager();
 
-//            int visibleThreshold = 5;
-
             int totalItemCount = linearLayoutManager.getItemCount();
             int lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
-
-//            linearLayoutManager.findLastVisibleItemPosition()
 
             if (totalItemCount <= (lastVisibleItem + 3)) {
                 tryDoLoadMore();

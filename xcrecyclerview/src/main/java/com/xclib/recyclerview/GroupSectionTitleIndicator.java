@@ -21,13 +21,7 @@ public class GroupSectionTitleIndicator extends SectionTitleIndicator<ISectionDa
 
     @Override
     public void setSection(ISectionData colorGroup) {
-        // Example of using a single character
         setTitleText(colorGroup.getSectionHeader());
-
-        // Example of using a longer string
-        // setTitleText(colorGroup.getName());
-
-//        setIndicatorTextColor(colorGroup.getAsColor());
     }
 
 }

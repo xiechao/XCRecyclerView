@@ -30,11 +30,6 @@ public class TestObservableScrollActivity extends AppCompatActivity implements H
     TextView tvHeaderTitle;
     @Bind(R.id.sliding_tabs)
     TabLayout slidingTabs;
-//
-//    @Override
-//    public View getHeaderView() {
-//        return headerView;
-//    }
     @Bind(R.id.ll_header_layout)
     LinearLayout llHeaderLayout;
 

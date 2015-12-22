@@ -239,7 +239,5 @@ public abstract class HeaderRecyclerFragment extends Fragment {
 
             }
         }
-
-
     }
 }

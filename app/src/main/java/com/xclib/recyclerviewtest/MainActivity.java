@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.xclib.recyclerviewtest.activities.HeaderSectionActivity;
+import com.xclib.recyclerviewtest.activities.HeaderSectionSwipeActivity;
 import com.xclib.recyclerviewtest.activities.ManagerGridLayoutActivity;
 import com.xclib.recyclerviewtest.activities.ManagerLinearLayoutActivity;
 import com.xclib.recyclerviewtest.activities.ManagerLinearLayoutSwipeActivity;
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick({R.id.btn_header_section_swipe})
     public void onClickHeaderSectionSwipe(View view) {
-        Intent intent = new Intent(this, HeaderSectionActivity.class);
+        Intent intent = new Intent(this, HeaderSectionSwipeActivity.class);
 
         startActivity(intent);
     }

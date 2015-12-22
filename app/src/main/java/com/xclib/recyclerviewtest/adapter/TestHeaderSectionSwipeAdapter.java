@@ -2,18 +2,30 @@ package com.xclib.recyclerviewtest.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.xclib.recyclerview.XCRecyclerViewHeaderBaseAdapter;
+import com.daimajia.swipe.SwipeLayout;
+import com.xclib.recyclerview.XCRecyclerViewHeaderSwipeBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TestHeaderSectionAdapter extends XCRecyclerViewHeaderBaseAdapter<Person> {
-    public TestHeaderSectionAdapter(Context context) {
+public class TestHeaderSectionSwipeAdapter extends XCRecyclerViewHeaderSwipeBaseAdapter<Person> {
+    public TestHeaderSectionSwipeAdapter(Context context) {
         super(context);
+    }
+
+    @Override
+    protected boolean isCommonItemSupportSwipe(int position, Person data) {
+        return true;
+    }
+
+    @Override
+    public int getSwipeLayoutResourceId(int position) {
+        return R.id.swipe_layout;
     }
 
     @Override
@@ -34,7 +46,7 @@ public class TestHeaderSectionAdapter extends XCRecyclerViewHeaderBaseAdapter<Pe
 
     @Override
     protected int getCommonViewResourceId(int viewType) {
-        return R.layout.item_layout_user;
+        return R.layout.item_layout_swip_user;
     }
 
     @Override
@@ -64,8 +76,12 @@ public class TestHeaderSectionAdapter extends XCRecyclerViewHeaderBaseAdapter<Pe
     }
 
     public class ViewHolder extends GTViewHolderBase {
+        @Bind(R.id.btn_delete)
+        Button btnDelete;
         @Bind(R.id.tv_name)
         TextView tvName;
+        @Bind(R.id.swipe_layout)
+        SwipeLayout swipeLayout;
 
 
         public ViewHolder(View itemView) {

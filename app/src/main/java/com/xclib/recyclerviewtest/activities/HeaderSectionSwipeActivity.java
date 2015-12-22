@@ -7,13 +7,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.swipe.util.Attributes;
 import com.eowise.recyclerview.stickyheaders.OnHeaderClickListener;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersBuilder;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
 import com.xclib.recyclerview.GroupSectionTitleIndicator;
 import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerviewtest.R;
-import com.xclib.recyclerviewtest.adapter.TestHeaderSectionAdapter;
+import com.xclib.recyclerviewtest.adapter.TestHeaderSectionSwipeAdapter;
 import com.xclib.recyclerviewtest.model.Person;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
-public class HeaderSectionActivity extends AppCompatActivity {
+public class HeaderSectionSwipeActivity extends AppCompatActivity {
 
 
     @Bind(R.id.recycler_view)
@@ -58,25 +59,26 @@ public class HeaderSectionActivity extends AppCompatActivity {
             personList.add(new Person(personName));
         }
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(HeaderSectionActivity.this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(HeaderSectionSwipeActivity.this, LinearLayoutManager.VERTICAL, false));
 
-        TestHeaderSectionAdapter testHeaderSectionAdapter = new TestHeaderSectionAdapter(this);
-        testHeaderSectionAdapter.resetData(personList);
+        TestHeaderSectionSwipeAdapter testHeaderSectionSwipeAdapter = new TestHeaderSectionSwipeAdapter(this);
+        testHeaderSectionSwipeAdapter.resetData(personList);
+        testHeaderSectionSwipeAdapter.setMode(Attributes.Mode.Single);
 
         StickyHeadersItemDecoration top = new StickyHeadersBuilder()
-                .setAdapter(testHeaderSectionAdapter)
+                .setAdapter(testHeaderSectionSwipeAdapter)
                 .setRecyclerView(recyclerView)
-                .setStickyHeadersAdapter(testHeaderSectionAdapter.getStickyHeadersAdapter())
-                .setOnHeaderClickListener(new OnHeaderClickListener() {
-                    @Override
-                    public void onHeaderClick(View header, long headerId) {
-                        TextView text = (TextView) header.findViewById(R.id.title);
-                        Toast.makeText(getApplicationContext(), "Click on " + text.getText(), Toast.LENGTH_SHORT).show();
-                    }
-                })
+                .setStickyHeadersAdapter(testHeaderSectionSwipeAdapter.getStickyHeadersAdapter())
+//                .setOnHeaderClickListener(new OnHeaderClickListener() {
+//                    @Override
+//                    public void onHeaderClick(View header, long headerId) {
+//                        TextView text = (TextView) header.findViewById(R.id.title);
+//                        Toast.makeText(getApplicationContext(), "Click on " + text.getText(), Toast.LENGTH_SHORT).show();
+//                    }
+//                })
                 .build();
 
-        recyclerView.setAdapter(testHeaderSectionAdapter);
+        recyclerView.setAdapter(testHeaderSectionSwipeAdapter);
         recyclerView.addItemDecoration(top);
     }
 

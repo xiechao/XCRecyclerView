@@ -35,8 +35,14 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
 
+
         <activity
             android:name=".activities.HeaderSectionActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activities.HeaderSectionSwipeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
 

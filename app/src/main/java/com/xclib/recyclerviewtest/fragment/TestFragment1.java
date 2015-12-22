@@ -1,7 +1,10 @@
 package com.xclib.recyclerviewtest.fragment;
 
-/**
- * Created by xiechao on 22/12/15.
- */
+import com.xclib.recyclerview.XCRecyclerViewBaseAdapter;
+
 public class TestFragment1 extends HeaderRecyclerFragment {
+    @Override
+    protected XCRecyclerViewBaseAdapter getAdapter() {
+        return null;
+    }
 }

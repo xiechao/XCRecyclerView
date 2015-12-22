@@ -97,7 +97,12 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         } else if (viewType == VIEW_TYPE_LOAD_MORE) {
             return new LoadMoreViewHolder(loadMoreViewContainer);
         } else {
-            return onCommonCreateViewHolder(LayoutInflater.from(parent.getContext()).inflate(getCommonViewResourceId(viewType), parent, false));
+            View viewItem = null;
+            if (getCommonViewResourceId(viewType) > 0) {
+                viewItem = LayoutInflater.from(parent.getContext()).inflate(getCommonViewResourceId(viewType), parent, false);
+            }
+
+            return onCommonCreateViewHolder(viewItem);
         }
     }
 
@@ -126,7 +131,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
 
     }
 
-    protected T getItem(int position) {
+    public T getItem(int position) {
         return dataArrayList.get(position - headerViewList.size());
     }
 

@@ -62,10 +62,10 @@ public class ManagerGridLayoutActivity extends AppCompatActivity {
         recycleView.addFooterView(footerView2);
 
 
-        List<Person> users = new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
         for (int i = 0; i < 29; i++) {
             Person person = new Person("Name " + i);
-            users.add(person);
+            personList.add(person);
         }
 
 
@@ -73,7 +73,9 @@ public class ManagerGridLayoutActivity extends AppCompatActivity {
 
         recycleView.setLayoutManager(gridLayoutManager);
 
-        testRecycleViewAdapter = new TestRecycleViewAdapter(this, users);
+        testRecycleViewAdapter = new TestRecycleViewAdapter(this);
+
+        testRecycleViewAdapter.resetData(personList);
 
         recycleView.setAdapter(testRecycleViewAdapter);
 

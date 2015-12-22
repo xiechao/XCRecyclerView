@@ -3,10 +3,12 @@ package com.xclib.recyclerviewtest.fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerview.XCRecyclerViewBaseAdapter;
@@ -20,7 +22,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
 
 
     protected ListEmptyView listEmptyView;
-    private View headerView;
+    private LinearLayout headerView;
     private XCRecyclerViewBaseAdapter baseAdapter;
     private XCRecyclerViewBaseAdapter adapter;
 
@@ -31,9 +33,10 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         xcRecycleView = (XCRecycleView) rootView.findViewById(R.id.xc_recycler_view);
 
         listEmptyView = new ListEmptyView(getActivity());
-        if (getActivity() instanceof HeaderViewProvider) {
-            headerView = ((HeaderViewProvider) getActivity()).getHeaderView();
-        }
+
+        headerView = new LinearLayout(getContext());
+
+        refreshHeaderView();
 
         baseAdapter = getAdapter();
         adapter = new HeaderListAdapter(baseAdapter);
@@ -42,7 +45,24 @@ public abstract class HeaderRecyclerFragment extends Fragment {
 
         xcRecycleView.setAdapter(adapter);
 
+        xcRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         return rootView;
+    }
+
+    private void refreshHeaderView() {
+        if (headerView != null) {
+            if (isHeaderAvailable) {
+                if (getActivity() instanceof HeaderViewProvider) {
+                    View headerViewContent = ((HeaderViewProvider) getActivity()).getHeaderView();
+                    headerView.addView(headerViewContent, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                }
+            } else {
+                headerView.removeAllViews();
+
+                xcRecycleView.setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override
@@ -111,12 +131,27 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         }
     };
 
+    private boolean isHeaderAvailable = true;
+
+    public void setHeaderAvailable(boolean isHeaderAvailable) {
+        if (this.isHeaderAvailable && !isHeaderAvailable) {
+            this.isHeaderAvailable = false;
+
+            refreshHeaderView();
+        } else if (!this.isHeaderAvailable && isHeaderAvailable) {
+            this.isHeaderAvailable = true;
+
+            refreshHeaderView();
+        }
+    }
+
 
     public class HeaderListAdapter extends XCRecyclerViewBaseAdapter {
         XCRecyclerViewBaseAdapter mListAdapter;
 
         private static final int VIEW_TYPE_OBSERVABLE_SCROLL_HEADER = 5000;
         private static final int VIEW_TYPE_EMPTY_VIEW = VIEW_TYPE_OBSERVABLE_SCROLL_HEADER + 1;
+
 
         private HeaderListAdapter(XCRecyclerViewBaseAdapter listAdapter) {
             super(getContext());
@@ -133,10 +168,10 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         public int getCommonItemViewType(int position, Object data) {
             if (isHeaderType(position)) {
                 return VIEW_TYPE_OBSERVABLE_SCROLL_HEADER;
-            } else if (position == 1 && mListAdapter.getItemCount() == 0) {
+            } else if (isEmptyViewType(position)) {
                 return VIEW_TYPE_EMPTY_VIEW;
             } else {
-                return mListAdapter.getItemViewType(position - 1 - (mListAdapter.getItemCount() == 0 ? 1 : 0));
+                return mListAdapter.getItemViewType(offsetPosition(position));
             }
         }
 
@@ -211,7 +246,9 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         }
 
         public int offsetPosition(int position) {
-            return position - (mListAdapter.getItemCount() == 0 ? 2 : 1);
+            return position - (mListAdapter.getItemCount() == 0 ? 1 : 0) - 1;
         }
+
+
     }
 }

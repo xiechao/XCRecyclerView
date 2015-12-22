@@ -15,10 +15,8 @@ import butterknife.ButterKnife;
 
 public class TestRecycleViewAdapter extends XCRecyclerViewBaseAdapter<Person> {
 
-    public TestRecycleViewAdapter(Context context, List<Person> personList) {
+    public TestRecycleViewAdapter(Context context) {
         super(context);
-
-        resetData(personList);
     }
 
     @Override

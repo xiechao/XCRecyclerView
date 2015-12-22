@@ -71,7 +71,8 @@ public class ManagerLinearLayoutActivity extends AppCompatActivity {
 
         recycleView.setLayoutManager(new LinearLayoutManager(this));
 
-        testRecycleViewAdapter = new TestRecycleViewAdapter(this, personList);
+        testRecycleViewAdapter = new TestRecycleViewAdapter(this);
+        testRecycleViewAdapter.resetData(personList);
 
         recycleView.setAdapter(testRecycleViewAdapter);
 

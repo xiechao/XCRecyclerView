@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,12 @@ public abstract class HeaderRecyclerFragment extends Fragment {
 
         headerView = new LinearLayout(getContext());
 
-        refreshHeaderView();
+        if (getActivity() instanceof HeaderViewProvider) {
+            HeaderViewProvider headerViewProvider = (HeaderViewProvider) getActivity();
+
+            View view = new View(getContext());
+            headerView.addView(view, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerViewProvider.getHeaderViewHeight()));
+        }
 
         baseAdapter = getAdapter();
         adapter = new HeaderListAdapter(baseAdapter);
@@ -47,35 +53,48 @@ public abstract class HeaderRecyclerFragment extends Fragment {
 
         xcRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
+        xcRecycleView.addOnScrollListener(onScrollListener);
+
         return rootView;
     }
 
-    private void refreshHeaderView() {
-        if (headerView != null) {
-            if (isHeaderAvailable) {
-                if (getActivity() instanceof HeaderViewProvider) {
-                    View headerViewContent = ((HeaderViewProvider) getActivity()).getHeaderView();
-                    headerView.addView(headerViewContent, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                }
-            } else {
-                headerView.removeAllViews();
+    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+        }
 
-                xcRecycleView.setVisibility(View.GONE);
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            Log.d("aaaaaaaa", "dx = " + dx + "; dy = " + dy);
+
+            super.onScrolled(recyclerView, dx, dy);
+
+            if (getActivity() instanceof HeaderViewProvider) {
+                HeaderViewProvider headerViewProvider = (HeaderViewProvider) getActivity();
+
+                headerViewProvider.onScrolled(recyclerView, dx, dy);
             }
         }
-    }
+    };
 
     @Override
     public void onDestroy() {
         super.onDestroy();
 
         unregisterAdapterDataObserver();
+
+        xcRecycleView.removeOnScrollListener(onScrollListener);
     }
 
     protected abstract XCRecyclerViewBaseAdapter getAdapter();
 
     public interface HeaderViewProvider {
-        View getHeaderView();
+        //        View getHeaderView();
+        int getHeaderViewHeight();
+
+        void onScrolled(RecyclerView recyclerView, int dx, int dy);
     }
 
     private void registerAdapterDataObserver() {
@@ -130,20 +149,6 @@ public abstract class HeaderRecyclerFragment extends Fragment {
             adapter.notifyItemRangeRemoved(fromPosition + 1, itemCount);
         }
     };
-
-    private boolean isHeaderAvailable = true;
-
-    public void setHeaderAvailable(boolean isHeaderAvailable) {
-        if (this.isHeaderAvailable && !isHeaderAvailable) {
-            this.isHeaderAvailable = false;
-
-            refreshHeaderView();
-        } else if (!this.isHeaderAvailable && isHeaderAvailable) {
-            this.isHeaderAvailable = true;
-
-            refreshHeaderView();
-        }
-    }
 
 
     public class HeaderListAdapter extends XCRecyclerViewBaseAdapter {

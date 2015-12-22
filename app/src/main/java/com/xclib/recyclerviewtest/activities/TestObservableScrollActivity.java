@@ -5,8 +5,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.support.v7.widget.RecyclerView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,28 +16,27 @@ import com.xclib.recyclerviewtest.fragment.TestFragment1;
 import com.xclib.recyclerviewtest.fragment.TestFragment2;
 import com.xclib.recyclerviewtest.fragment.TestFragment3;
 
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class TestObservableScrollActivity extends AppCompatActivity implements HeaderRecyclerFragment.HeaderViewProvider {
+
+    @Bind(R.id.layout_fragment_content)
+    FrameLayout layoutFragmentContent;
     @Bind(R.id.tv_header_title)
     TextView tvHeaderTitle;
     @Bind(R.id.sliding_tabs)
     TabLayout slidingTabs;
-    @Bind(R.id.ll_detail_container)
-    LinearLayout llDetailContainer;
-
-    private View headerView;
+    @Bind(R.id.ll_header_layout)
+    LinearLayout llHeaderLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        headerView = LayoutInflater.from(this).inflate(R.layout.include_circle_detail_header, null);
+        setContentView(R.layout.activity_observable_scroll);
 
-        ButterKnife.bind(this, headerView);
+        ButterKnife.bind(this);
 
         tvHeaderTitle.setText("Header Text!");
 
@@ -48,11 +47,11 @@ public class TestObservableScrollActivity extends AppCompatActivity implements H
             tab.select();
         }
     }
-
-    @Override
-    public View getHeaderView() {
-        return headerView;
-    }
+//
+//    @Override
+//    public View getHeaderView() {
+//        return headerView;
+//    }
 
     private static final int TAB_COUNT = 3;
 
@@ -81,17 +80,10 @@ public class TestObservableScrollActivity extends AppCompatActivity implements H
     }
 
     private void switchFragment(int position) {
-        List<Fragment> fragmentArrayList = getSupportFragmentManager().getFragments();
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) llHeaderLayout.getLayoutParams();
 
-        if (fragmentArrayList != null) {
-            for (Fragment fragment : fragmentArrayList) {
-                if (fragment instanceof HeaderRecyclerFragment) {
-                    HeaderRecyclerFragment headerRecyclerFragment = (HeaderRecyclerFragment) fragment;
-
-                    headerRecyclerFragment.setHeaderAvailable(false);
-                }
-            }
-        }
+        layoutParams.setMargins(0, 0, 0, 0);
+        llHeaderLayout.setLayoutParams(layoutParams);
 
         Fragment fragment;
         if (position == 0) {
@@ -105,8 +97,20 @@ public class TestObservableScrollActivity extends AppCompatActivity implements H
         Bundle args = new Bundle();
         fragment.setArguments(args);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(android.R.id.content, fragment, fragment.getClass().getName());
+        fragmentTransaction.replace(R.id.layout_fragment_content, fragment, fragment.getClass().getName());
         fragmentTransaction.commit();
     }
 
+    @Override
+    public int getHeaderViewHeight() {
+        return (int) (this.getResources().getDisplayMetrics().density * 200 + 0.5f);
+    }
+
+    @Override
+    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) llHeaderLayout.getLayoutParams();
+
+        layoutParams.setMargins(layoutParams.leftMargin - dx, layoutParams.topMargin - dy, layoutParams.rightMargin - dx, layoutParams.bottomMargin - dy);
+        llHeaderLayout.setLayoutParams(layoutParams);
+    }
 }

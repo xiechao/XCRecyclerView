@@ -21,8 +21,6 @@ public class TestFragment2 extends HeaderRecyclerFragment {
 
         initData();
 
-        setHeaderAvailable(true);
-
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

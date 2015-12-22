@@ -2,6 +2,7 @@ package com.xclib.recyclerviewtest.views;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,8 @@ public class ListEmptyView extends LinearLayout {
         this.addView(view, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         emptyTextView = (TextView) findViewById(R.id.tv_empty);
+
+        this.setBackgroundColor(Color.argb(255,255,255,255));
     }
 
     public void setText(int resId) {

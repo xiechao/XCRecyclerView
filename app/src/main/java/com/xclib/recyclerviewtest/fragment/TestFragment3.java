@@ -1,6 +1,8 @@
 package com.xclib.recyclerviewtest.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,11 @@ public class TestFragment3 extends HeaderRecyclerFragment {
     @Override
     protected XCRecyclerViewBaseAdapter getAdapter() {
         return testRecycleViewAdapter;
+    }
+
+    @Override
+    protected RecyclerView.LayoutManager getLayoutManager() {
+        return new LinearLayoutManager(getContext());
     }
 
     private void initData() {

@@ -1,6 +1,8 @@
 package com.xclib.recyclerviewtest.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +23,11 @@ public class TestFragment1 extends HeaderRecyclerFragment {
 
         initData();
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+
+        listEmptyView.setText("empty test!");
+
+        return view;
     }
 
 
@@ -30,13 +36,18 @@ public class TestFragment1 extends HeaderRecyclerFragment {
         return testRecycleViewAdapter;
     }
 
-    private void initData() {
-        List<Person> personList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            Person user = new Person("Fragment1 Name " + i);
-            personList.add(user);
-        }
+    @Override
+    protected RecyclerView.LayoutManager getLayoutManager() {
+        return new LinearLayoutManager(getContext());
+    }
 
-        testRecycleViewAdapter.resetData(personList);
+    private void initData() {
+//        List<Person> personList = new ArrayList<>();
+//        for (int i = 0; i < 30; i++) {
+//            Person user = new Person("Fragment1 Name " + i);
+//            personList.add(user);
+//        }
+
+//        testRecycleViewAdapter.resetData(personList);
     }
 }

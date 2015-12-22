@@ -3,7 +3,6 @@ package com.xclib.recyclerviewtest.fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +32,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_list_view, container, false);
         xcRecycleView = (XCRecycleView) rootView.findViewById(R.id.xc_recycler_view);
 
-        listEmptyView = new ListEmptyView(getActivity());
+        listEmptyView = new ListEmptyView(getContext());
 
         headerView = new LinearLayout(getContext());
 
@@ -51,8 +50,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
 
         xcRecycleView.setAdapter(adapter);
 
-        xcRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        xcRecycleView.setLayoutManager(getLayoutManager());
 
         xcRecycleView.addOnScrollListener(onScrollListener);
 
@@ -89,6 +87,8 @@ public abstract class HeaderRecyclerFragment extends Fragment {
     }
 
     protected abstract XCRecyclerViewBaseAdapter getAdapter();
+
+    protected abstract RecyclerView.LayoutManager getLayoutManager();
 
     public interface HeaderViewProvider {
         //        View getHeaderView();

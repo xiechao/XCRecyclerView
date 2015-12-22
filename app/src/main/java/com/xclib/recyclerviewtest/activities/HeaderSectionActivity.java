@@ -48,9 +48,6 @@ public class HeaderSectionActivity extends AppCompatActivity {
         // Connect the section indicator to the scroller
         fastScroller.setSectionIndicator(fastScrollerSectionTitleIndicator);
 
-//        setRecyclerViewLayoutManager(recyclerView);
-
-
         String[] personInfos = this.getResources().getStringArray(R.array.person_info);
 
         List<Person> personList = new ArrayList<>();

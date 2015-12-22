@@ -21,12 +21,11 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
     private static final int VIEW_TYPE_FOOTER_BASE = 2000;
     private static final int VIEW_TYPE_LOAD_MORE = 3000;
     private static final int LOAD_MORE_ANI_TIME = 300;
-
-    private boolean mIsLoading;
     private final ArrayList<T> dataArrayList = new ArrayList<>();
-    private XCRecycleView.OnLoadMoreListener onLoadMoreListener;
     private final ArrayList<View> headerViewList = new ArrayList<>();
     private final ArrayList<View> footerViewList = new ArrayList<>();
+    private boolean mIsLoading;
+    private XCRecycleView.OnLoadMoreListener onLoadMoreListener;
     private RelativeLayout loadMoreViewContainer = null;
     private View loadMoreViewContent = null;
 

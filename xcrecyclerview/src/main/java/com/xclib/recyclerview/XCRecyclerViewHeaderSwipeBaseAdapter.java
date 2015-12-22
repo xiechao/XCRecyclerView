@@ -11,12 +11,12 @@ import com.daimajia.swipe.util.Attributes;
 
 import java.util.List;
 
-public abstract class XCRecyclerViewHeaderSwipeBaseAdapter<T extends ISectionData> extends XCRecyclerViewHeaderBaseAdapter<T>  implements SwipeItemMangerInterface, SwipeAdapterInterface {
+public abstract class XCRecyclerViewHeaderSwipeBaseAdapter<T extends ISectionData> extends XCRecyclerViewHeaderBaseAdapter<T> implements SwipeItemMangerInterface, SwipeAdapterInterface {
+    private final SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
+
     protected XCRecyclerViewHeaderSwipeBaseAdapter(Context context) {
         super(context);
     }
-
-    private final SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
 
     @Override
     public void openItem(int position) {

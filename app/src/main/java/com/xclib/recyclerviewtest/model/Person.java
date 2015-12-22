@@ -23,7 +23,6 @@ public class Person implements ISectionData {
     }
 
 
-
     @Override
     public String getSectionHeader() {
         if (TextUtils.isEmpty(sectionHeader)) {

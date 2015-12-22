@@ -15,13 +15,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public abstract class XCRecyclerViewHeaderBaseAdapter<T extends ISectionData> extends XCRecyclerViewBaseAdapter<T> implements SectionIndexer {
-    protected XCRecyclerViewHeaderBaseAdapter(Context context) {
-        super(context);
-
-        setHasStableIds(true);
-    }
-
-
     private final StickyHeadersAdapter<GTViewHolderBase> stickyHeadersAdapter = new StickyHeadersAdapter<GTViewHolderBase>() {
         @Override
         public GTViewHolderBase onCreateViewHolder(ViewGroup parent) {
@@ -38,6 +31,13 @@ public abstract class XCRecyclerViewHeaderBaseAdapter<T extends ISectionData> ex
             return getItem(position).getSectionHeaderId();
         }
     };
+    private final ArrayList<T> sectionList = new ArrayList<>();
+
+    protected XCRecyclerViewHeaderBaseAdapter(Context context) {
+        super(context);
+
+        setHasStableIds(true);
+    }
 
     @SuppressWarnings("SameReturnValue")
     protected abstract int getHeaderViewResourceId();
@@ -89,8 +89,6 @@ public abstract class XCRecyclerViewHeaderBaseAdapter<T extends ISectionData> ex
 
         super.resetData(dataList);
     }
-
-    private final ArrayList<T> sectionList = new ArrayList<>();
 
     @Override
     public Object[] getSections() {

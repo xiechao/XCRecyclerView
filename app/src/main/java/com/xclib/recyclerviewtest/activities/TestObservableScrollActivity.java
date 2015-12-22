@@ -22,12 +22,19 @@ import butterknife.ButterKnife;
 
 public class TestObservableScrollActivity extends AppCompatActivity implements HeaderRecyclerFragment.HeaderViewProvider {
 
+    private static final int TAB_COUNT = 3;
+    private static final String[] tabTitles = new String[]{"Fragment1", "Fragment2", "Fragment3"};
     @Bind(R.id.layout_fragment_content)
     FrameLayout layoutFragmentContent;
     @Bind(R.id.tv_header_title)
     TextView tvHeaderTitle;
     @Bind(R.id.sliding_tabs)
     TabLayout slidingTabs;
+//
+//    @Override
+//    public View getHeaderView() {
+//        return headerView;
+//    }
     @Bind(R.id.ll_header_layout)
     LinearLayout llHeaderLayout;
 
@@ -49,15 +56,6 @@ public class TestObservableScrollActivity extends AppCompatActivity implements H
             tab.select();
         }
     }
-//
-//    @Override
-//    public View getHeaderView() {
-//        return headerView;
-//    }
-
-    private static final int TAB_COUNT = 3;
-
-    private static final String[] tabTitles = new String[]{"Fragment1", "Fragment2", "Fragment3"};
 
     private void setUpTab() {
         for (int i = 0; i < TAB_COUNT; i++) {

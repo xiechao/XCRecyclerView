@@ -16,46 +16,6 @@ import com.xclib.recyclerviewtest.views.ListEmptyView;
 
 public abstract class HeaderRecyclerFragment extends Fragment {
 
-    @SuppressWarnings("unused")
-    protected XCRecycleView xcRecycleView;
-
-
-    protected ListEmptyView listEmptyView;
-    private LinearLayout headerView;
-    private XCRecyclerViewBaseAdapter baseAdapter;
-    private XCRecyclerViewBaseAdapter adapter;
-
-    @SuppressLint("CutPasteId")
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_list_view, container, false);
-        xcRecycleView = (XCRecycleView) rootView.findViewById(R.id.xc_recycler_view);
-
-        listEmptyView = new ListEmptyView(getContext());
-
-        headerView = new LinearLayout(getContext());
-
-        if (getActivity() instanceof HeaderViewProvider) {
-            HeaderViewProvider headerViewProvider = (HeaderViewProvider) getActivity();
-
-            View view = new View(getContext());
-            headerView.addView(view, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerViewProvider.getHeaderViewHeight()));
-        }
-
-        baseAdapter = getAdapter();
-        adapter = new HeaderListAdapter(baseAdapter);
-
-        registerAdapterDataObserver();
-
-        xcRecycleView.setAdapter(adapter);
-
-        xcRecycleView.setLayoutManager(getLayoutManager());
-
-        xcRecycleView.addOnScrollListener(onScrollListener);
-
-        return rootView;
-    }
-
     private final RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
 
         @Override
@@ -69,36 +29,12 @@ public abstract class HeaderRecyclerFragment extends Fragment {
             }
         }
     };
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        unregisterAdapterDataObserver();
-
-        xcRecycleView.removeOnScrollListener(onScrollListener);
-    }
-
-    protected abstract XCRecyclerViewBaseAdapter getAdapter();
-
-    protected abstract RecyclerView.LayoutManager getLayoutManager();
-
-    public interface HeaderViewProvider {
-        //        View getHeaderView();
-        int getHeaderViewHeight();
-
-        void onScrolled(RecyclerView recyclerView, int dx, int dy);
-    }
-
-    private void registerAdapterDataObserver() {
-        baseAdapter.registerAdapterDataObserver(adapterDataObserver);
-    }
-
-
-    private void unregisterAdapterDataObserver() {
-        baseAdapter.unregisterAdapterDataObserver(adapterDataObserver);
-    }
-
+    @SuppressWarnings("unused")
+    protected XCRecycleView xcRecycleView;
+    protected ListEmptyView listEmptyView;
+    private LinearLayout headerView;
+    private XCRecyclerViewBaseAdapter baseAdapter;
+    private XCRecyclerViewBaseAdapter adapter;
     private final RecyclerView.AdapterDataObserver adapterDataObserver = new RecyclerView.AdapterDataObserver() {
         @Override
         public void onChanged() {
@@ -143,12 +79,70 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         }
     };
 
+    @SuppressLint("CutPasteId")
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_list_view, container, false);
+        xcRecycleView = (XCRecycleView) rootView.findViewById(R.id.xc_recycler_view);
+
+        listEmptyView = new ListEmptyView(getContext());
+
+        headerView = new LinearLayout(getContext());
+
+        if (getActivity() instanceof HeaderViewProvider) {
+            HeaderViewProvider headerViewProvider = (HeaderViewProvider) getActivity();
+
+            View view = new View(getContext());
+            headerView.addView(view, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerViewProvider.getHeaderViewHeight()));
+        }
+
+        baseAdapter = getAdapter();
+        adapter = new HeaderListAdapter(baseAdapter);
+
+        registerAdapterDataObserver();
+
+        xcRecycleView.setAdapter(adapter);
+
+        xcRecycleView.setLayoutManager(getLayoutManager());
+
+        xcRecycleView.addOnScrollListener(onScrollListener);
+
+        return rootView;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        unregisterAdapterDataObserver();
+
+        xcRecycleView.removeOnScrollListener(onScrollListener);
+    }
+
+    protected abstract XCRecyclerViewBaseAdapter getAdapter();
+
+    protected abstract RecyclerView.LayoutManager getLayoutManager();
+
+    private void registerAdapterDataObserver() {
+        baseAdapter.registerAdapterDataObserver(adapterDataObserver);
+    }
+
+
+    private void unregisterAdapterDataObserver() {
+        baseAdapter.unregisterAdapterDataObserver(adapterDataObserver);
+    }
+
+    public interface HeaderViewProvider {
+        //        View getHeaderView();
+        int getHeaderViewHeight();
+
+        void onScrolled(RecyclerView recyclerView, int dx, int dy);
+    }
 
     public class HeaderListAdapter extends XCRecyclerViewBaseAdapter {
-        final XCRecyclerViewBaseAdapter mListAdapter;
-
         private static final int VIEW_TYPE_OBSERVABLE_SCROLL_HEADER = 5000;
         private static final int VIEW_TYPE_EMPTY_VIEW = VIEW_TYPE_OBSERVABLE_SCROLL_HEADER + 1;
+        final XCRecyclerViewBaseAdapter mListAdapter;
 
 
         private HeaderListAdapter(XCRecyclerViewBaseAdapter listAdapter) {
@@ -181,31 +175,6 @@ public abstract class HeaderRecyclerFragment extends Fragment {
                 return new EmptyViewHolder(listEmptyView);
             } else {
                 return mListAdapter.onCreateViewHolder(parent, viewType);
-            }
-        }
-
-
-        private class ObservableScrollHeaderViewHolder extends GTViewHolderBase {
-
-            public ObservableScrollHeaderViewHolder(View itemView) {
-                super(itemView);
-            }
-
-            @Override
-            public void render(Object data) {
-
-            }
-        }
-
-        private class EmptyViewHolder extends GTViewHolderBase {
-
-            public EmptyViewHolder(View itemView) {
-                super(itemView);
-            }
-
-            @Override
-            public void render(Object data) {
-
             }
         }
 
@@ -245,6 +214,30 @@ public abstract class HeaderRecyclerFragment extends Fragment {
 
         public int offsetPosition(int position) {
             return position - (mListAdapter.getItemCount() == 0 ? 1 : 0) - 1;
+        }
+
+        private class ObservableScrollHeaderViewHolder extends GTViewHolderBase {
+
+            public ObservableScrollHeaderViewHolder(View itemView) {
+                super(itemView);
+            }
+
+            @Override
+            public void render(Object data) {
+
+            }
+        }
+
+        private class EmptyViewHolder extends GTViewHolderBase {
+
+            public EmptyViewHolder(View itemView) {
+                super(itemView);
+            }
+
+            @Override
+            public void render(Object data) {
+
+            }
         }
 
 

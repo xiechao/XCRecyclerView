@@ -13,9 +13,9 @@
         android:textAppearance="?android:textAppearanceMedium" />
 
     <ImageView
-        android:contentDescription="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:contentDescription="@null"
         android:scaleType="fitXY"
         android:src="?android:listDivider" />
 </LinearLayout>

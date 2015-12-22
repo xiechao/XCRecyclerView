@@ -32,6 +32,8 @@ public class XCRecycleView extends RecyclerView {
 
 
     };
+    private final ArrayList<View> headerViewArrayList = new ArrayList<>();
+    private final ArrayList<View> footerViewArrayList = new ArrayList<>();
 
     public XCRecycleView(Context context) {
         super(context);
@@ -67,7 +69,6 @@ public class XCRecycleView extends RecyclerView {
         }
     }
 
-
     public void clear() {
         removeOnScrollListener(onScrollListener);
     }
@@ -92,9 +93,6 @@ public class XCRecycleView extends RecyclerView {
             }
         });
     }
-
-    private final ArrayList<View> headerViewArrayList = new ArrayList<>();
-    private final ArrayList<View> footerViewArrayList = new ArrayList<>();
 
     public void addHeaderView(View v) {
         headerViewArrayList.add(v);
@@ -160,13 +158,6 @@ public class XCRecycleView extends RecyclerView {
         return footerViewArrayList.size();
     }
 
-    public interface OnLoadMoreListener {
-        void onLoadMore();
-
-        @SuppressWarnings("SameReturnValue")
-        boolean isHasMoreData();
-    }
-
     @Override
     public void setAdapter(Adapter adapter) {
         super.setAdapter(adapter);
@@ -208,5 +199,12 @@ public class XCRecycleView extends RecyclerView {
                 }
             });
         }
+    }
+
+    public interface OnLoadMoreListener {
+        void onLoadMore();
+
+        @SuppressWarnings("SameReturnValue")
+        boolean isHasMoreData();
     }
 }

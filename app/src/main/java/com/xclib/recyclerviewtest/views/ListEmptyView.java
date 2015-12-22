@@ -40,7 +40,7 @@ public class ListEmptyView extends LinearLayout {
 
         emptyTextView = (TextView) findViewById(R.id.tv_empty);
 
-        this.setBackgroundColor(Color.argb(255,255,255,255));
+        this.setBackgroundColor(Color.argb(255, 255, 255, 255));
     }
 
     public void setText(int resId) {

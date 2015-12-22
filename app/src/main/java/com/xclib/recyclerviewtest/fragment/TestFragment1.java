@@ -9,10 +9,6 @@ import android.view.ViewGroup;
 
 import com.xclib.recyclerview.XCRecyclerViewBaseAdapter;
 import com.xclib.recyclerviewtest.adapter.TestRecycleViewAdapter;
-import com.xclib.recyclerviewtest.model.Person;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TestFragment1 extends HeaderRecyclerFragment {
     private TestRecycleViewAdapter testRecycleViewAdapter;
@@ -41,6 +37,7 @@ public class TestFragment1 extends HeaderRecyclerFragment {
         return new LinearLayoutManager(getContext());
     }
 
+    @SuppressWarnings("EmptyMethod")
     private void initData() {
 //        List<Person> personList = new ArrayList<>();
 //        for (int i = 0; i < 30; i++) {

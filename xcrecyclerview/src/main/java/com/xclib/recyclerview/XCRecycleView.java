@@ -10,11 +10,7 @@ import android.view.View;
 import java.util.ArrayList;
 
 public class XCRecycleView extends RecyclerView {
-    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
-        }
+    private final RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -76,26 +72,15 @@ public class XCRecycleView extends RecyclerView {
         removeOnScrollListener(onScrollListener);
     }
 
-    private boolean tryDoLoadMore() {
+    private void tryDoLoadMore() {
         if (getAdapter() instanceof XCRecyclerViewBaseAdapter) {
             XCRecyclerViewBaseAdapter XCRecyclerViewBaseAdapter = (XCRecyclerViewBaseAdapter) getAdapter();
 
-            if (XCRecyclerViewBaseAdapter.tryDoLoadMore()) {
-//                this.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                    }
-//                        scrollToPosition(getAdapter().getItemCount() - 1);
-//                }, 100);
-
-                return true;
-            }
+            XCRecyclerViewBaseAdapter.tryDoLoadMore();
         }
-
-        return false;
     }
 
-    public void setLoadMoreEnd(final boolean isImmediate) {
+    public void setLoadMoreEnd(@SuppressWarnings("SameParameterValue") final boolean isImmediate) {
         this.post(new Runnable() {
             @Override
             public void run() {
@@ -108,8 +93,8 @@ public class XCRecycleView extends RecyclerView {
         });
     }
 
-    ArrayList<View> headerViewArrayList = new ArrayList<>();
-    ArrayList<View> footerViewArrayList = new ArrayList<>();
+    private final ArrayList<View> headerViewArrayList = new ArrayList<>();
+    private final ArrayList<View> footerViewArrayList = new ArrayList<>();
 
     public void addHeaderView(View v) {
         headerViewArrayList.add(v);
@@ -178,6 +163,7 @@ public class XCRecycleView extends RecyclerView {
     public interface OnLoadMoreListener {
         void onLoadMore();
 
+        @SuppressWarnings("SameReturnValue")
         boolean isHasMoreData();
     }
 

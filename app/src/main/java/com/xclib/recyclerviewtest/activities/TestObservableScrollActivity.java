@@ -1,5 +1,6 @@
 package com.xclib.recyclerviewtest.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,7 @@ public class TestObservableScrollActivity extends AppCompatActivity implements H
     @Bind(R.id.ll_header_layout)
     LinearLayout llHeaderLayout;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

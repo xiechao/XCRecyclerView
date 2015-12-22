@@ -1,6 +1,5 @@
 package com.xclib.recyclerviewtest.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +27,7 @@ public class ManagerLinearLayoutSwipeActivity extends AppCompatActivity {
 
 
     private TestRecycleViewSwipeAdapter testRecycleViewAdapter;
-    private XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
+    private final XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
         @Override
         public void onLoadMore() {
             doLoadMore();
@@ -47,14 +46,15 @@ public class ManagerLinearLayoutSwipeActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(
-                Context.LAYOUT_INFLATER_SERVICE);
+        recycleView.setLayoutManager(new LinearLayoutManager(this));
 
-        View headerView1 = inflater.inflate(R.layout.item_header_view_1, null, false);
-        View headerView2 = inflater.inflate(R.layout.item_header_view_2, null, false);
+        LayoutInflater inflater = LayoutInflater.from(this);
 
-        View footerView1 = inflater.inflate(R.layout.item_footer_view_1, null, false);
-        View footerView2 = inflater.inflate(R.layout.item_footer_view_2, null, false);
+        View headerView1 = inflater.inflate(R.layout.item_header_view_1, recycleView, false);
+        View headerView2 = inflater.inflate(R.layout.item_header_view_2, recycleView, false);
+
+        View footerView1 = inflater.inflate(R.layout.item_footer_view_1, recycleView, false);
+        View footerView2 = inflater.inflate(R.layout.item_footer_view_2, recycleView, false);
 
         recycleView.addHeaderView(headerView1);
         recycleView.addHeaderView(headerView2);
@@ -68,9 +68,6 @@ public class ManagerLinearLayoutSwipeActivity extends AppCompatActivity {
             Person user = new Person("Name " + i);
             personList.add(user);
         }
-
-
-        recycleView.setLayoutManager(new LinearLayoutManager(this));
 
         testRecycleViewAdapter = new TestRecycleViewSwipeAdapter(this, personList);
         testRecycleViewAdapter.setMode(Attributes.Mode.Single);
@@ -92,10 +89,6 @@ public class ManagerLinearLayoutSwipeActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-//                recycleView.setLoadMoreEnd(false);
-
-                Log.e("haint", "Load More 2");
-
                 List<Person> personList = new ArrayList<>();
                 for (int i = testRecycleViewAdapter.getCommonItemCount(); i < testRecycleViewAdapter.getCommonItemCount() + 30; i++) {
                     Person person = new Person("Name " + i);

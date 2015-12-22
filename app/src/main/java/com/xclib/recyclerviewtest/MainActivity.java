@@ -38,11 +38,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
     @OnClick({R.id.btn_linear_layout_manager})
     public void onClickLinearLayout(View view) {
         Intent intent = new Intent(this, ManagerLinearLayoutActivity.class);

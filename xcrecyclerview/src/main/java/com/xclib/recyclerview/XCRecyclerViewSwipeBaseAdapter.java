@@ -12,11 +12,11 @@ import com.daimajia.swipe.util.Attributes;
 import java.util.List;
 
 public abstract class XCRecyclerViewSwipeBaseAdapter<T> extends XCRecyclerViewBaseAdapter<T> implements SwipeItemMangerInterface, SwipeAdapterInterface {
-    public XCRecyclerViewSwipeBaseAdapter(Context context) {
+    protected XCRecyclerViewSwipeBaseAdapter(Context context) {
         super(context);
     }
 
-    public SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
+    private final SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
 
     @Override
     public void openItem(int position) {
@@ -69,10 +69,11 @@ public abstract class XCRecyclerViewSwipeBaseAdapter<T> extends XCRecyclerViewBa
     }
 
 
-    protected final boolean isSupportSwipe(int position) {
+    private boolean isSupportSwipe(int position) {
         return !(isHeaderView(position) || isFooterView(position) || isLoadMoreView(position)) && isCommonItemSupportSwipe(position, getItem(position));
     }
 
+    @SuppressWarnings("SameReturnValue")
     protected abstract boolean isCommonItemSupportSwipe(int position, T data);
 
     @Override

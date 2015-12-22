@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.xclib.recyclerview.ISectionData;
 
 public class Person implements ISectionData {
-    private String name;
+    private final String name;
     private String sectionHeader;
 
     public Person(String name) {

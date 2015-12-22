@@ -8,8 +8,6 @@ import com.xclib.recyclerview.XCRecyclerViewBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
 
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

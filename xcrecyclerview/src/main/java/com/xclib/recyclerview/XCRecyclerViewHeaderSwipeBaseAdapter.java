@@ -16,7 +16,7 @@ public abstract class XCRecyclerViewHeaderSwipeBaseAdapter<T extends ISectionDat
         super(context);
     }
 
-    public SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
+    private final SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
 
     @Override
     public void openItem(int position) {
@@ -69,10 +69,11 @@ public abstract class XCRecyclerViewHeaderSwipeBaseAdapter<T extends ISectionDat
     }
 
 
-    protected final boolean isSupportSwipe(int position) {
+    private boolean isSupportSwipe(int position) {
         return !(isHeaderView(position) || isFooterView(position) || isLoadMoreView(position)) && isCommonItemSupportSwipe(position, getItem(position));
     }
 
+    @SuppressWarnings("SameReturnValue")
     protected abstract boolean isCommonItemSupportSwipe(int position, T data);
 
     @Override

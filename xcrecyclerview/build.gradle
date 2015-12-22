@@ -2,16 +2,19 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-// 这个version是区分library版本的，因此当我们需要更新library时记得修改这个version
 version = "0.3.0"
 
 android {
+    //noinspection GroovyAssignabilityCheck
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
+    //noinspection GroovyAssignabilityCheck
     buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
-    resourcePrefix "com.xclib.recyclerview"
+    resourcePrefix ""
 
     defaultConfig {
+        //noinspection GroovyAssignabilityCheck
         minSdkVersion Integer.parseInt(project.ANDROID_BUILD_MIN_SDK_VERSION)
+        //noinspection GroovyAssignabilityCheck
         targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
         versionCode 1
         versionName version
@@ -38,22 +41,26 @@ dependencies {
 }
 
 
-def siteUrl = 'https://github.com/xiechao/XCRecyclerView'      // 项目的主页
-def gitUrl = 'https://github.com/xiechao/XCRecyclerView.git'   // Git仓库的url
-group = "com.xclib" // Maven Group ID for the artifact，一般填你唯一的包名
+def siteUrl = 'https://github.com/xiechao/XCRecyclerView'
+def gitUrl = 'https://github.com/xiechao/XCRecyclerView.git'
+group = "com.xclib"
 
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
         pom {
+            //noinspection GroovyAssignabilityCheck
             project {
                 packaging 'aar'
                 // Add your description here
+                //noinspection GroovyAssignabilityCheck
                 name 'Android XC Recycler View'  //项目描述
                 url siteUrl
                 // Set your license
                 licenses {
                     license {
+                        //noinspection GroovyAssignabilityCheck
+                        //noinspection GroovyAssignabilityCheck
                         name 'The Apache Software License, Version 2.0'
                         url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
@@ -61,6 +68,7 @@ install {
                 developers {
                     developer {
                         id 'xiechao'       //填写开发者基本信息
+                        //noinspection GroovyAssignabilityCheck
                         name 'xiechao'
                         email 'xc9898@gmail.com'
                     }
@@ -75,12 +83,14 @@ install {
     }
 }
 task sourcesJar(type: Jar) {
+    //noinspection GroovyAssignabilityCheck
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
 }
 
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
+    //noinspection GroovyAssignabilityCheck
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }
 

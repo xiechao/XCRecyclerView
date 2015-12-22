@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,16 +56,10 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         return rootView;
     }
 
-    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
-        }
+    private final RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            Log.d("aaaaaaaa", "dx = " + dx + "; dy = " + dy);
-
             super.onScrolled(recyclerView, dx, dy);
 
             if (getActivity() instanceof HeaderViewProvider) {
@@ -106,7 +99,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         baseAdapter.unregisterAdapterDataObserver(adapterDataObserver);
     }
 
-    RecyclerView.AdapterDataObserver adapterDataObserver = new RecyclerView.AdapterDataObserver() {
+    private final RecyclerView.AdapterDataObserver adapterDataObserver = new RecyclerView.AdapterDataObserver() {
         @Override
         public void onChanged() {
             super.onChanged();
@@ -152,7 +145,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
 
 
     public class HeaderListAdapter extends XCRecyclerViewBaseAdapter {
-        XCRecyclerViewBaseAdapter mListAdapter;
+        final XCRecyclerViewBaseAdapter mListAdapter;
 
         private static final int VIEW_TYPE_OBSERVABLE_SCROLL_HEADER = 5000;
         private static final int VIEW_TYPE_EMPTY_VIEW = VIEW_TYPE_OBSERVABLE_SCROLL_HEADER + 1;

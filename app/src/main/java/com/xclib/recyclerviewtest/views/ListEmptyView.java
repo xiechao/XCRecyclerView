@@ -47,7 +47,7 @@ public class ListEmptyView extends LinearLayout {
         emptyTextView.setText(resId);
     }
 
-    public void setText(String text) {
+    public void setText(@SuppressWarnings("SameParameterValue") String text) {
         emptyTextView.setText(text);
     }
 

@@ -23,10 +23,10 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
     private static final int LOAD_MORE_ANI_TIME = 300;
 
     private boolean mIsLoading;
-    private ArrayList<T> dataArrayList = new ArrayList<>();
+    private final ArrayList<T> dataArrayList = new ArrayList<>();
     private XCRecycleView.OnLoadMoreListener onLoadMoreListener;
-    private ArrayList<View> headerViewList = new ArrayList<>();
-    private ArrayList<View> footerViewList = new ArrayList<>();
+    private final ArrayList<View> headerViewList = new ArrayList<>();
+    private final ArrayList<View> footerViewList = new ArrayList<>();
     private RelativeLayout loadMoreViewContainer = null;
     private View loadMoreViewContent = null;
 
@@ -127,7 +127,7 @@ public abstract class XCRecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<
         onBindViewHolderSuccess(holder.itemView, position);
     }
 
-    protected void onBindViewHolderSuccess(View view, int position) {
+    void onBindViewHolderSuccess(View view, int position) {
 
     }
 

@@ -22,7 +22,7 @@ public abstract class XCRecyclerViewHeaderBaseAdapter<T extends ISectionData> ex
     }
 
 
-    private StickyHeadersAdapter<GTViewHolderBase> stickyHeadersAdapter = new StickyHeadersAdapter<GTViewHolderBase>() {
+    private final StickyHeadersAdapter<GTViewHolderBase> stickyHeadersAdapter = new StickyHeadersAdapter<GTViewHolderBase>() {
         @Override
         public GTViewHolderBase onCreateViewHolder(ViewGroup parent) {
             return onHeaderCreateViewHolder(LayoutInflater.from(parent.getContext()).inflate(getHeaderViewResourceId(), parent, false));
@@ -39,6 +39,7 @@ public abstract class XCRecyclerViewHeaderBaseAdapter<T extends ISectionData> ex
         }
     };
 
+    @SuppressWarnings("SameReturnValue")
     protected abstract int getHeaderViewResourceId();
 
     protected abstract GTViewHolderBase onHeaderCreateViewHolder(View view);
@@ -89,7 +90,7 @@ public abstract class XCRecyclerViewHeaderBaseAdapter<T extends ISectionData> ex
         super.resetData(dataList);
     }
 
-    private ArrayList<T> sectionList = new ArrayList<>();
+    private final ArrayList<T> sectionList = new ArrayList<>();
 
     @Override
     public Object[] getSections() {

@@ -19,7 +19,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:paddingEnd="@dimen/margin_small"
-        android:paddingRight="@dimen/margin_small"
+        android:paddingStart="@dimen/margin_small"
         recyclerviewfastscroller:rfs_handleBackground="@drawable/fast_scroller_handle_rounded" />
 
 

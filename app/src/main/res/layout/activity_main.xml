@@ -42,4 +42,11 @@
         android:layout_height="wrap_content"
         android:text="Header Section Swipe"
         tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn_observable_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Observable Scroll"
+        tools:ignore="HardcodedText" />
 </LinearLayout>

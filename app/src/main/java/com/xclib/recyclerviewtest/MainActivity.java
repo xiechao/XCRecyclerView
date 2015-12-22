@@ -11,6 +11,7 @@ import com.xclib.recyclerviewtest.activities.HeaderSectionSwipeActivity;
 import com.xclib.recyclerviewtest.activities.ManagerGridLayoutActivity;
 import com.xclib.recyclerviewtest.activities.ManagerLinearLayoutActivity;
 import com.xclib.recyclerviewtest.activities.ManagerLinearLayoutSwipeActivity;
+import com.xclib.recyclerviewtest.activities.TestObservableScrollActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnLinearLayoutSwipeManager;
     @Bind(R.id.btn_header_section_swipe)
     Button btnHeaderSectionSwipe;
+    @Bind(R.id.btn_observable_scroll)
+    Button btnObservableScroll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,4 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+    @OnClick({R.id.btn_observable_scroll})
+    public void onClickObservableScroll(View view) {
+        Intent intent = new Intent(this, TestObservableScrollActivity.class);
+
+        startActivity(intent);
+    }
+
 }

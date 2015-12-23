@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class XCRecycleView extends RecyclerView {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
+
+            long currentTime = System.currentTimeMillis();
 
             final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) getLayoutManager();
 
@@ -31,6 +34,9 @@ public class XCRecycleView extends RecyclerView {
             if (totalItemCount <= (lastVisibleItem + 3 * columnSpanCount)) {
                 tryDoLoadMore();
             }
+
+            long timeInterval = System.currentTimeMillis() - currentTime;
+            Log.d("qqqqqqqqq", "OnScrollListener timeInterval = " + timeInterval + "; dx = " + dx + "; dy = " + dy);
         }
 
 

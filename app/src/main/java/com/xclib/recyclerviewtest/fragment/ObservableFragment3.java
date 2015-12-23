@@ -10,18 +10,18 @@ import android.view.ViewGroup;
 
 import com.xclib.recyclerview.RecyclerViewBaseAdapter;
 import com.xclib.recyclerview.XCRecycleView;
-import com.xclib.recyclerviewtest.adapter.RecyclerViewAdapter;
+import com.xclib.recyclerviewtest.adapter.RecyclerViewGridAdapter;
 import com.xclib.recyclerviewtest.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ObservableFragment3 extends HeaderRecyclerViewBaseFragment {
-    private RecyclerViewAdapter recyclerViewAdapter;
+    private RecyclerViewGridAdapter recyclerViewGridAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        recyclerViewAdapter = new RecyclerViewAdapter(getContext());
+        recyclerViewGridAdapter = new RecyclerViewGridAdapter(getContext());
 
         initData();
 
@@ -37,7 +37,7 @@ public class ObservableFragment3 extends HeaderRecyclerViewBaseFragment {
 
     @Override
     protected RecyclerViewBaseAdapter getAdapter() {
-        return recyclerViewAdapter;
+        return recyclerViewGridAdapter;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ObservableFragment3 extends HeaderRecyclerViewBaseFragment {
             personList.add(user);
         }
 
-        recyclerViewAdapter.resetData(personList);
+        recyclerViewGridAdapter.resetData(personList);
     }
 
     private XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
@@ -72,12 +72,12 @@ public class ObservableFragment3 extends HeaderRecyclerViewBaseFragment {
             @Override
             public void run() {
                 List<Person> personList = new ArrayList<>();
-                for (int i = recyclerViewAdapter.getCommonItemCount(); i < recyclerViewAdapter.getCommonItemCount() + 100; i++) {
+                for (int i = recyclerViewGridAdapter.getCommonItemCount(); i < recyclerViewGridAdapter.getCommonItemCount() + 100; i++) {
                     Person person = new Person("Name " + i);
                     personList.add(person);
                 }
 
-                recyclerViewAdapter.addAll(personList);
+                recyclerViewGridAdapter.addAll(personList);
 
                 xcRecycleView.setLoadMoreEnd(true);
             }

@@ -10,7 +10,7 @@ import android.view.View;
 import com.xclib.recyclerview.EmptyView;
 import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerviewtest.R;
-import com.xclib.recyclerviewtest.adapter.RecyclerViewAdapter;
+import com.xclib.recyclerviewtest.adapter.RecyclerViewGridAdapter;
 import com.xclib.recyclerviewtest.model.Person;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
     @Bind(R.id.recycle_view_empty_view)
     EmptyView recycleViewEmptyView;
 
-    private RecyclerViewAdapter recyclerViewAdapter;
+    private RecyclerViewGridAdapter recyclerViewGridAdapter;
     private final XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
         @Override
         public void onLoadMore() {
@@ -73,11 +73,11 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
         }
 
 
-        recyclerViewAdapter = new RecyclerViewAdapter(this);
+        recyclerViewGridAdapter = new RecyclerViewGridAdapter(this);
 
-        recyclerViewAdapter.resetData(personList);
+        recyclerViewGridAdapter.resetData(personList);
 
-        recycleView.setAdapter(recyclerViewAdapter);
+        recycleView.setAdapter(recyclerViewGridAdapter);
 
         recycleView.setOnLoadMoreListener(onLoadMoreListener);
     }
@@ -94,12 +94,12 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
             @Override
             public void run() {
                 List<Person> personList = new ArrayList<>();
-                for (int i = recyclerViewAdapter.getCommonItemCount(); i < recyclerViewAdapter.getCommonItemCount() + 100; i++) {
+                for (int i = recyclerViewGridAdapter.getCommonItemCount(); i < recyclerViewGridAdapter.getCommonItemCount() + 100; i++) {
                     Person person = new Person("Name " + i);
                     personList.add(person);
                 }
 
-                recyclerViewAdapter.addAll(personList);
+                recyclerViewGridAdapter.addAll(personList);
 
                 recycleView.setLoadMoreEnd(true);
             }

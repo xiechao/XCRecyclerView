@@ -57,17 +57,25 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
 
     @Override
     public int getItemViewType(int position) {
+//        long currentTime = System.currentTimeMillis();
+
+        int viewType;
+
         if (getCommonItemCount() > 0 && position >= 0 && position < getHeaderViewsCount()) {
-            return VIEW_TYPE_HEADER_BASE + position;
+            viewType = VIEW_TYPE_HEADER_BASE + position;
         } else if (getCommonItemCount() > 0 && position >= getHeaderViewsCount() + getCommonItemCount() && position < getHeaderViewsCount() + getCommonItemCount() + getFooterViewsCount()) {
-            return VIEW_TYPE_FOOTER_BASE + (position - (getHeaderViewsCount() + getCommonItemCount()));
+            viewType = VIEW_TYPE_FOOTER_BASE + (position - (getHeaderViewsCount() + getCommonItemCount()));
         } else if (getCommonItemCount() > 0 && mIsLoading && position == getHeaderViewsCount() + getCommonItemCount() + getFooterViewsCount()) {
-            return VIEW_TYPE_LOAD_MORE;
+            viewType = VIEW_TYPE_LOAD_MORE;
         } else if (getCommonItemCount() <= 0 && mIsLoading && position == 0) {
-            return VIEW_TYPE_LOAD_MORE;
+            viewType = VIEW_TYPE_LOAD_MORE;
         } else {
-            return getCommonItemViewType(position, getItem(position));
+            viewType = getCommonItemViewType(position, getItem(position));
         }
+//        long timeInterval = System.currentTimeMillis() - currentTime;
+//        Log.d("qqqqqqqqq", "getItemViewType timeInterval = " + timeInterval + "; position = " + position + "; viewType = " + viewType);
+
+        return viewType;
     }
 
     @Override
@@ -111,20 +119,29 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
 
     @Override
     public ViewHolderBase onCreateViewHolder(ViewGroup parent, int viewType) {
+        long currentTime = System.currentTimeMillis();
+
+        ViewHolderBase viewHolderBase;
+
         if (isHeaderViewByViewType(viewType)) {
-            return new HeaderViewHolder(headerViewList.get(viewType - VIEW_TYPE_HEADER_BASE));
+            viewHolderBase = new HeaderViewHolder(headerViewList.get(viewType - VIEW_TYPE_HEADER_BASE));
         } else if (isFooterViewByViewType(viewType)) {
-            return new FooterViewHolder(footerViewList.get(viewType - VIEW_TYPE_FOOTER_BASE));
+            viewHolderBase = new FooterViewHolder(footerViewList.get(viewType - VIEW_TYPE_FOOTER_BASE));
         } else if (isLoadMoreViewByViewType(viewType)) {
-            return new LoadMoreViewHolder(loadMoreViewContainer);
+            viewHolderBase = new LoadMoreViewHolder(loadMoreViewContainer);
         } else {
             View viewItem = null;
             if (getCommonViewResourceId(viewType) > 0) {
                 viewItem = LayoutInflater.from(parent.getContext()).inflate(getCommonViewResourceId(viewType), parent, false);
             }
 
-            return onCommonCreateViewHolder(parent, viewItem, viewType);
+            viewHolderBase = onCommonCreateViewHolder(parent, viewItem, viewType);
         }
+
+        long timeInterval = System.currentTimeMillis() - currentTime;
+        Log.d("qqqqqqqqq", "onCreateViewHolder timeInterval = " + timeInterval + "; viewType = " + viewType);
+
+        return viewHolderBase;
     }
 
 
@@ -135,9 +152,14 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
     @Override
     @SuppressWarnings("unchecked")
     public void onBindViewHolder(RecyclerViewBaseAdapter.ViewHolderBase holder, int position) {
+        long currentTime = System.currentTimeMillis();
+
         holder.render(getItem(position));
 
         onBindViewHolderSuccess(holder.itemView, position);
+
+        long timeInterval = System.currentTimeMillis() - currentTime;
+        Log.d("qqqqqqqqq", "onBindViewHolder timeInterval = " + timeInterval + "; position = " + position);
     }
 
     void onBindViewHolderSuccess(View view, int position) {

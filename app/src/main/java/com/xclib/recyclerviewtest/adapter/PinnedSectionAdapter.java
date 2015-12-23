@@ -30,7 +30,7 @@ public class PinnedSectionAdapter extends PinnedSectionBaseAdapter<Person> {
 
     @Override
     protected int getCommonViewResourceId(int viewType) {
-        return R.layout.item_layout_common;
+        return R.layout.item_layout_linear_common;
     }
 
     @Override

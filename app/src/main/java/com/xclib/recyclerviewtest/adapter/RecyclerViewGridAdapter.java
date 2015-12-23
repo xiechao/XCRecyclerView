@@ -12,9 +12,9 @@ import com.xclib.recyclerviewtest.model.Person;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class RecyclerViewAdapter extends RecyclerViewBaseAdapter<Person> {
+public class RecyclerViewGridAdapter  extends RecyclerViewBaseAdapter<Person> {
 
-    public RecyclerViewAdapter(Context context) {
+    public RecyclerViewGridAdapter(Context context) {
         super(context);
     }
 
@@ -25,7 +25,7 @@ public class RecyclerViewAdapter extends RecyclerViewBaseAdapter<Person> {
 
     @Override
     protected int getCommonViewResourceId(int viewType) {
-        return R.layout.item_layout_linear_common;
+        return R.layout.item_layout_grid_common;
     }
 
     @Override

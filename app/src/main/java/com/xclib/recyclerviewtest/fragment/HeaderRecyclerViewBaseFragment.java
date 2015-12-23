@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ public abstract class HeaderRecyclerViewBaseFragment extends Fragment {
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
 
+            long currentTime = System.currentTimeMillis();
+
             scrollXValue += dx;
             scrollYValue += dy;
 
@@ -33,9 +36,13 @@ public abstract class HeaderRecyclerViewBaseFragment extends Fragment {
             if (getActivity() instanceof HeaderViewProvider) {
                 HeaderViewProvider headerViewProvider = (HeaderViewProvider) getActivity();
 
-                if (scrollYValue < headerViewProvider.getHeaderViewHeight() + 200)
+                if (scrollYValue < headerViewProvider.getHeaderViewHeight() + 200) {
                     headerViewProvider.onHeadScrollHScrolled(scrollYValue);
+                }
             }
+
+            long timeInterval = System.currentTimeMillis() - currentTime;
+            Log.d("qqqqqqqqq", "HeaderRecyclerViewBaseFragment OnScrollListener timeInterval = " + timeInterval + "; dx = " + dx + "; dy = " + dy);
         }
     };
 

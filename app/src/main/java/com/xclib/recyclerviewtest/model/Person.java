@@ -7,6 +7,7 @@ import com.xclib.recyclerview.ISectionData;
 public class Person implements ISectionData {
     private final String name;
     private String sectionHeader;
+    private CharSequence nameFilterEffect;
 
     public Person(String name) {
         this.name = name;
@@ -45,5 +46,13 @@ public class Person implements ISectionData {
     @Override
     public long getSectionHeaderId() {
         return getSectionHeader().hashCode();
+    }
+
+    public void setNameFilterEffect(CharSequence nameFilterEffect) {
+        this.nameFilterEffect = nameFilterEffect;
+    }
+
+    public CharSequence getNameFilterEffect() {
+        return nameFilterEffect;
     }
 }

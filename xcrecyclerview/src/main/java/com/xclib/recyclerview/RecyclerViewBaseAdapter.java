@@ -71,14 +71,21 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         }
     };
 
+    private Context context;
     @SuppressLint("InflateParams")
     public RecyclerViewBaseAdapter(Context context) {
+        this.context = context;
+
         LayoutInflater inflater = LayoutInflater.from(context);
 
         loadMoreViewContainer = (RelativeLayout) inflater.inflate(R.layout.item_loading_container, null, false);
         loadMoreViewContent = inflater.inflate(R.layout.item_loading, loadMoreViewContainer, false);
 
         loadMoreViewContainer.addView(loadMoreViewContent, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+    }
+
+    protected Context getContext() {
+        return context;
     }
 
     @Override

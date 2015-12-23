@@ -17,8 +17,6 @@ public class XCRecycleView extends RecyclerView {
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
 
-            long currentTime = System.currentTimeMillis();
-
             final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) getLayoutManager();
 
             int totalItemCount = linearLayoutManager.getItemCount();
@@ -34,9 +32,6 @@ public class XCRecycleView extends RecyclerView {
             if (totalItemCount <= (lastVisibleItem + 3 * columnSpanCount)) {
                 tryDoLoadMore();
             }
-
-            long timeInterval = System.currentTimeMillis() - currentTime;
-            Log.d("qqqqqqqqq", "OnScrollListener timeInterval = " + timeInterval + "; dx = " + dx + "; dy = " + dy);
         }
 
 

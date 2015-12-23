@@ -3,7 +3,6 @@ package com.xclib.recyclerview;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +56,6 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
 
     @Override
     public int getItemViewType(int position) {
-//        long currentTime = System.currentTimeMillis();
-
         int viewType;
 
         if (getCommonItemCount() > 0 && position >= 0 && position < getHeaderViewsCount()) {
@@ -72,8 +69,6 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         } else {
             viewType = getCommonItemViewType(position, getItem(position));
         }
-//        long timeInterval = System.currentTimeMillis() - currentTime;
-//        Log.d("qqqqqqqqq", "getItemViewType timeInterval = " + timeInterval + "; position = " + position + "; viewType = " + viewType);
 
         return viewType;
     }
@@ -119,8 +114,6 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
 
     @Override
     public ViewHolderBase onCreateViewHolder(ViewGroup parent, int viewType) {
-        long currentTime = System.currentTimeMillis();
-
         ViewHolderBase viewHolderBase;
 
         if (isHeaderViewByViewType(viewType)) {
@@ -138,9 +131,6 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
             viewHolderBase = onCommonCreateViewHolder(parent, viewItem, viewType);
         }
 
-        long timeInterval = System.currentTimeMillis() - currentTime;
-        Log.d("qqqqqqqqq", "onCreateViewHolder timeInterval = " + timeInterval + "; viewType = " + viewType);
-
         return viewHolderBase;
     }
 
@@ -152,14 +142,9 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
     @Override
     @SuppressWarnings("unchecked")
     public void onBindViewHolder(RecyclerViewBaseAdapter.ViewHolderBase holder, int position) {
-        long currentTime = System.currentTimeMillis();
-
         holder.render(getItem(position));
 
         onBindViewHolderSuccess(holder.itemView, position);
-
-        long timeInterval = System.currentTimeMillis() - currentTime;
-        Log.d("qqqqqqqqq", "onBindViewHolder timeInterval = " + timeInterval + "; position = " + position);
     }
 
     void onBindViewHolderSuccess(View view, int position) {

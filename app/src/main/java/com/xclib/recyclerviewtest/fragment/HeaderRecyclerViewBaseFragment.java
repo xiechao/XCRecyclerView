@@ -27,8 +27,6 @@ public abstract class HeaderRecyclerViewBaseFragment extends Fragment {
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
 
-            long currentTime = System.currentTimeMillis();
-
             scrollXValue += dx;
             scrollYValue += dy;
 
@@ -40,9 +38,6 @@ public abstract class HeaderRecyclerViewBaseFragment extends Fragment {
                     headerViewProvider.onHeadScrollHScrolled(scrollYValue);
                 }
             }
-
-            long timeInterval = System.currentTimeMillis() - currentTime;
-            Log.d("qqqqqqqqq", "HeaderRecyclerViewBaseFragment OnScrollListener timeInterval = " + timeInterval + "; dx = " + dx + "; dy = " + dy);
         }
     };
 

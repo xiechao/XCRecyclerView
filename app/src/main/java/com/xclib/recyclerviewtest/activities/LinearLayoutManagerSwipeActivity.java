@@ -3,6 +3,7 @@ package com.xclib.recyclerviewtest.activities;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -25,7 +26,8 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 
 public class LinearLayoutManagerSwipeActivity extends BaseActivity {
-
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
     @Bind(R.id.ptr_frame_layout)
     PtrFrameLayout ptrFrameLayout;
     @Bind(R.id.recycler_view)
@@ -53,6 +55,12 @@ public class LinearLayoutManagerSwipeActivity extends BaseActivity {
         setContentView(R.layout.activity_recycler_view_common);
 
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Linear Layout Swipe");
+        }
 
         recyclerViewEmptyView.setText("empty data!");
 

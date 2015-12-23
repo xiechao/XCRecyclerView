@@ -2,6 +2,7 @@ package com.xclib.recyclerviewtest.activities;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
 
 import com.daimajia.swipe.util.Attributes;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersBuilder;
@@ -22,7 +23,8 @@ import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScrol
 
 public class PinnedSectionSwipeActivity extends BaseActivity {
 
-
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
     @Bind(R.id.recycler_view)
     XCRecycleView recyclerView;
     @Bind(R.id.fast_scroller)
@@ -35,6 +37,12 @@ public class PinnedSectionSwipeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pinned_section);
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Pinned Section Swipe");
+        }
 
         // Connect the recycler to the scroller (to let the scroller scroll the list)
         fastScroller.setRecyclerView(recyclerView);

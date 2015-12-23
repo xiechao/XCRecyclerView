@@ -23,6 +23,7 @@ public class ObservableRecyclerViewActivity extends BaseActivity implements Head
 
     private static final int TAB_COUNT = 3;
     private static final String[] tabTitles = new String[]{"Fragment1", "Fragment2", "Fragment3"};
+
     @Bind(R.id.layout_fragment_content)
     FrameLayout layoutFragmentContent;
     @Bind(R.id.tv_header_title)

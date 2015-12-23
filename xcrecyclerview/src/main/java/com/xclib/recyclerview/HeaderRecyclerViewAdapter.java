@@ -1,7 +1,6 @@
 package com.xclib.recyclerview;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -86,6 +85,26 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
         return position - getHeaderViewsCount() - (baseAdapter.getItemCount() == 0 ? 1 : 0) - 1;
     }
 
+    public void addHeaderView(View v) {
+        // This adapter not support header and footer View
+    }
+
+    public boolean removeHeaderView(View v) {
+        // This adapter not support header and footer View
+
+        return false;
+    }
+
+    public void addFooterView(View v) {
+        // This adapter not support header and footer View
+    }
+
+    public boolean removeFooterView(View v) {
+        // This adapter not support header and footer View
+
+        return false;
+    }
+
     private class ObservableScrollHeaderViewHolder extends ViewHolderBase {
 
         public ObservableScrollHeaderViewHolder(View itemView) {
@@ -108,25 +127,5 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
         public void render(Object data) {
 
         }
-    }
-
-    public void addHeaderView(View v) {
-        // This adapter not support header and footer View
-    }
-
-    public boolean removeHeaderView(View v) {
-        // This adapter not support header and footer View
-
-        return false;
-    }
-
-    public void addFooterView(View v) {
-        // This adapter not support header and footer View
-    }
-
-    public boolean removeFooterView(View v) {
-        // This adapter not support header and footer View
-
-        return false;
     }
 }

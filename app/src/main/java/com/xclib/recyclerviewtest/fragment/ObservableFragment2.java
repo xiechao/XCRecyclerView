@@ -19,6 +19,17 @@ import java.util.List;
 
 public class ObservableFragment2 extends HeaderRecyclerViewBaseFragment {
     private RecyclerViewAdapter recyclerViewAdapter;
+    private XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
+        @Override
+        public void onLoadMore() {
+            doLoadMore();
+        }
+
+        @Override
+        public boolean isHasMoreData() {
+            return true;
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +48,6 @@ public class ObservableFragment2 extends HeaderRecyclerViewBaseFragment {
         return view;
     }
 
-
     @Override
     protected RecyclerViewBaseAdapter getAdapter() {
         return recyclerViewAdapter;
@@ -48,7 +58,6 @@ public class ObservableFragment2 extends HeaderRecyclerViewBaseFragment {
         return new LinearLayoutManager(getContext());
     }
 
-
     private void initData() {
         List<Person> personList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
@@ -58,18 +67,6 @@ public class ObservableFragment2 extends HeaderRecyclerViewBaseFragment {
 
         recyclerViewAdapter.resetData(personList);
     }
-
-    private XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
-        @Override
-        public void onLoadMore() {
-            doLoadMore();
-        }
-
-        @Override
-        public boolean isHasMoreData() {
-            return true;
-        }
-    };
 
     private void doLoadMore() {
         new Handler().postDelayed(new Runnable() {

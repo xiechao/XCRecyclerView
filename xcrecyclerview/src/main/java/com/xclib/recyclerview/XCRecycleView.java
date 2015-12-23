@@ -38,6 +38,42 @@ public class XCRecycleView extends RecyclerView {
     private final ArrayList<View> headerViewArrayList = new ArrayList<>();
     private final ArrayList<View> footerViewArrayList = new ArrayList<>();
     private EmptyView emptyVIew;
+    private AdapterDataObserver adapterDataObserver = new AdapterDataObserver() {
+        @Override
+        public void onChanged() {
+            super.onChanged();
+
+            doRefreshEmptyView();
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+            super.onItemRangeChanged(positionStart, itemCount);
+
+            doRefreshEmptyView();
+        }
+
+        @Override
+        public void onItemRangeInserted(int positionStart, int itemCount) {
+            super.onItemRangeInserted(positionStart, itemCount);
+
+            doRefreshEmptyView();
+        }
+
+        @Override
+        public void onItemRangeRemoved(int positionStart, int itemCount) {
+            super.onItemRangeRemoved(positionStart, itemCount);
+
+            doRefreshEmptyView();
+        }
+
+        @Override
+        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+            super.onItemRangeMoved(fromPosition, toPosition, itemCount);
+
+            doRefreshEmptyView();
+        }
+    };
 
     public XCRecycleView(Context context) {
         super(context);
@@ -181,43 +217,6 @@ public class XCRecycleView extends RecyclerView {
 
         doRefreshEmptyView();
     }
-
-    private AdapterDataObserver adapterDataObserver = new AdapterDataObserver() {
-        @Override
-        public void onChanged() {
-            super.onChanged();
-
-            doRefreshEmptyView();
-        }
-
-        @Override
-        public void onItemRangeChanged(int positionStart, int itemCount) {
-            super.onItemRangeChanged(positionStart, itemCount);
-
-            doRefreshEmptyView();
-        }
-
-        @Override
-        public void onItemRangeInserted(int positionStart, int itemCount) {
-            super.onItemRangeInserted(positionStart, itemCount);
-
-            doRefreshEmptyView();
-        }
-
-        @Override
-        public void onItemRangeRemoved(int positionStart, int itemCount) {
-            super.onItemRangeRemoved(positionStart, itemCount);
-
-            doRefreshEmptyView();
-        }
-
-        @Override
-        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
-            super.onItemRangeMoved(fromPosition, toPosition, itemCount);
-
-            doRefreshEmptyView();
-        }
-    };
 
     private void doRefreshEmptyView() {
         if (emptyVIew == null) {

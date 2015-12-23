@@ -69,7 +69,7 @@ public class LinearLayoutManagerSwipeActivity extends AppCompatActivity {
 
 
         List<Person> personList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 100; i++) {
             Person user = new Person("Name " + i);
             personList.add(user);
         }
@@ -95,7 +95,7 @@ public class LinearLayoutManagerSwipeActivity extends AppCompatActivity {
             @Override
             public void run() {
                 List<Person> personList = new ArrayList<>();
-                for (int i = testRecycleViewAdapter.getCommonItemCount(); i < testRecycleViewAdapter.getCommonItemCount() + 30; i++) {
+                for (int i = testRecycleViewAdapter.getCommonItemCount(); i < testRecycleViewAdapter.getCommonItemCount() + 100; i++) {
                     Person person = new Person("Name " + i);
                     personList.add(person);
                 }

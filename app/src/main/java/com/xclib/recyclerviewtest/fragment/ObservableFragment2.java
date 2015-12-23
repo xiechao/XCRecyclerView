@@ -48,10 +48,10 @@ public class ObservableFragment2 extends HeaderRecyclerViewBaseFragment {
 
     private void initData() {
         List<Person> personList = new ArrayList<>();
-//        for (int i = 0; i < 30; i++) {
-//            Person user = new Person("Fragment2 Name " + i);
-//            personList.add(user);
-//        }
+        for (int i = 0; i < 30; i++) {
+            Person user = new Person("Fragment2 Name " + i);
+            personList.add(user);
+        }
 
         recyclerViewAdapter.resetData(personList);
     }
@@ -73,7 +73,7 @@ public class ObservableFragment2 extends HeaderRecyclerViewBaseFragment {
             @Override
             public void run() {
                 List<Person> personList = new ArrayList<>();
-                for (int i = recyclerViewAdapter.getCommonItemCount(); i < recyclerViewAdapter.getCommonItemCount() + 30; i++) {
+                for (int i = recyclerViewAdapter.getCommonItemCount(); i < recyclerViewAdapter.getCommonItemCount() + 100; i++) {
                     Person person = new Person("Name " + i);
                     personList.add(person);
                 }

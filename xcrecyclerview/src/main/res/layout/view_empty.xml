@@ -14,8 +14,8 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="?android:attr/textColorPrimary"
-        tools:ignore="HardcodedText" />
+        android:textSize="14dp"
+        tools:ignore="HardcodedText,SpUsage" />
 
 </RelativeLayout>

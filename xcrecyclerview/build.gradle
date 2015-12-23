@@ -34,7 +34,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.eowise:recyclerview-stickyheaders:0.5.2'
     compile 'xyz.danoz:recyclerviewfastscroller:0.1.3'
     compile 'com.daimajia.swipelayout:library:1.2.0@aar'

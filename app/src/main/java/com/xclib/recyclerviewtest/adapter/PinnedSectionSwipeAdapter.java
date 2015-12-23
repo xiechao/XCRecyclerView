@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.xclib.recyclerview.PinnedSectionSwipeBaseAdapter;
@@ -13,8 +15,10 @@ import com.xclib.recyclerviewtest.model.Person;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PinnedSectionSwipeAdapter extends PinnedSectionSwipeBaseAdapter<Person> {
+
     public PinnedSectionSwipeAdapter(Context context) {
         super(context);
     }
@@ -76,9 +80,12 @@ public class PinnedSectionSwipeAdapter extends PinnedSectionSwipeBaseAdapter<Per
         Button btnDelete;
         @Bind(R.id.tv_name)
         TextView tvName;
+        @Bind(R.id.root_layout)
+        LinearLayout rootLayout;
         @Bind(R.id.swipe_layout)
         SwipeLayout swipeLayout;
 
+        private Person person;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -88,7 +95,19 @@ public class PinnedSectionSwipeAdapter extends PinnedSectionSwipeBaseAdapter<Per
 
         @Override
         public void render(Person data) {
+            this.person = data;
+
             tvName.setText(data.getName());
+        }
+
+        @OnClick({R.id.root_layout})
+        public void onClickItem(final View view) {
+            Toast.makeText(view.getContext(), "onClickItem: " + person.getName(), Toast.LENGTH_SHORT).show();
+        }
+
+        @OnClick({R.id.btn_delete})
+        public void onClickDeleteItem(final View view) {
+            Toast.makeText(view.getContext(), "onClickDeleteItem: " + person.getName(), Toast.LENGTH_SHORT).show();
         }
     }
 }

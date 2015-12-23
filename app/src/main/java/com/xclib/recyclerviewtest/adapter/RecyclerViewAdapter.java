@@ -3,7 +3,9 @@ package com.xclib.recyclerviewtest.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xclib.recyclerview.RecyclerViewBaseAdapter;
 import com.xclib.recyclerviewtest.R;
@@ -11,9 +13,9 @@ import com.xclib.recyclerviewtest.model.Person;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class RecyclerViewAdapter extends RecyclerViewBaseAdapter<Person> {
-
     public RecyclerViewAdapter(Context context) {
         super(context);
     }
@@ -36,6 +38,10 @@ public class RecyclerViewAdapter extends RecyclerViewBaseAdapter<Person> {
     public class TestViewHolder extends ViewHolderBase {
         @Bind(R.id.tv_name)
         TextView tvName;
+        @Bind(R.id.root_layout)
+        RelativeLayout rootLayout;
+
+        private Person person;
 
         public TestViewHolder(View itemView) {
             super(itemView);
@@ -45,7 +51,14 @@ public class RecyclerViewAdapter extends RecyclerViewBaseAdapter<Person> {
 
         @Override
         public void render(Person data) {
+            this.person = data;
+
             tvName.setText(data.getName());
+        }
+
+        @OnClick({R.id.root_layout})
+        public void onClickItem(final View view) {
+            Toast.makeText(view.getContext(), "onClickItem: " + person.getName(), Toast.LENGTH_SHORT).show();
         }
     }
 }

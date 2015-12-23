@@ -4,19 +4,21 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.xclib.recyclerview.RecyclerViewSwipeBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
 
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class RecyclerViewSwipeAdapter extends RecyclerViewSwipeBaseAdapter<Person> {
+
 
     public RecyclerViewSwipeAdapter(Context context) {
         super(context);
@@ -52,8 +54,12 @@ public class RecyclerViewSwipeAdapter extends RecyclerViewSwipeBaseAdapter<Perso
         Button btnDelete;
         @Bind(R.id.tv_name)
         TextView tvName;
+        @Bind(R.id.root_layout)
+        LinearLayout rootLayout;
         @Bind(R.id.swipe_layout)
         SwipeLayout swipeLayout;
+
+        private Person person;
 
         public TestViewHolder(View itemView) {
             super(itemView);
@@ -63,7 +69,20 @@ public class RecyclerViewSwipeAdapter extends RecyclerViewSwipeBaseAdapter<Perso
 
         @Override
         public void render(Person data) {
+            this.person = data;
+
             tvName.setText(data.getName());
+        }
+
+
+        @OnClick({R.id.root_layout})
+        public void onClickItem(final View view) {
+            Toast.makeText(view.getContext(), "onClickItem: " + person.getName(), Toast.LENGTH_SHORT).show();
+        }
+
+        @OnClick({R.id.btn_delete})
+        public void onClickDeleteItem(final View view) {
+            Toast.makeText(view.getContext(), "onClickDeleteItem: " + person.getName(), Toast.LENGTH_SHORT).show();
         }
     }
 }

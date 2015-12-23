@@ -67,7 +67,7 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
 
 
         List<Person> personList = new ArrayList<>();
-        for (int i = 0; i < 101; i++) {
+        for (int i = 0; i < 1010; i++) {
             Person person = new Person("Name " + i);
             personList.add(person);
         }

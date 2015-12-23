@@ -17,16 +17,24 @@ import com.xclib.recyclerviewtest.R;
 
 public abstract class HeaderRecyclerViewBaseFragment extends Fragment {
 
+    private int scrollXValue = 0;
+    private int scrollYValue = 0;
+
     private final RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
 
+            scrollXValue += dx;
+            scrollYValue += dy;
+
+
             if (getActivity() instanceof HeaderViewProvider) {
                 HeaderViewProvider headerViewProvider = (HeaderViewProvider) getActivity();
 
-                headerViewProvider.onScrolled(recyclerView, dx, dy);
+                if (scrollYValue < headerViewProvider.getHeaderViewHeight() + 200)
+                    headerViewProvider.onHeadScrollHScrolled(scrollYValue);
             }
         }
     };
@@ -138,7 +146,7 @@ public abstract class HeaderRecyclerViewBaseFragment extends Fragment {
     public interface HeaderViewProvider {
         int getHeaderViewHeight();
 
-        void onScrolled(RecyclerView recyclerView, int dx, int dy);
+        void onHeadScrollHScrolled(int scrollY);
     }
 
 }

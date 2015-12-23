@@ -47,7 +47,7 @@ public class ObservableFragment3 extends HeaderRecyclerViewBaseFragment {
 
     private void initData() {
         List<Person> personList = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             Person user = new Person("Fragment3 Name " + i);
             personList.add(user);
         }

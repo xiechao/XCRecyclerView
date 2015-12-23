@@ -6,7 +6,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -102,10 +101,10 @@ public class ObservableRecyclerViewActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+    public void onHeadScrollHScrolled(int scrollY) {
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) llHeaderLayout.getLayoutParams();
 
-        layoutParams.setMargins(layoutParams.leftMargin - dx, layoutParams.topMargin - dy, layoutParams.rightMargin - dx, layoutParams.bottomMargin - dy);
+        layoutParams.setMargins(0, 0 - scrollY, 0, 0 - scrollY);
         llHeaderLayout.setLayoutParams(layoutParams);
     }
 }

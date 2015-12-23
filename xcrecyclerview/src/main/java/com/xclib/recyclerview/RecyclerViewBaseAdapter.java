@@ -111,8 +111,6 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
 
     @Override
     public ViewHolderBase onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.d("qqqqwwwww", "qqqqqqqqq onCreateViewHolder viewType = " + viewType);
-
         if (isHeaderViewByViewType(viewType)) {
             return new HeaderViewHolder(headerViewList.get(viewType - VIEW_TYPE_HEADER_BASE));
         } else if (isFooterViewByViewType(viewType)) {
@@ -137,13 +135,9 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
     @Override
     @SuppressWarnings("unchecked")
     public void onBindViewHolder(RecyclerViewBaseAdapter.ViewHolderBase holder, int position) {
-        Log.d("qqqqwwwww", "onBindViewHolder(RecyclerViewBaseAdapter.ViewHolderBase holder, int position) { position = " + position);
-        long startTime = System.currentTimeMillis();
         holder.render(getItem(position));
 
         onBindViewHolderSuccess(holder.itemView, position);
-        long time = System.currentTimeMillis() - startTime;
-        Log.d("qqqqwwwww", "onBindViewHolder(RecyclerViewBaseAdapter.ViewHolderBase holder, int position) { position = " + position + "; time = " + time);
     }
 
     void onBindViewHolderSuccess(View view, int position) {

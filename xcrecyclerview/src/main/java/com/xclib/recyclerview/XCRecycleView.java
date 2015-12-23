@@ -21,7 +21,14 @@ public class XCRecycleView extends RecyclerView {
             int totalItemCount = linearLayoutManager.getItemCount();
             int lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
 
-            if (totalItemCount <= (lastVisibleItem + 3)) {
+            LayoutManager layoutManager = getLayoutManager();
+            int columnSpanCount = 1;
+            if (layoutManager instanceof GridLayoutManager) {
+                GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+                columnSpanCount = gridLayoutManager.getSpanCount();
+            }
+
+            if (totalItemCount <= (lastVisibleItem + 3 * columnSpanCount)) {
                 tryDoLoadMore();
             }
         }

@@ -3,6 +3,7 @@ package com.xclib.recyclerview;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,6 +120,8 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         } else {
             View viewItem = null;
             if (getCommonViewResourceId(viewType) > 0) {
+                Log.d("qqqqwwwww", "qqqqqqqqq onCreateViewHolder viewType = " + viewType);
+
                 viewItem = LayoutInflater.from(parent.getContext()).inflate(getCommonViewResourceId(viewType), parent, false);
             }
 

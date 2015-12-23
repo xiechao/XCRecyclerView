@@ -36,7 +36,7 @@ public abstract class HeaderRecyclerViewBaseFragment extends Fragment {
             if (getActivity() instanceof HeaderViewProvider) {
                 HeaderViewProvider headerViewProvider = (HeaderViewProvider) getActivity();
 
-                if (scrollYValue < headerViewProvider.getHeaderViewHeight() + 200) {
+                if (scrollYValue < headerViewProvider.getHeaderViewHeight() + 400) {
                     headerViewProvider.onHeadScrollHScrolled(scrollYValue);
                 }
             }

@@ -68,7 +68,7 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
 
 
         List<Person> personList = new ArrayList<>();
-        for (int i = 0; i < 101; i++) {
+        for (int i = 0; i < 20; i++) {
             Person user = new Person("Name " + i);
             personList.add(user);
         }
@@ -93,7 +93,7 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
             @Override
             public void run() {
                 List<Person> personList = new ArrayList<>();
-                for (int i = recyclerViewAdapter.getCommonItemCount(); i < recyclerViewAdapter.getCommonItemCount() + 100; i++) {
+                for (int i = recyclerViewAdapter.getCommonItemCount(); i < recyclerViewAdapter.getCommonItemCount() + 20; i++) {
                     Person person = new Person("Name " + i);
                     personList.add(person);
                 }

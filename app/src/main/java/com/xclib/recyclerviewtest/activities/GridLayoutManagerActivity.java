@@ -67,7 +67,7 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
 
 
         List<Person> personList = new ArrayList<>();
-        for (int i = 0; i < 1010; i++) {
+        for (int i = 0; i < 20; i++) {
             Person person = new Person("Name " + i);
             personList.add(person);
         }
@@ -94,7 +94,7 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
             @Override
             public void run() {
                 List<Person> personList = new ArrayList<>();
-                for (int i = recyclerViewGridAdapter.getCommonItemCount(); i < recyclerViewGridAdapter.getCommonItemCount() + 100; i++) {
+                for (int i = recyclerViewGridAdapter.getCommonItemCount(); i < recyclerViewGridAdapter.getCommonItemCount() + 20; i++) {
                     Person person = new Person("Name " + i);
                     personList.add(person);
                 }

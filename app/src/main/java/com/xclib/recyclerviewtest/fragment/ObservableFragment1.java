@@ -48,7 +48,7 @@ public class ObservableFragment1 extends HeaderRecyclerViewBaseFragment {
     @SuppressWarnings("EmptyMethod")
     private void initData() {
         List<Person> personList = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 20; i++) {
             Person user = new Person("Fragment1 Name " + i);
             personList.add(user);
         }
@@ -73,7 +73,7 @@ public class ObservableFragment1 extends HeaderRecyclerViewBaseFragment {
             @Override
             public void run() {
                 List<Person> personList = new ArrayList<>();
-                for (int i = recyclerViewAdapter.getCommonItemCount(); i < recyclerViewAdapter.getCommonItemCount() + 100; i++) {
+                for (int i = recyclerViewAdapter.getCommonItemCount(); i < recyclerViewAdapter.getCommonItemCount() + 20; i++) {
                     Person person = new Person("Name " + i);
                     personList.add(person);
                 }

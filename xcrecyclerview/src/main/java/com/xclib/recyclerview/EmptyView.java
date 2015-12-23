@@ -2,7 +2,6 @@ package com.xclib.recyclerview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class EmptyView  extends LinearLayout {
+public class EmptyView extends LinearLayout {
     private TextView emptyTextView;
 
     public EmptyView(Context context) {
@@ -32,13 +31,11 @@ public class EmptyView  extends LinearLayout {
     }
 
     private void initUI(Context context) {
-        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(R.layout.view_empty, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.view_empty, this, false);
 
         this.addView(view, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         emptyTextView = (TextView) findViewById(R.id.tv_empty);
-
-        this.setBackgroundColor(Color.argb(255, 255, 255, 255));
     }
 
     public void setText(int resId) {

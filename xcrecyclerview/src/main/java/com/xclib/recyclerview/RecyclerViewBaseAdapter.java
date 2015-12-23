@@ -31,8 +31,7 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
 
     @SuppressLint("InflateParams")
     public RecyclerViewBaseAdapter(Context context) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(
-                Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = LayoutInflater.from(context);
 
         loadMoreViewContainer = (RelativeLayout) inflater.inflate(R.layout.item_loading_container, null, false);
         loadMoreViewContent = inflater.inflate(R.layout.item_loading, loadMoreViewContainer, false);

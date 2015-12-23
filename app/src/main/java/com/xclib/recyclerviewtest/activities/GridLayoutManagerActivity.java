@@ -169,7 +169,7 @@ public class GridLayoutManagerActivity extends BaseActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Log.d("aaaaaaaa", "cccccc query = " + newText);
+                recyclerViewGridAdapter.getFilter().filter(newText);
 
                 return true;
             }

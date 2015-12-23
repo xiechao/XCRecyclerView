@@ -173,7 +173,7 @@ public class LinearLayoutManagerSwipeActivity extends BaseActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Log.d("aaaaaaaa", "cccccc query = " + newText);
+                recyclerViewSwipeAdapter.getFilter().filter(newText);
 
                 return true;
             }

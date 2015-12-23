@@ -171,8 +171,6 @@ public class LinearLayoutManagerActivity extends BaseActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Log.d("aaaaaaaa", "cccccc query = " + newText);
-
                 recyclerViewAdapter.getFilter().filter(newText);
 
                 return true;

@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.xclib.recyclerview.EmptyView;
 import com.xclib.recyclerview.XCRecycleView;
+import com.xclib.recyclerviewtest.PTRUtil;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.adapter.RecyclerViewAdapter;
 import com.xclib.recyclerviewtest.model.Person;
@@ -18,13 +19,18 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
 
 public class LinearLayoutManagerActivity extends AppCompatActivity {
-
+    @Bind(R.id.ptr_frame_layout)
+    PtrFrameLayout ptrFrameLayout;
     @Bind(R.id.recycle_view)
     XCRecycleView recycleView;
     @Bind(R.id.recycle_view_empty_view)
     EmptyView recycleViewEmptyView;
+
 
     private RecyclerViewAdapter recyclerViewAdapter;
     private final XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
@@ -67,18 +73,33 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
         recycleView.addFooterView(footerView2);
 
 
-        List<Person> personList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            Person user = new Person("Name " + i);
-            personList.add(user);
-        }
-
         recyclerViewAdapter = new RecyclerViewAdapter(this);
-        recyclerViewAdapter.resetData(personList);
 
         recycleView.setAdapter(recyclerViewAdapter);
 
         recycleView.setOnLoadMoreListener(onLoadMoreListener);
+
+        PTRUtil.init(this, ptrFrameLayout);
+
+        ptrFrameLayout.setPtrHandler(new PtrHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshData();
+                        ptrFrameLayout.refreshComplete();
+                    }
+                }, 1500);
+            }
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, recycleView, header);
+            }
+        });
+
+        refreshData();
     }
 
     @Override
@@ -86,6 +107,18 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
         super.onDestroy();
 
         recycleView.clear();
+    }
+
+    private void refreshData() {
+        List<Person> personList = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            Person user = new Person("Name " + i);
+            personList.add(user);
+        }
+
+        recyclerViewAdapter.resetData(personList);
+
+        recyclerViewAdapter.notifyDataSetChanged();
     }
 
     private void doLoadMore() {

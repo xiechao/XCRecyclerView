@@ -6,4 +6,9 @@
 
     <color name="primary">#Be009688</color>
 
+    <color name="google_colors_red">#FFC93437</color>
+    <color name="google_colors_blue">#FF375BF1</color>
+    <color name="google_colors_yellow">#FFF7D23E</color>
+    <color name="google_colors_green">#FF34A350</color>
+
 </resources>

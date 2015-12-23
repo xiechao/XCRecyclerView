@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <integer-array name="google_colors">
+        <item>@color/google_colors_red</item>
+        <item>@color/google_colors_blue</item>
+        <item>@color/google_colors_yellow</item>
+        <item>@color/google_colors_green</item>
+    </integer-array>
+
     <string-array name="person_info">
         <item>Abram Tavernia</item>
         <item>Alexa Oquin</item>

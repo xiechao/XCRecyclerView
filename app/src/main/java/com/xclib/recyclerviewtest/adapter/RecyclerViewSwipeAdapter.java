@@ -18,10 +18,8 @@ import butterknife.ButterKnife;
 
 public class RecyclerViewSwipeAdapter extends RecyclerViewSwipeBaseAdapter<Person> {
 
-    public RecyclerViewSwipeAdapter(Context context, List<Person> personList) {
+    public RecyclerViewSwipeAdapter(Context context) {
         super(context);
-
-        resetData(personList);
     }
 
     @Override

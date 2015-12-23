@@ -10,6 +10,7 @@ import android.view.View;
 import com.daimajia.swipe.util.Attributes;
 import com.xclib.recyclerview.EmptyView;
 import com.xclib.recyclerview.XCRecycleView;
+import com.xclib.recyclerviewtest.PTRUtil;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.adapter.RecyclerViewSwipeAdapter;
 import com.xclib.recyclerviewtest.model.Person;
@@ -19,15 +20,21 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
 
 public class LinearLayoutManagerSwipeActivity extends AppCompatActivity {
 
+    @Bind(R.id.ptr_frame_layout)
+    PtrFrameLayout ptrFrameLayout;
     @Bind(R.id.recycle_view)
     XCRecycleView recycleView;
     @Bind(R.id.recycle_view_empty_view)
     EmptyView recycleViewEmptyView;
 
-    private RecyclerViewSwipeAdapter testRecycleViewAdapter;
+
+    private RecyclerViewSwipeAdapter recyclerViewSwipeAdapter;
     private final XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
         @Override
         public void onLoadMore() {
@@ -68,19 +75,35 @@ public class LinearLayoutManagerSwipeActivity extends AppCompatActivity {
         recycleView.addFooterView(footerView2);
 
 
-        List<Person> personList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            Person user = new Person("Name " + i);
-            personList.add(user);
-        }
+        recyclerViewSwipeAdapter = new RecyclerViewSwipeAdapter(this);
+        recyclerViewSwipeAdapter.setMode(Attributes.Mode.Single);
 
-        testRecycleViewAdapter = new RecyclerViewSwipeAdapter(this, personList);
-        testRecycleViewAdapter.setMode(Attributes.Mode.Single);
-
-        recycleView.setAdapter(testRecycleViewAdapter);
+        recycleView.setAdapter(recyclerViewSwipeAdapter);
 
         recycleView.setOnLoadMoreListener(onLoadMoreListener);
 
+
+        PTRUtil.init(this, ptrFrameLayout);
+
+        ptrFrameLayout.setPtrHandler(new PtrHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshData();
+                        ptrFrameLayout.refreshComplete();
+                    }
+                }, 1500);
+            }
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, recycleView, header);
+            }
+        });
+
+        refreshData();
     }
 
     @Override
@@ -90,17 +113,28 @@ public class LinearLayoutManagerSwipeActivity extends AppCompatActivity {
         recycleView.clear();
     }
 
+    private void refreshData() {
+        List<Person> personList = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            Person user = new Person("Name " + i);
+            personList.add(user);
+        }
+
+        recyclerViewSwipeAdapter.resetData(personList);
+        recyclerViewSwipeAdapter.notifyDataSetChanged();
+    }
+
     private void doLoadMore() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 List<Person> personList = new ArrayList<>();
-                for (int i = testRecycleViewAdapter.getCommonItemCount(); i < testRecycleViewAdapter.getCommonItemCount() + 20; i++) {
+                for (int i = recyclerViewSwipeAdapter.getCommonItemCount(); i < recyclerViewSwipeAdapter.getCommonItemCount() + 20; i++) {
                     Person person = new Person("Name " + i);
                     personList.add(person);
                 }
 
-                testRecycleViewAdapter.addAll(personList);
+                recyclerViewSwipeAdapter.addAll(personList);
 
                 recycleView.setLoadMoreEnd(true);
             }

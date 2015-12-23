@@ -12,6 +12,7 @@ import com.eowise.recyclerview.stickyheaders.StickyHeadersBuilder;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
 import com.xclib.recyclerview.PinnedSectionTitleIndicator;
 import com.xclib.recyclerview.XCRecycleView;
+import com.xclib.recyclerviewtest.DividerItemDecoration;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.adapter.PinnedSectionAdapter;
 import com.xclib.recyclerviewtest.model.Person;
@@ -56,6 +57,8 @@ public class PinnedSectionActivity extends AppCompatActivity {
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(PinnedSectionActivity.this, LinearLayoutManager.VERTICAL, false));
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
         PinnedSectionAdapter pinnedSectionAdapter = new PinnedSectionAdapter(this);
         pinnedSectionAdapter.resetData(personList);

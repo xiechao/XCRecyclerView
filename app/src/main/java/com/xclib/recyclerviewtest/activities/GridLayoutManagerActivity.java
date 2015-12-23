@@ -26,10 +26,10 @@ import in.srain.cube.views.ptr.PtrHandler;
 public class GridLayoutManagerActivity extends AppCompatActivity {
     @Bind(R.id.ptr_frame_layout)
     PtrFrameLayout ptrFrameLayout;
-    @Bind(R.id.recycle_view)
-    XCRecycleView recycleView;
-    @Bind(R.id.recycle_view_empty_view)
-    EmptyView recycleViewEmptyView;
+    @Bind(R.id.recycler_view)
+    XCRecycleView recyclerView;
+    @Bind(R.id.recycler_view_empty_view)
+    EmptyView recyclerViewEmptyView;
 
 
     private RecyclerViewGridAdapter recyclerViewGridAdapter;
@@ -52,33 +52,33 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        recycleViewEmptyView.setText("empty data!");
+        recyclerViewEmptyView.setText("empty data!");
 
-        recycleView.setEmptyView(recycleViewEmptyView);
+        recyclerView.setEmptyView(recyclerViewEmptyView);
 
-        recycleView.setLayoutManager(new GridLayoutManager(this, 3));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 
         LayoutInflater inflater = LayoutInflater.from(this);
 
-        View headerView1 = inflater.inflate(R.layout.item_header_view_1, recycleView, false);
-        View headerView2 = inflater.inflate(R.layout.item_header_view_2, recycleView, false);
+        View headerView1 = inflater.inflate(R.layout.item_header_view_1, recyclerView, false);
+        View headerView2 = inflater.inflate(R.layout.item_header_view_2, recyclerView, false);
 
-        View footerView1 = inflater.inflate(R.layout.item_footer_view_1, recycleView, false);
-        View footerView2 = inflater.inflate(R.layout.item_footer_view_2, recycleView, false);
+        View footerView1 = inflater.inflate(R.layout.item_footer_view_1, recyclerView, false);
+        View footerView2 = inflater.inflate(R.layout.item_footer_view_2, recyclerView, false);
 
-        recycleView.addHeaderView(headerView1);
-        recycleView.addHeaderView(headerView2);
+        recyclerView.addHeaderView(headerView1);
+        recyclerView.addHeaderView(headerView2);
 
-        recycleView.addFooterView(footerView1);
-        recycleView.addFooterView(footerView2);
+        recyclerView.addFooterView(footerView1);
+        recyclerView.addFooterView(footerView2);
 
 
         recyclerViewGridAdapter = new RecyclerViewGridAdapter(this);
 
 
-        recycleView.setAdapter(recyclerViewGridAdapter);
+        recyclerView.setAdapter(recyclerViewGridAdapter);
 
-        recycleView.setOnLoadMoreListener(onLoadMoreListener);
+        recyclerView.setOnLoadMoreListener(onLoadMoreListener);
 
         PTRUtil.init(this, ptrFrameLayout);
 
@@ -96,7 +96,7 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
 
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, recycleView, header);
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, recyclerView, header);
             }
         });
 
@@ -107,7 +107,7 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        recycleView.clear();
+        recyclerView.clear();
     }
 
     private void refreshData() {
@@ -134,7 +134,7 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
 
                 recyclerViewGridAdapter.addAll(personList);
 
-                recycleView.setLoadMoreEnd(true);
+                recyclerView.setLoadMoreEnd(true);
             }
         }, 1500);
     }

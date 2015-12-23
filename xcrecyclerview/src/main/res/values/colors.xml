@@ -3,4 +3,5 @@
 
     <color name="primary" tools:ignore="ResourceName">#009688</color>
 
+    <color name="divider">#f4f4f4</color>
 </resources>

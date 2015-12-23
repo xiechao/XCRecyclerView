@@ -40,27 +40,29 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
     }
 
     public void resetData(List<T> dataList) {
-        int oldData = dataArrayList.size();
+        int oldData = getCommonItemCount();
         dataArrayList.clear();
-        notifyItemRangeRemoved(headerViewList.size(), oldData);
+        notifyItemRangeRemoved(getHeaderViewsCount(), oldData);
 
         dataArrayList.addAll(dataList);
-        notifyItemRangeInserted(headerViewList.size(), dataArrayList.size());
+        notifyItemRangeInserted(getHeaderViewsCount(), getCommonItemCount());
     }
 
     public void addAll(List<T> dataList) {
         dataArrayList.addAll(dataList);
 
-        notifyItemRangeInserted(headerViewList.size() + dataArrayList.size(), dataList.size());
+        notifyItemRangeInserted(getHeaderViewsCount() + getCommonItemCount(), dataList.size());
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position >= 0 && position < headerViewList.size()) {
+        if (getCommonItemCount() > 0 && position >= 0 && position < getHeaderViewsCount()) {
             return VIEW_TYPE_HEADER_BASE + position;
-        } else if (position >= headerViewList.size() + dataArrayList.size() && position < headerViewList.size() + dataArrayList.size() + footerViewList.size()) {
-            return VIEW_TYPE_FOOTER_BASE + (position - (headerViewList.size() + dataArrayList.size()));
-        } else if (mIsLoading && position == headerViewList.size() + dataArrayList.size() + footerViewList.size()) {
+        } else if (getCommonItemCount() > 0 && position >= getHeaderViewsCount() + getCommonItemCount() && position < getHeaderViewsCount() + getCommonItemCount() + getFooterViewsCount()) {
+            return VIEW_TYPE_FOOTER_BASE + (position - (getHeaderViewsCount() + getCommonItemCount()));
+        } else if (getCommonItemCount() > 0 && mIsLoading && position == getHeaderViewsCount() + getCommonItemCount() + getFooterViewsCount()) {
+            return VIEW_TYPE_LOAD_MORE;
+        } else if (getCommonItemCount() <= 0 && mIsLoading && position == 0) {
             return VIEW_TYPE_LOAD_MORE;
         } else {
             return getCommonItemViewType(position, getItem(position));
@@ -142,9 +144,9 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
     }
 
     public T getItem(int position) {
-        int index = position - headerViewList.size();
+        int index = position - (getCommonItemCount() > 0 ? getHeaderViewsCount() : 0);
 
-        if (index >= 0 && index < dataArrayList.size()) {
+        if (index >= 0 && index < getCommonItemCount()) {
             return dataArrayList.get(index);
         } else {
             return null;
@@ -157,15 +159,15 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
 
     @Override
     public int getItemCount() {
-        if (dataArrayList.size() > 0) {
-            return headerViewList.size() + dataArrayList.size() + footerViewList.size() + (mIsLoading ? 1 : 0);
-        } else {
-            return 0;
-        }
+        return getHeaderViewsCount() + getCommonItemCount() + getFooterViewsCount() + getLoadMoreItemCount();
     }
 
     public int getCommonItemCount() {
         return dataArrayList.size();
+    }
+
+    public int getLoadMoreItemCount() {
+        return mIsLoading ? 1 : 0;
     }
 
     public boolean tryDoLoadMore() {
@@ -242,7 +244,7 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
     }
 
     public int getHeaderViewsCount() {
-        return headerViewList.size();
+        return getCommonItemCount() > 0 ? headerViewList.size() : 0;
     }
 
     public void addFooterView(View v) {
@@ -254,7 +256,7 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
     }
 
     public int getFooterViewsCount() {
-        return footerViewList.size();
+        return getCommonItemCount() > 0 ? footerViewList.size() : 0;
     }
 
     private void expand(View v, Animation.AnimationListener collapseListener) {
@@ -307,25 +309,25 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
     }
 
     public void resetHeaderViewsCount(ArrayList<View> headerViewArrayList) {
-        int oldHeaderCount = headerViewList.size();
+        int oldHeaderCount = getHeaderViewsCount();
 
         headerViewList.clear();
         notifyItemRangeRemoved(0, oldHeaderCount);
 
         headerViewList.addAll(headerViewArrayList);
 
-        notifyItemRangeInserted(0, headerViewList.size());
+        notifyItemRangeInserted(0, getHeaderViewsCount());
     }
 
     public void resetFooterViewsCount(ArrayList<View> footerViewArrayList) {
-        int oldFooterCount = footerViewList.size();
+        int oldFooterCount = getFooterViewsCount();
 
         footerViewList.clear();
-        notifyItemRangeRemoved(headerViewList.size() + dataArrayList.size(), oldFooterCount);
+        notifyItemRangeRemoved(getHeaderViewsCount() + getCommonItemCount(), oldFooterCount);
 
         footerViewList.addAll(footerViewArrayList);
 
-        notifyItemRangeInserted(headerViewList.size() + dataArrayList.size(), footerViewList.size());
+        notifyItemRangeInserted(getHeaderViewsCount() + getCommonItemCount(), getFooterViewsCount());
     }
 
     public abstract class ViewHolderBase extends RecyclerView.ViewHolder {

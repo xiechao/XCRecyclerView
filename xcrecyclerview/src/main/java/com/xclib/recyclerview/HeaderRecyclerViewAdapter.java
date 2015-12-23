@@ -1,6 +1,7 @@
 package com.xclib.recyclerview;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -22,8 +23,8 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
     }
 
     @Override
-    public int getItemCount() {
-        return super.getItemCount() + 1 + (baseAdapter.getItemCount() == 0 ? 1 : baseAdapter.getItemCount());
+    public int getCommonItemCount() {
+        return 1 + (baseAdapter.getItemCount() == 0 ? 1 : baseAdapter.getItemCount());
     }
 
     @Override
@@ -33,12 +34,12 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
         } else if (isEmptyViewType(position)) {
             return VIEW_TYPE_EMPTY_VIEW;
         } else {
-            return baseAdapter.getItemViewType(offsetPosition(position));
+            return baseAdapter.getItemViewType(offsetPositionForBaseAdapter(position));
         }
     }
 
     boolean isSupportSeparateSpan(int position) {
-        return !(isHeaderType(position) || isEmptyViewType(position)) && baseAdapter.isSupportSeparateSpan(offsetPosition(position)) && super.isSupportSeparateSpan(position - 1);
+        return !(isHeaderType(position) || isEmptyViewType(position)) && super.isSupportSeparateSpan(position) && baseAdapter.isSupportSeparateSpan(offsetPositionForBaseAdapter(position));
     }
 
     @Override
@@ -60,7 +61,7 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
     @Override
     public Object getItem(int position) {
         if (!isHeaderType(position) && !isEmptyViewType(position)) {
-            return baseAdapter.getItem(offsetPosition(position));
+            return baseAdapter.getItem(offsetPositionForBaseAdapter(position));
         }
         return null;
     }
@@ -68,21 +69,21 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
     @Override
     public long getItemId(int position) {
         if (!isHeaderType(position) && !isEmptyViewType(position)) {
-            return baseAdapter.getItemId(offsetPosition(position));
+            return baseAdapter.getItemId(offsetPositionForBaseAdapter(position));
         }
         return 0;
     }
 
     public boolean isHeaderType(int position) {
-        return position == 0;
+        return position - getHeaderViewsCount() == 0;
     }
 
     public boolean isEmptyViewType(int position) {
-        return position == (1 + getHeaderViewsCount()) && baseAdapter.getItemCount() == 0;
+        return (position - getHeaderViewsCount()) == 1 && baseAdapter.getItemCount() == 0;
     }
 
-    public int offsetPosition(int position) {
-        return position - (baseAdapter.getItemCount() == 0 ? 1 : 0) - getHeaderViewsCount() - 1;
+    public int offsetPositionForBaseAdapter(int position) {
+        return position - getHeaderViewsCount() - (baseAdapter.getItemCount() == 0 ? 1 : 0) - 1;
     }
 
     private class ObservableScrollHeaderViewHolder extends ViewHolderBase {
@@ -107,5 +108,25 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
         public void render(Object data) {
 
         }
+    }
+
+    public void addHeaderView(View v) {
+        // This adapter not support header and footer View
+    }
+
+    public boolean removeHeaderView(View v) {
+        // This adapter not support header and footer View
+
+        return false;
+    }
+
+    public void addFooterView(View v) {
+        // This adapter not support header and footer View
+    }
+
+    public boolean removeFooterView(View v) {
+        // This adapter not support header and footer View
+
+        return false;
     }
 }

@@ -1,6 +1,7 @@
 package com.xclib.recyclerviewtest.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.xclib.recyclerview.RecyclerViewBaseAdapter;
+import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerviewtest.adapter.RecyclerViewAdapter;
 import com.xclib.recyclerviewtest.model.Person;
 
@@ -23,7 +25,13 @@ public class ObservableFragment3 extends HeaderRecyclerViewBaseFragment {
 
         initData();
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+
+        emptyView.setText("empty test!");
+        xcRecycleView.setOnLoadMoreListener(onLoadMoreListener);
+
+        return view;
     }
 
 
@@ -45,5 +53,34 @@ public class ObservableFragment3 extends HeaderRecyclerViewBaseFragment {
         }
 
         recyclerViewAdapter.resetData(personList);
+    }
+
+    private XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
+        @Override
+        public void onLoadMore() {
+            doLoadMore();
+        }
+
+        @Override
+        public boolean isHasMoreData() {
+            return true;
+        }
+    };
+
+    private void doLoadMore() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                List<Person> personList = new ArrayList<>();
+                for (int i = recyclerViewAdapter.getCommonItemCount(); i < recyclerViewAdapter.getCommonItemCount() + 30; i++) {
+                    Person person = new Person("Name " + i);
+                    personList.add(person);
+                }
+
+                recyclerViewAdapter.addAll(personList);
+
+                xcRecycleView.setLoadMoreEnd(true);
+            }
+        }, 1500);
     }
 }

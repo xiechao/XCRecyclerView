@@ -19,7 +19,7 @@ import com.xclib.recyclerviewtest.fragment.ObservableFragment3;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ObservableRecyclerViewActivity extends AppCompatActivity implements HeaderRecyclerViewBaseFragment.HeaderViewProvider {
+public class ObservableRecyclerViewActivity extends BaseActivity implements HeaderRecyclerViewBaseFragment.HeaderViewProvider {
 
     private static final int TAB_COUNT = 3;
     private static final String[] tabTitles = new String[]{"Fragment1", "Fragment2", "Fragment3"};

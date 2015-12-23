@@ -21,7 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
-public class PinnedSectionSwipeActivity extends AppCompatActivity {
+public class PinnedSectionSwipeActivity extends BaseActivity {
 
 
     @Bind(R.id.recycler_view)

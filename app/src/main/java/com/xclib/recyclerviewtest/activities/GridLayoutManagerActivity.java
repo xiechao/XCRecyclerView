@@ -23,7 +23,7 @@ import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 
-public class GridLayoutManagerActivity extends AppCompatActivity {
+public class GridLayoutManagerActivity extends BaseActivity {
     @Bind(R.id.ptr_frame_layout)
     PtrFrameLayout ptrFrameLayout;
     @Bind(R.id.recycler_view)

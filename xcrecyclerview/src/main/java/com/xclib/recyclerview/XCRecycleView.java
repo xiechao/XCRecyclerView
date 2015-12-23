@@ -68,6 +68,10 @@ public class XCRecycleView extends RecyclerView {
 
     public void clear() {
         removeOnScrollListener(onScrollListener);
+
+        if (getAdapter() != null) {
+            getAdapter().unregisterAdapterDataObserver(adapterDataObserver);
+        }
     }
 
     private void tryDoLoadMore() {

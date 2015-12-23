@@ -1,1 +1,2 @@
-include ':app', ':xcrecyclerview'
+include ':app'
+include ':xcrecyclerview'

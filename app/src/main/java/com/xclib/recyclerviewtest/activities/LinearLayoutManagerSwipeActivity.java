@@ -2,15 +2,14 @@ package com.xclib.recyclerviewtest.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.daimajia.swipe.util.Attributes;
+import com.xclib.recyclerview.DividerItemDecoration;
 import com.xclib.recyclerview.EmptyView;
 import com.xclib.recyclerview.XCRecycleView;
-import com.xclib.recyclerviewtest.DividerItemDecoration;
 import com.xclib.recyclerviewtest.PTRUtil;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.adapter.RecyclerViewSwipeAdapter;

@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.xclib.recyclerview.DividerItemDecoration;
 import com.xclib.recyclerview.RecyclerViewBaseAdapter;
 import com.xclib.recyclerview.XCRecycleView;
-import com.xclib.recyclerviewtest.DividerItemDecoration;
 import com.xclib.recyclerviewtest.adapter.RecyclerViewAdapter;
 import com.xclib.recyclerviewtest.model.Person;
 

@@ -1,7 +1,6 @@
 package com.xclib.recyclerviewtest.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.TextView;
@@ -10,9 +9,9 @@ import android.widget.Toast;
 import com.eowise.recyclerview.stickyheaders.OnHeaderClickListener;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersBuilder;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
+import com.xclib.recyclerview.DividerItemDecoration;
 import com.xclib.recyclerview.PinnedSectionTitleIndicator;
 import com.xclib.recyclerview.XCRecycleView;
-import com.xclib.recyclerviewtest.DividerItemDecoration;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.adapter.PinnedSectionAdapter;
 import com.xclib.recyclerviewtest.model.Person;

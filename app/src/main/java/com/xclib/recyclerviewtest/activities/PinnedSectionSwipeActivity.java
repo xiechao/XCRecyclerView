@@ -1,15 +1,14 @@
 package com.xclib.recyclerviewtest.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.daimajia.swipe.util.Attributes;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersBuilder;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
+import com.xclib.recyclerview.DividerItemDecoration;
 import com.xclib.recyclerview.PinnedSectionTitleIndicator;
 import com.xclib.recyclerview.XCRecycleView;
-import com.xclib.recyclerviewtest.DividerItemDecoration;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.adapter.PinnedSectionSwipeAdapter;
 import com.xclib.recyclerviewtest.model.Person;

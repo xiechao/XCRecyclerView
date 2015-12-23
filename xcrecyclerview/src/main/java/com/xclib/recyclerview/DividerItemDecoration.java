@@ -1,4 +1,5 @@
-package com.xclib.recyclerviewtest;
+package com.xclib.recyclerview;
+
 
 import android.content.Context;
 import android.graphics.Canvas;

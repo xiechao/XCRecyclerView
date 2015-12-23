@@ -143,7 +143,7 @@ public class LinearLayoutManagerSwipeActivity extends BaseActivity {
             @Override
             public void run() {
                 List<Person> personList = new ArrayList<>();
-                for (int i = recyclerViewSwipeAdapter.getCommonItemCount(); i < recyclerViewSwipeAdapter.getCommonItemCount() + 20; i++) {
+                for (int i = recyclerViewSwipeAdapter.getAllCommonItemCount(); i < recyclerViewSwipeAdapter.getAllCommonItemCount() + 20; i++) {
                     Person person = new Person("Name " + i);
                     personList.add(person);
                 }

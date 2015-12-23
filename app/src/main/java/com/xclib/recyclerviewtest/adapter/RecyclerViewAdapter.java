@@ -22,11 +22,7 @@ public class RecyclerViewAdapter extends RecyclerViewBaseAdapter<Person> {
 
     @Override
     protected boolean checkFiltering(Person data, CharSequence constraint) {
-        if (data.getName().contains(constraint)) {
-            return true;
-        }
-
-        return false;
+        return data.getName().contains(constraint);
     }
 
     @Override

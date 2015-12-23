@@ -141,7 +141,7 @@ public class LinearLayoutManagerActivity extends BaseActivity {
             @Override
             public void run() {
                 List<Person> personList = new ArrayList<>();
-                for (int i = recyclerViewAdapter.getCommonItemCount(); i < recyclerViewAdapter.getCommonItemCount() + 20; i++) {
+                for (int i = recyclerViewAdapter.getAllCommonItemCount(); i < recyclerViewAdapter.getAllCommonItemCount() + 20; i++) {
                     Person person = new Person("Name " + i);
                     personList.add(person);
                 }

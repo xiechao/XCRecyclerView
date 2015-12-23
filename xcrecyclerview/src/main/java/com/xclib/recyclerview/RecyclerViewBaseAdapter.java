@@ -221,8 +221,12 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
 
     }
 
-    public List<T> getAllItems() {
+    public List<T> getAllCommonItems() {
         return baseItems;
+    }
+
+    public int getAllCommonItemCount() {
+        return baseItems.size();
     }
 
     public boolean isFiltered() {

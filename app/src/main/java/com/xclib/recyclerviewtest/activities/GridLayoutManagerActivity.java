@@ -139,7 +139,7 @@ public class GridLayoutManagerActivity extends BaseActivity {
             @Override
             public void run() {
                 List<Person> personList = new ArrayList<>();
-                for (int i = recyclerViewGridAdapter.getCommonItemCount(); i < recyclerViewGridAdapter.getCommonItemCount() + 20; i++) {
+                for (int i = recyclerViewGridAdapter.getAllCommonItemCount(); i < recyclerViewGridAdapter.getAllCommonItemCount() + 20; i++) {
                     Person person = new Person("Name " + i);
                     personList.add(person);
                 }

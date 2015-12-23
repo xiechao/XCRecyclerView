@@ -168,7 +168,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         }
 
         @Override
-        public GTViewHolderBase onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolderBase onCreateViewHolder(ViewGroup parent, int viewType) {
             if (viewType == VIEW_TYPE_OBSERVABLE_SCROLL_HEADER) {
                 return new ObservableScrollHeaderViewHolder(headerView);
             } else if (viewType == VIEW_TYPE_EMPTY_VIEW) {
@@ -184,7 +184,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         }
 
         @Override
-        protected GTViewHolderBase onCommonCreateViewHolder(View view) {
+        protected ViewHolderBase onCommonCreateViewHolder(View view) {
             return null;
         }
 
@@ -216,7 +216,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
             return position - (mListAdapter.getItemCount() == 0 ? 1 : 0) - 1;
         }
 
-        private class ObservableScrollHeaderViewHolder extends GTViewHolderBase {
+        private class ObservableScrollHeaderViewHolder extends ViewHolderBase {
 
             public ObservableScrollHeaderViewHolder(View itemView) {
                 super(itemView);
@@ -228,7 +228,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
             }
         }
 
-        private class EmptyViewHolder extends GTViewHolderBase {
+        private class EmptyViewHolder extends ViewHolderBase {
 
             public EmptyViewHolder(View itemView) {
                 super(itemView);

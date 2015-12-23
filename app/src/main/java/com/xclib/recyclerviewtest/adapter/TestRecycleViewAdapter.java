@@ -28,11 +28,11 @@ public class TestRecycleViewAdapter extends RecyclerViewBaseAdapter<Person> {
     }
 
     @Override
-    protected GTViewHolderBase onCommonCreateViewHolder(View view) {
+    protected ViewHolderBase onCommonCreateViewHolder(View view) {
         return new TestViewHolder(view);
     }
 
-    public class TestViewHolder extends GTViewHolderBase {
+    public class TestViewHolder extends ViewHolderBase {
         @Bind(R.id.tv_name)
         TextView tvName;
 

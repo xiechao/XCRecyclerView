@@ -44,11 +44,11 @@ public class TestRecycleViewSwipeAdapter extends RecyclerViewSwipeBaseAdapter<Pe
     }
 
     @Override
-    protected GTViewHolderBase onCommonCreateViewHolder(View view) {
+    protected ViewHolderBase onCommonCreateViewHolder(View view) {
         return new TestViewHolder(view);
     }
 
-    public class TestViewHolder extends GTViewHolderBase {
+    public class TestViewHolder extends ViewHolderBase {
         @Bind(R.id.btn_delete)
         Button btnDelete;
         @Bind(R.id.tv_name)

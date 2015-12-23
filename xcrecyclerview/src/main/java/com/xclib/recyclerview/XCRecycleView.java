@@ -5,7 +5,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -179,6 +178,8 @@ public class XCRecycleView extends RecyclerView {
         }
 
         adapter.registerAdapterDataObserver(adapterDataObserver);
+
+        doRefreshEmptyView();
     }
 
     private AdapterDataObserver adapterDataObserver = new AdapterDataObserver() {

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HeaderRecyclerViewAdapter  extends RecyclerViewBaseAdapter {
+public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
     private static final int VIEW_TYPE_OBSERVABLE_SCROLL_HEADER = 5000;
     private static final int VIEW_TYPE_EMPTY_VIEW = VIEW_TYPE_OBSERVABLE_SCROLL_HEADER + 1;
 
@@ -47,6 +47,10 @@ public class HeaderRecyclerViewAdapter  extends RecyclerViewBaseAdapter {
         } else {
             return baseAdapter.onCreateViewHolder(parent, viewType);
         }
+    }
+
+    boolean isSupportSeparateSpan(int position) {
+        return !(isHeaderType(position) || isEmptyViewType(position)) && baseAdapter.isSupportSeparateSpan(offsetPosition(position));
     }
 
     @Override

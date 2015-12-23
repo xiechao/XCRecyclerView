@@ -84,6 +84,13 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         return mIsLoading && position == headerViewList.size() + dataArrayList.size() + footerViewList.size();
     }
 
+    boolean isSupportSeparateSpan(int position) {
+        return !(isHeaderView(position) ||
+                isFooterView(position) ||
+                isLoadMoreView(position));
+    }
+
+
     public abstract int getCommonItemViewType(int position, T data);
 
     @Override

@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xclib.recyclerviewtest.R;
-import com.xclib.recyclerviewtest.fragment.HeaderRecyclerFragment;
+import com.xclib.recyclerviewtest.fragment.HeaderRecyclerViewBaseFragment;
 import com.xclib.recyclerviewtest.fragment.ObservableFragment1;
 import com.xclib.recyclerviewtest.fragment.ObservableFragment2;
 import com.xclib.recyclerviewtest.fragment.ObservableFragment3;
@@ -20,7 +20,7 @@ import com.xclib.recyclerviewtest.fragment.ObservableFragment3;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ObservableRecyclerViewActivity extends AppCompatActivity implements HeaderRecyclerFragment.HeaderViewProvider {
+public class ObservableRecyclerViewActivity extends AppCompatActivity implements HeaderRecyclerViewBaseFragment.HeaderViewProvider {
 
     private static final int TAB_COUNT = 3;
     private static final String[] tabTitles = new String[]{"Fragment1", "Fragment2", "Fragment3"};

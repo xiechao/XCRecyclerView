@@ -14,7 +14,7 @@ import com.xclib.recyclerviewtest.model.Person;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObservableFragment3 extends HeaderRecyclerFragment {
+public class ObservableFragment3 extends HeaderRecyclerViewBaseFragment {
     private RecyclerViewAdapter recyclerViewAdapter;
 
     @Override

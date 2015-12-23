@@ -15,7 +15,7 @@ import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerview.RecyclerViewBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 
-public abstract class HeaderRecyclerFragment extends Fragment {
+public abstract class HeaderRecyclerViewBaseFragment extends Fragment {
 
     private final RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
 

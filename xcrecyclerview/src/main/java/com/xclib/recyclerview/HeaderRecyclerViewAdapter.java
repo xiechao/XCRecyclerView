@@ -23,9 +23,8 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
 
     @Override
     public int getItemCount() {
-        return super.getItemCount() + baseAdapter.getItemCount() + 1 + (baseAdapter.getItemCount() == 0 ? 1 : 0);
+        return super.getItemCount() + 1 + (baseAdapter.getItemCount() == 0 ? 1 : baseAdapter.getItemCount());
     }
-
 
     @Override
     public int getCommonItemViewType(int position, Object data) {
@@ -39,7 +38,7 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
     }
 
     boolean isSupportSeparateSpan(int position) {
-        return !(isHeaderType(position) || isEmptyViewType(position)) && baseAdapter.isSupportSeparateSpan(offsetPosition(position));
+        return !(isHeaderType(position) || isEmptyViewType(position)) && baseAdapter.isSupportSeparateSpan(offsetPosition(position)) && super.isSupportSeparateSpan(position - 1);
     }
 
     @Override

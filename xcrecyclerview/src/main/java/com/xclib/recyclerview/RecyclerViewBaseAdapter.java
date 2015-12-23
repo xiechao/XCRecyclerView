@@ -72,22 +72,35 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         return getItem(position).hashCode();
     }
 
-    boolean isHeaderView(int position) {
-        return position >= 0 && position < headerViewList.size();
+    boolean isHeaderViewByPosition(int position) {
+        return isHeaderViewByViewType(getItemViewType(position));
     }
 
-    boolean isFooterView(int position) {
-        return position >= headerViewList.size() + dataArrayList.size() && position < headerViewList.size() + dataArrayList.size() + footerViewList.size();
+    boolean isFooterViewByPosition(int position) {
+        return isFooterViewByViewType(getItemViewType(position));
     }
 
-    boolean isLoadMoreView(int position) {
-        return mIsLoading && position == headerViewList.size() + dataArrayList.size() + footerViewList.size();
+    boolean isLoadMoreViewByPosition(int position) {
+        return isLoadMoreViewByViewType(getItemViewType(position));
+    }
+
+    private boolean isHeaderViewByViewType(int viewType) {
+        return viewType >= VIEW_TYPE_HEADER_BASE && viewType < VIEW_TYPE_FOOTER_BASE;
+    }
+
+    private boolean isFooterViewByViewType(int viewType) {
+        return viewType >= VIEW_TYPE_FOOTER_BASE && viewType < VIEW_TYPE_LOAD_MORE;
+
+    }
+
+    private boolean isLoadMoreViewByViewType(int viewType) {
+        return viewType == VIEW_TYPE_LOAD_MORE;
     }
 
     boolean isSupportSeparateSpan(int position) {
-        return !(isHeaderView(position) ||
-                isFooterView(position) ||
-                isLoadMoreView(position));
+        return !(isHeaderViewByPosition(position) ||
+                isFooterViewByPosition(position) ||
+                isLoadMoreViewByPosition(position));
     }
 
 
@@ -95,11 +108,11 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
 
     @Override
     public ViewHolderBase onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType >= VIEW_TYPE_HEADER_BASE && viewType < VIEW_TYPE_FOOTER_BASE) {
+        if (isHeaderViewByViewType(viewType)) {
             return new HeaderViewHolder(headerViewList.get(viewType - VIEW_TYPE_HEADER_BASE));
-        } else if (viewType >= VIEW_TYPE_FOOTER_BASE && viewType < VIEW_TYPE_LOAD_MORE) {
+        } else if (isFooterViewByViewType(viewType)) {
             return new FooterViewHolder(footerViewList.get(viewType - VIEW_TYPE_FOOTER_BASE));
-        } else if (viewType == VIEW_TYPE_LOAD_MORE) {
+        } else if (isLoadMoreViewByViewType(viewType)) {
             return new LoadMoreViewHolder(loadMoreViewContainer);
         } else {
             View viewItem = null;
@@ -119,15 +132,7 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
     @Override
     @SuppressWarnings("unchecked")
     public void onBindViewHolder(RecyclerViewBaseAdapter.ViewHolderBase holder, int position) {
-        if (position >= 0 && position < headerViewList.size()) {
-            holder.render(null);
-        } else if (position >= headerViewList.size() + dataArrayList.size() && position < headerViewList.size() + dataArrayList.size() + footerViewList.size()) {
-            holder.render(null);
-        } else if (mIsLoading && position == headerViewList.size() + dataArrayList.size() + footerViewList.size()) {
-            holder.render(null);
-        } else {
-            holder.render(getItem(position));
-        }
+        holder.render(getItem(position));
 
         onBindViewHolderSuccess(holder.itemView, position);
     }
@@ -137,7 +142,13 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
     }
 
     public T getItem(int position) {
-        return dataArrayList.get(position - headerViewList.size());
+        int index = position - headerViewList.size();
+
+        if (index >= 0 && index < dataArrayList.size()) {
+            return dataArrayList.get(index);
+        } else {
+            return null;
+        }
     }
 
     public void setOnLoadMoreListener(XCRecycleView.OnLoadMoreListener onLoadMoreListener) {

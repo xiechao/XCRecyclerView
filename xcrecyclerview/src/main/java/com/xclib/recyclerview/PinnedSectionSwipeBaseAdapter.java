@@ -70,7 +70,7 @@ public abstract class PinnedSectionSwipeBaseAdapter<T extends ISectionData> exte
 
 
     private boolean isSupportSwipe(int position) {
-        return !(isHeaderView(position) || isFooterView(position) || isLoadMoreView(position)) && isCommonItemSupportSwipe(position, getItem(position));
+        return !(isHeaderViewByPosition(position) || isFooterViewByPosition(position) || isLoadMoreViewByPosition(position)) && isCommonItemSupportSwipe(position, getItem(position));
     }
 
     @SuppressWarnings("SameReturnValue")

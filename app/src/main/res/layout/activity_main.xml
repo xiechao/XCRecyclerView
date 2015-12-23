@@ -23,10 +23,10 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/btn_header_section"
+        android:id="@+id/btn_pinned_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Header Section"
+        android:text="Pinned Section"
         tools:ignore="HardcodedText" />
 
 
@@ -38,16 +38,16 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/btn_header_section_swipe"
+        android:id="@+id/btn_pinned_section_swipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Header Section Swipe"
+        android:text="Pinned Section Swipe"
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/btn_observable_scroll"
+        android:id="@+id/btn_observable_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Observable Scroll"
+        android:text="Observable Recycler View"
         tools:ignore="HardcodedText" />
 </LinearLayout>

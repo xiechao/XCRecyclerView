@@ -1,4 +1,4 @@
-package com.xclib.recyclerviewtest.views;
+package com.xclib.recyclerview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.xclib.recyclerviewtest.R;
-
-public class EmptyView extends LinearLayout {
+public class EmptyView  extends LinearLayout {
     private TextView emptyTextView;
 
     public EmptyView(Context context) {

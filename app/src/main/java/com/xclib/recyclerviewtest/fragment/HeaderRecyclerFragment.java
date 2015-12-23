@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.xclib.recyclerview.EmptyView;
 import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerview.RecyclerViewBaseAdapter;
 import com.xclib.recyclerviewtest.R;
-import com.xclib.recyclerviewtest.views.EmptyView;
 
 public abstract class HeaderRecyclerFragment extends Fragment {
 

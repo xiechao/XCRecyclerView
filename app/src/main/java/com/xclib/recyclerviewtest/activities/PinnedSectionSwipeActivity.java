@@ -69,7 +69,7 @@ public class PinnedSectionSwipeActivity extends BaseActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
         PinnedSectionSwipeAdapter pinnedSectionSwipeAdapter = new PinnedSectionSwipeAdapter(this);
-        pinnedSectionSwipeAdapter.resetData(personList);
+        pinnedSectionSwipeAdapter.setItems(personList);
         pinnedSectionSwipeAdapter.setMode(Attributes.Mode.Single);
 
         StickyHeadersItemDecoration top = new StickyHeadersBuilder()

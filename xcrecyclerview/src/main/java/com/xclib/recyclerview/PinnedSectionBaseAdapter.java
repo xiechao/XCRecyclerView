@@ -49,7 +49,7 @@ public abstract class PinnedSectionBaseAdapter<T extends ISectionData> extends R
     }
 
     @Override
-    public void resetData(List<T> dataList) {
+    public void setItems(List<T> dataList) {
 
         Collections.sort(dataList, new Comparator<T>() {
             @Override
@@ -87,7 +87,7 @@ public abstract class PinnedSectionBaseAdapter<T extends ISectionData> extends R
             }
         }
 
-        super.resetData(dataList);
+        super.setItems(dataList);
     }
 
     @Override

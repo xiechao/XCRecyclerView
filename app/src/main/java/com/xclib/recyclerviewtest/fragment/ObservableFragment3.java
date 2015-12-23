@@ -62,7 +62,7 @@ public class ObservableFragment3 extends HeaderRecyclerViewBaseFragment {
             personList.add(user);
         }
 
-        recyclerViewGridAdapter.resetData(personList);
+        recyclerViewGridAdapter.setItems(personList);
     }
 
     private void doLoadMore() {
@@ -75,7 +75,7 @@ public class ObservableFragment3 extends HeaderRecyclerViewBaseFragment {
                     personList.add(person);
                 }
 
-                recyclerViewGridAdapter.addAll(personList);
+                recyclerViewGridAdapter.addMoreItems(personList, true);
 
                 xcRecycleView.setLoadMoreEnd(true);
             }

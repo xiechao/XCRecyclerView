@@ -129,7 +129,7 @@ public class GridLayoutManagerActivity extends BaseActivity {
             personList.add(person);
         }
 
-        recyclerViewGridAdapter.resetData(personList);
+        recyclerViewGridAdapter.setItems(personList);
 
         recyclerViewGridAdapter.notifyDataSetChanged();
     }
@@ -144,7 +144,7 @@ public class GridLayoutManagerActivity extends BaseActivity {
                     personList.add(person);
                 }
 
-                recyclerViewGridAdapter.addAll(personList);
+                recyclerViewGridAdapter.addMoreItems(personList, true);
 
                 recyclerView.setLoadMoreEnd(true);
             }

@@ -3,6 +3,7 @@ package com.xclib.recyclerview;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,23 +12,64 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<RecyclerViewBaseAdapter.ViewHolderBase> {
+public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<RecyclerViewBaseAdapter.ViewHolderBase> implements Filterable {
     private static final int VIEW_TYPE_HEADER_BASE = 1000;
     private static final int VIEW_TYPE_FOOTER_BASE = 2000;
     private static final int VIEW_TYPE_LOAD_MORE = 3000;
     private static final int LOAD_MORE_ANI_TIME = 300;
-    private final ArrayList<T> dataArrayList = new ArrayList<>();
+    private final ArrayList<T> baseItems = new ArrayList<>();
+    private List<T> showItems = new ArrayList<>();
     private final ArrayList<View> headerViewList = new ArrayList<>();
     private final ArrayList<View> footerViewList = new ArrayList<>();
     private boolean mIsLoading;
     private XCRecycleView.OnLoadMoreListener onLoadMoreListener;
     private RelativeLayout loadMoreViewContainer = null;
     private View loadMoreViewContent = null;
+    private CharSequence mCurrentConstraint = "";
+
+
+    private Filter mFilter = new Filter() {
+
+        @Override
+        protected Filter.FilterResults performFiltering(CharSequence constraint) {
+            mCurrentConstraint = constraint;
+
+            final Filter.FilterResults oReturn = new Filter.FilterResults();
+            final ArrayList<T> results = new ArrayList<>();
+
+
+            if (constraint != null) {
+                if (baseItems != null) {
+                    for (T data : baseItems) {
+                        if (checkFiltering(data, constraint))
+                            results.add(data);
+                    }
+                }
+                oReturn.values = results;
+            }
+            return oReturn;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint,
+                                      Filter.FilterResults results) {
+
+            showItems.clear();
+            if (results.values != null) {
+                showItems.addAll((ArrayList<T>) results.values);
+            }
+
+            notifyDataSetChanged();
+        }
+    };
 
     @SuppressLint("InflateParams")
     public RecyclerViewBaseAdapter(Context context) {
@@ -39,19 +81,152 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         loadMoreViewContainer.addView(loadMoreViewContent, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
     }
 
-    public void resetData(List<T> dataList) {
-        int oldData = getCommonItemCount();
-        dataArrayList.clear();
-        notifyItemRangeRemoved(getHeaderViewsCount(), oldData);
-
-        dataArrayList.addAll(dataList);
-        notifyItemRangeInserted(getHeaderViewsCount(), getCommonItemCount());
+    @Override
+    public Filter getFilter() {
+        return mFilter;
     }
 
-    public void addAll(List<T> dataList) {
-        dataArrayList.addAll(dataList);
+    protected boolean checkFiltering(T data, CharSequence constraint) {
+        return true;
+    }
 
-        notifyItemRangeInserted(getHeaderViewsCount() + getCommonItemCount(), dataList.size());
+    public void addMoreItem(T newItem, boolean append) {
+        if (append) {
+            this.baseItems.add(newItem);
+        } else {
+            this.baseItems.add(0, newItem);
+        }
+
+        if (!TextUtils.isEmpty(mCurrentConstraint)) {
+            getFilter().filter(mCurrentConstraint);
+        } else {
+            showItems.clear();
+            showItems.addAll(baseItems);
+
+            notifyItemInserted(getHeaderViewsCount() + getCommonItemCount() - 1);
+        }
+    }
+
+    public void addMoreItems(List<T> newItems, boolean append) {
+        if (append) {
+            this.baseItems.addAll(newItems);
+        } else {
+            this.baseItems.addAll(0, newItems);
+        }
+
+        if (!TextUtils.isEmpty(mCurrentConstraint)) {
+            getFilter().filter(mCurrentConstraint);
+        } else {
+            showItems.clear();
+
+            if (append) {
+                showItems.addAll(baseItems);
+                notifyItemRangeInserted(getHeaderViewsCount() + getCommonItemCount() - newItems.size(), newItems.size());
+            } else {
+                showItems.addAll(0, newItems);
+                notifyItemRangeInserted(getHeaderViewsCount(), newItems.size());
+            }
+        }
+    }
+
+
+    public void removeAllItems() {
+        this.baseItems.clear();
+
+        if (!TextUtils.isEmpty(mCurrentConstraint)) {
+            getFilter().filter(mCurrentConstraint);
+        } else {
+            showItems.clear();
+            notifyDataSetChanged();
+        }
+    }
+
+    public void remove(T item) {
+        baseItems.remove(item);
+
+        if (!TextUtils.isEmpty(mCurrentConstraint)) {
+            getFilter().filter(mCurrentConstraint);
+        } else {
+            int index = showItems.indexOf(item);
+
+            if (index > 0) {
+                showItems.remove(index);
+                notifyItemRemoved(getHeaderViewsCount() + index);
+            }
+        }
+    }
+
+    public void update(T item) {
+        int index = baseItems.indexOf(item);
+        if (index >= 0) {
+            baseItems.remove(item);
+            baseItems.add(index, item);
+
+            if (!TextUtils.isEmpty(mCurrentConstraint)) {
+                getFilter().filter(mCurrentConstraint);
+            } else {
+                index = showItems.indexOf(item);
+
+                if (index > 0) {
+                    showItems.remove(index);
+                    showItems.add(index, item);
+
+                    notifyItemChanged(getHeaderViewsCount() + index);
+                }
+            }
+        }
+    }
+
+    public int indexOf(T item) {
+        return showItems.indexOf(item);
+    }
+
+    public void add(T item) {
+        baseItems.add(item);
+
+        if (!TextUtils.isEmpty(mCurrentConstraint)) {
+            getFilter().filter(mCurrentConstraint);
+        } else {
+            showItems.add(item);
+
+            notifyItemInserted(getHeaderViewsCount() + getCommonItemCount() - 1);
+        }
+    }
+
+    public void add(int index, T item) {
+        baseItems.add(index, item);
+
+        if (!TextUtils.isEmpty(mCurrentConstraint)) {
+            getFilter().filter(mCurrentConstraint);
+        } else {
+            showItems.add(index, item);
+            notifyItemInserted(getHeaderViewsCount() + index);
+        }
+    }
+
+    public void setItems(List<T> dataList) {
+        baseItems.clear();
+        baseItems.addAll(dataList);
+
+        if (!TextUtils.isEmpty(mCurrentConstraint)) {
+            getFilter().filter(mCurrentConstraint);
+        } else {
+            int oldData = getCommonItemCount();
+            showItems.clear();
+            notifyItemRangeRemoved(getHeaderViewsCount(), oldData);
+
+            showItems.addAll(baseItems);
+            notifyItemRangeInserted(getHeaderViewsCount(), getCommonItemCount());
+        }
+
+    }
+
+    public List<T> getAllItems() {
+        return baseItems;
+    }
+
+    public boolean isFiltered() {
+        return baseItems.size() != showItems.size();
     }
 
     @Override
@@ -155,7 +330,7 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         int index = position - (getCommonItemCount() > 0 ? getHeaderViewsCount() : 0);
 
         if (index >= 0 && index < getCommonItemCount()) {
-            return dataArrayList.get(index);
+            return showItems.get(index);
         } else {
             return null;
         }
@@ -171,7 +346,7 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
     }
 
     public int getCommonItemCount() {
-        return dataArrayList.size();
+        return showItems.size();
     }
 
     public int getLoadMoreItemCount() {

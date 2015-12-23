@@ -65,7 +65,7 @@ public class ObservableFragment2 extends HeaderRecyclerViewBaseFragment {
             personList.add(user);
         }
 
-        recyclerViewAdapter.resetData(personList);
+        recyclerViewAdapter.setItems(personList);
     }
 
     private void doLoadMore() {
@@ -78,7 +78,7 @@ public class ObservableFragment2 extends HeaderRecyclerViewBaseFragment {
                     personList.add(person);
                 }
 
-                recyclerViewAdapter.addAll(personList);
+                recyclerViewAdapter.addMoreItems(personList, true);
 
                 xcRecycleView.setLoadMoreEnd(true);
             }

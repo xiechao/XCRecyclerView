@@ -134,7 +134,7 @@ public class LinearLayoutManagerSwipeActivity extends BaseActivity {
             personList.add(user);
         }
 
-        recyclerViewSwipeAdapter.resetData(personList);
+        recyclerViewSwipeAdapter.setItems(personList);
         recyclerViewSwipeAdapter.notifyDataSetChanged();
     }
 
@@ -148,7 +148,7 @@ public class LinearLayoutManagerSwipeActivity extends BaseActivity {
                     personList.add(person);
                 }
 
-                recyclerViewSwipeAdapter.addAll(personList);
+                recyclerViewSwipeAdapter.addMoreItems(personList, true);
 
                 recyclerView.setLoadMoreEnd(true);
             }

@@ -69,7 +69,7 @@ public class PinnedSectionActivity extends BaseActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
         PinnedSectionAdapter pinnedSectionAdapter = new PinnedSectionAdapter(this);
-        pinnedSectionAdapter.resetData(personList);
+        pinnedSectionAdapter.setItems(personList);
 
         StickyHeadersItemDecoration top = new StickyHeadersBuilder()
                 .setAdapter(pinnedSectionAdapter)

@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 
 import com.xclib.recyclerview.EmptyView;
 import com.xclib.recyclerview.HeaderRecyclerViewAdapter;
-import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerview.RecyclerViewBaseAdapter;
+import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerviewtest.R;
 
 public abstract class HeaderRecyclerViewBaseFragment extends Fragment {
@@ -118,6 +118,8 @@ public abstract class HeaderRecyclerViewBaseFragment extends Fragment {
         unregisterAdapterDataObserver();
 
         xcRecycleView.removeOnScrollListener(onScrollListener);
+
+        xcRecycleView.clear();
     }
 
     protected abstract RecyclerViewBaseAdapter getAdapter();

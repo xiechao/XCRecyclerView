@@ -2,7 +2,6 @@ package com.xclib.recyclerviewtest;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +23,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         }
         mItemSize = (int) TypedValue.applyDimension(mItemSize, TypedValue.COMPLEX_UNIT_DIP, context.getResources().getDisplayMetrics());
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        //noinspection deprecation
         mPaint.setColor(context.getResources().getColor(R.color.divider));
 
         mPaint.setStyle(Paint.Style.FILL);

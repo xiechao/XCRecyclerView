@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.xclib.recyclerview.RecyclerViewBaseAdapter;
 import com.xclib.recyclerview.XCRecycleView;
+import com.xclib.recyclerviewtest.DividerItemDecoration;
 import com.xclib.recyclerviewtest.adapter.RecyclerViewAdapter;
 import com.xclib.recyclerviewtest.model.Person;
 
@@ -30,6 +31,8 @@ public class ObservableFragment2 extends HeaderRecyclerViewBaseFragment {
 
         emptyView.setText("empty test!");
         xcRecycleView.setOnLoadMoreListener(onLoadMoreListener);
+
+        xcRecycleView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         return view;
     }

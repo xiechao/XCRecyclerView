@@ -1,12 +1,14 @@
 package com.xclib.recyclerviewtest.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.xclib.recyclerview.FilterableUtil;
 import com.xclib.recyclerview.RecyclerViewBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
@@ -18,6 +20,24 @@ import butterknife.OnClick;
 public class RecyclerViewGridAdapter extends RecyclerViewBaseAdapter<Person> {
     public RecyclerViewGridAdapter(Context context) {
         super(context);
+    }
+
+    @Override
+    protected boolean checkFiltering(Person data, CharSequence constraint) {
+        if (TextUtils.isEmpty(constraint)) {
+            data.setNameFilterEffect(null);
+            return true;
+        }
+
+        int index = data.getName().indexOf(constraint.toString().trim());
+
+        if (index >= 0) {
+            data.setNameFilterEffect(FilterableUtil.translateFilterEffect(getContext(), data.getName(), index, constraint.length()));
+        } else {
+            data.setNameFilterEffect(null);
+        }
+
+        return index >= 0;
     }
 
     @Override
@@ -53,7 +73,11 @@ public class RecyclerViewGridAdapter extends RecyclerViewBaseAdapter<Person> {
         public void render(Person data) {
             this.person = data;
 
-            tvName.setText(data.getName());
+            if (!TextUtils.isEmpty(data.getNameFilterEffect())) {
+                tvName.setText(data.getNameFilterEffect());
+            } else {
+                tvName.setText(data.getName());
+            }
         }
 
         @OnClick({R.id.root_layout})

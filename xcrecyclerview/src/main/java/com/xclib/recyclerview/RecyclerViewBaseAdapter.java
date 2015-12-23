@@ -45,15 +45,14 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
             final ArrayList<T> results = new ArrayList<>();
 
 
-            if (constraint != null) {
-                if (baseItems != null) {
-                    for (T data : baseItems) {
-                        if (checkFiltering(data, constraint))
-                            results.add(data);
-                    }
+            if (baseItems != null) {
+                for (T data : baseItems) {
+                    if (checkFiltering(data, constraint))
+                        results.add(data);
                 }
-                oReturn.values = results;
             }
+            oReturn.values = results;
+
             return oReturn;
         }
 
@@ -72,6 +71,7 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
     };
 
     private Context context;
+
     @SuppressLint("InflateParams")
     public RecyclerViewBaseAdapter(Context context) {
         this.context = context;
@@ -107,10 +107,17 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         if (!TextUtils.isEmpty(mCurrentConstraint)) {
             getFilter().filter(mCurrentConstraint);
         } else {
-            showItems.clear();
-            showItems.addAll(baseItems);
+            checkFiltering(newItem, mCurrentConstraint);
 
-            notifyItemInserted(getHeaderViewsCount() + getCommonItemCount() - 1);
+            if (append) {
+                this.showItems.add(newItem);
+
+                notifyItemInserted(getHeaderViewsCount() + getCommonItemCount() - 1);
+            } else {
+                this.showItems.add(0, newItem);
+
+                notifyItemInserted(getHeaderViewsCount());
+            }
         }
     }
 
@@ -124,10 +131,12 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         if (!TextUtils.isEmpty(mCurrentConstraint)) {
             getFilter().filter(mCurrentConstraint);
         } else {
-            showItems.clear();
+            for (T data : newItems) {
+                checkFiltering(data, mCurrentConstraint);
+            }
 
             if (append) {
-                showItems.addAll(baseItems);
+                showItems.addAll(newItems);
                 notifyItemRangeInserted(getHeaderViewsCount() + getCommonItemCount() - newItems.size(), newItems.size());
             } else {
                 showItems.addAll(0, newItems);
@@ -172,6 +181,8 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
             if (!TextUtils.isEmpty(mCurrentConstraint)) {
                 getFilter().filter(mCurrentConstraint);
             } else {
+                checkFiltering(item, mCurrentConstraint);
+
                 index = showItems.indexOf(item);
 
                 if (index > 0) {
@@ -194,6 +205,8 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         if (!TextUtils.isEmpty(mCurrentConstraint)) {
             getFilter().filter(mCurrentConstraint);
         } else {
+            checkFiltering(item, mCurrentConstraint);
+
             showItems.add(item);
 
             notifyItemInserted(getHeaderViewsCount() + getCommonItemCount() - 1);
@@ -206,6 +219,8 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         if (!TextUtils.isEmpty(mCurrentConstraint)) {
             getFilter().filter(mCurrentConstraint);
         } else {
+            checkFiltering(item, mCurrentConstraint);
+
             showItems.add(index, item);
             notifyItemInserted(getHeaderViewsCount() + index);
         }
@@ -218,6 +233,10 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         if (!TextUtils.isEmpty(mCurrentConstraint)) {
             getFilter().filter(mCurrentConstraint);
         } else {
+            for (T data : dataList) {
+                checkFiltering(data, mCurrentConstraint);
+            }
+
             int oldData = getCommonItemCount();
             showItems.clear();
             notifyItemRangeRemoved(getHeaderViewsCount(), oldData);

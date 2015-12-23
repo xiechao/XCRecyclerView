@@ -24,15 +24,20 @@ public class RecyclerViewAdapter extends RecyclerViewBaseAdapter<Person> {
 
     @Override
     protected boolean checkFiltering(Person data, CharSequence constraint) {
-        int index = data.getName().indexOf(constraint.toString());
+        if (TextUtils.isEmpty(constraint)) {
+            data.setNameFilterEffect(null);
+            return true;
+        }
 
-        if (index > 0) {
+        int index = data.getName().indexOf(constraint.toString().trim());
+
+        if (index >= 0) {
             data.setNameFilterEffect(FilterableUtil.translateFilterEffect(getContext(), data.getName(), index, constraint.length()));
         } else {
             data.setNameFilterEffect(null);
         }
 
-        return index > 0;
+        return index >= 0;
     }
 
     @Override

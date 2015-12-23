@@ -12,29 +12,29 @@ import android.widget.TextView;
 
 import com.xclib.recyclerviewtest.R;
 
-public class ListEmptyView extends LinearLayout {
+public class EmptyView extends LinearLayout {
     private TextView emptyTextView;
 
-    public ListEmptyView(Context context) {
+    public EmptyView(Context context) {
         super(context);
 
         initUI(context);
     }
 
-    public ListEmptyView(Context context, AttributeSet attrs) {
+    public EmptyView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         initUI(context);
     }
 
-    public ListEmptyView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public EmptyView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         initUI(context);
     }
 
     private void initUI(Context context) {
-        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(R.layout.view_list_empty, null);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(R.layout.view_empty, null);
 
         this.addView(view, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 

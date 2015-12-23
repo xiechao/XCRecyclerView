@@ -8,18 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.xclib.recyclerview.RecyclerViewBaseAdapter;
-import com.xclib.recyclerviewtest.adapter.TestRecycleViewAdapter;
+import com.xclib.recyclerviewtest.adapter.RecyclerViewAdapter;
 import com.xclib.recyclerviewtest.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestFragment2 extends HeaderRecyclerFragment {
-    private TestRecycleViewAdapter testRecycleViewAdapter;
+public class ObservableFragment2 extends HeaderRecyclerFragment {
+    private RecyclerViewAdapter recyclerViewAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        testRecycleViewAdapter = new TestRecycleViewAdapter(getContext());
+        recyclerViewAdapter = new RecyclerViewAdapter(getContext());
 
         initData();
 
@@ -29,7 +29,7 @@ public class TestFragment2 extends HeaderRecyclerFragment {
 
     @Override
     protected RecyclerViewBaseAdapter getAdapter() {
-        return testRecycleViewAdapter;
+        return recyclerViewAdapter;
     }
 
     @Override
@@ -45,6 +45,6 @@ public class TestFragment2 extends HeaderRecyclerFragment {
             personList.add(user);
         }
 
-        testRecycleViewAdapter.resetData(personList);
+        recyclerViewAdapter.resetData(personList);
     }
 }

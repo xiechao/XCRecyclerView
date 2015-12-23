@@ -6,12 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.xclib.recyclerviewtest.activities.HeaderSectionActivity;
-import com.xclib.recyclerviewtest.activities.HeaderSectionSwipeActivity;
-import com.xclib.recyclerviewtest.activities.ManagerGridLayoutActivity;
-import com.xclib.recyclerviewtest.activities.ManagerLinearLayoutActivity;
-import com.xclib.recyclerviewtest.activities.ManagerLinearLayoutSwipeActivity;
-import com.xclib.recyclerviewtest.activities.TestObservableScrollActivity;
+import com.xclib.recyclerviewtest.activities.PinnedSectionActivity;
+import com.xclib.recyclerviewtest.activities.PinnedSectionSwipeActivity;
+import com.xclib.recyclerviewtest.activities.GridLayoutManagerActivity;
+import com.xclib.recyclerviewtest.activities.LinearLayoutManagerActivity;
+import com.xclib.recyclerviewtest.activities.LinearLayoutManagerSwipeActivity;
+import com.xclib.recyclerviewtest.activities.ObservableRecyclerViewActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -40,42 +40,42 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick({R.id.btn_linear_layout_manager})
     public void onClickLinearLayout(View view) {
-        Intent intent = new Intent(this, ManagerLinearLayoutActivity.class);
+        Intent intent = new Intent(this, LinearLayoutManagerActivity.class);
 
         startActivity(intent);
     }
 
     @OnClick({R.id.btn_relative_layout_manager})
     public void onClickRelativeLayout(View view) {
-        Intent intent = new Intent(this, ManagerGridLayoutActivity.class);
+        Intent intent = new Intent(this, GridLayoutManagerActivity.class);
 
         startActivity(intent);
     }
 
     @OnClick({R.id.btn_header_section})
     public void onClickHeaderSection(View view) {
-        Intent intent = new Intent(this, HeaderSectionActivity.class);
+        Intent intent = new Intent(this, PinnedSectionActivity.class);
 
         startActivity(intent);
     }
 
     @OnClick({R.id.btn_linear_layout_swipe_manager})
     public void onClickLinearLayoutSwipe(View view) {
-        Intent intent = new Intent(this, ManagerLinearLayoutSwipeActivity.class);
+        Intent intent = new Intent(this, LinearLayoutManagerSwipeActivity.class);
 
         startActivity(intent);
     }
 
     @OnClick({R.id.btn_header_section_swipe})
     public void onClickHeaderSectionSwipe(View view) {
-        Intent intent = new Intent(this, HeaderSectionSwipeActivity.class);
+        Intent intent = new Intent(this, PinnedSectionSwipeActivity.class);
 
         startActivity(intent);
     }
 
     @OnClick({R.id.btn_observable_scroll})
     public void onClickObservableScroll(View view) {
-        Intent intent = new Intent(this, TestObservableScrollActivity.class);
+        Intent intent = new Intent(this, ObservableRecyclerViewActivity.class);
 
         startActivity(intent);
     }

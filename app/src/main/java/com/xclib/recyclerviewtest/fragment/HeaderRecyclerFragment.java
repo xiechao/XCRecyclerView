@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerview.RecyclerViewBaseAdapter;
 import com.xclib.recyclerviewtest.R;
-import com.xclib.recyclerviewtest.views.ListEmptyView;
+import com.xclib.recyclerviewtest.views.EmptyView;
 
 public abstract class HeaderRecyclerFragment extends Fragment {
 
@@ -31,7 +31,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
     };
     @SuppressWarnings("unused")
     protected XCRecycleView xcRecycleView;
-    protected ListEmptyView listEmptyView;
+    protected EmptyView emptyView;
     private LinearLayout headerView;
     private RecyclerViewBaseAdapter baseAdapter;
     private RecyclerViewBaseAdapter adapter;
@@ -82,10 +82,10 @@ public abstract class HeaderRecyclerFragment extends Fragment {
     @SuppressLint("CutPasteId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_list_view, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_recycler_view_common, container, false);
         xcRecycleView = (XCRecycleView) rootView.findViewById(R.id.xc_recycler_view);
 
-        listEmptyView = new ListEmptyView(getContext());
+        emptyView = new EmptyView(getContext());
 
         headerView = new LinearLayout(getContext());
 
@@ -97,7 +97,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         }
 
         baseAdapter = getAdapter();
-        adapter = new HeaderListAdapter(baseAdapter);
+        adapter = new HeaderListAdapter();
 
         registerAdapterDataObserver();
 
@@ -142,17 +142,14 @@ public abstract class HeaderRecyclerFragment extends Fragment {
     public class HeaderListAdapter extends RecyclerViewBaseAdapter {
         private static final int VIEW_TYPE_OBSERVABLE_SCROLL_HEADER = 5000;
         private static final int VIEW_TYPE_EMPTY_VIEW = VIEW_TYPE_OBSERVABLE_SCROLL_HEADER + 1;
-        final RecyclerViewBaseAdapter mListAdapter;
 
-
-        private HeaderListAdapter(RecyclerViewBaseAdapter listAdapter) {
+        private HeaderListAdapter() {
             super(getContext());
-            mListAdapter = listAdapter;
         }
 
         @Override
         public int getItemCount() {
-            return 1 + mListAdapter.getItemCount() + (mListAdapter.getItemCount() == 0 ? 1 : 0);
+            return 1 + baseAdapter.getItemCount() + (baseAdapter.getItemCount() == 0 ? 1 : 0);
         }
 
 
@@ -163,7 +160,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
             } else if (isEmptyViewType(position)) {
                 return VIEW_TYPE_EMPTY_VIEW;
             } else {
-                return mListAdapter.getItemViewType(offsetPosition(position));
+                return baseAdapter.getItemViewType(offsetPosition(position));
             }
         }
 
@@ -172,9 +169,9 @@ public abstract class HeaderRecyclerFragment extends Fragment {
             if (viewType == VIEW_TYPE_OBSERVABLE_SCROLL_HEADER) {
                 return new ObservableScrollHeaderViewHolder(headerView);
             } else if (viewType == VIEW_TYPE_EMPTY_VIEW) {
-                return new EmptyViewHolder(listEmptyView);
+                return new EmptyViewHolder(emptyView);
             } else {
-                return mListAdapter.onCreateViewHolder(parent, viewType);
+                return baseAdapter.onCreateViewHolder(parent, viewType);
             }
         }
 
@@ -191,7 +188,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         @Override
         public Object getItem(int position) {
             if (!isHeaderType(position) && !isEmptyViewType(position)) {
-                return mListAdapter.getItem(offsetPosition(position));
+                return baseAdapter.getItem(offsetPosition(position));
             }
             return null;
         }
@@ -199,7 +196,7 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         @Override
         public long getItemId(int position) {
             if (!isHeaderType(position) && !isEmptyViewType(position)) {
-                return mListAdapter.getItemId(offsetPosition(position));
+                return baseAdapter.getItemId(offsetPosition(position));
             }
             return 0;
         }
@@ -209,11 +206,11 @@ public abstract class HeaderRecyclerFragment extends Fragment {
         }
 
         public boolean isEmptyViewType(int position) {
-            return position == 1 && mListAdapter.getItemCount() == 0;
+            return position == 1 && baseAdapter.getItemCount() == 0;
         }
 
         public int offsetPosition(int position) {
-            return position - (mListAdapter.getItemCount() == 0 ? 1 : 0) - 1;
+            return position - (baseAdapter.getItemCount() == 0 ? 1 : 0) - 1;
         }
 
         private class ObservableScrollHeaderViewHolder extends ViewHolderBase {

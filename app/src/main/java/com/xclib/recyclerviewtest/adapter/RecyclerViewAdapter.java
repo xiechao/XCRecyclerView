@@ -11,9 +11,9 @@ import com.xclib.recyclerviewtest.model.Person;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TestRecycleViewAdapter extends RecyclerViewBaseAdapter<Person> {
+public class RecyclerViewAdapter extends RecyclerViewBaseAdapter<Person> {
 
-    public TestRecycleViewAdapter(Context context) {
+    public RecyclerViewAdapter(Context context) {
         super(context);
     }
 
@@ -24,7 +24,7 @@ public class TestRecycleViewAdapter extends RecyclerViewBaseAdapter<Person> {
 
     @Override
     protected int getCommonViewResourceId(int viewType) {
-        return R.layout.item_layout_user;
+        return R.layout.item_layout_common;
     }
 
     @Override

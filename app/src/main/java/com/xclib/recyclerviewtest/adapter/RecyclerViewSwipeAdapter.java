@@ -6,16 +6,21 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.xclib.recyclerview.RecyclerViewHeaderSwipeBaseAdapter;
+import com.xclib.recyclerview.RecyclerViewSwipeBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TestHeaderSectionSwipeAdapter extends RecyclerViewHeaderSwipeBaseAdapter<Person> {
-    public TestHeaderSectionSwipeAdapter(Context context) {
+public class RecyclerViewSwipeAdapter extends RecyclerViewSwipeBaseAdapter<Person> {
+
+    public RecyclerViewSwipeAdapter(Context context, List<Person> personList) {
         super(context);
+
+        resetData(personList);
     }
 
     @Override
@@ -34,43 +39,16 @@ public class TestHeaderSectionSwipeAdapter extends RecyclerViewHeaderSwipeBaseAd
     }
 
     @Override
-    protected int getHeaderViewResourceId() {
-        return R.layout.item_section_header;
-    }
-
-
-    @Override
     protected int getCommonViewResourceId(int viewType) {
-        return R.layout.item_layout_swip_user;
-    }
-
-    @Override
-    protected ViewHolderBase onHeaderCreateViewHolder(View view) {
-        return new HeaderViewHolder(view);
+        return R.layout.item_layout_swip_common;
     }
 
     @Override
     protected ViewHolderBase onCommonCreateViewHolder(View view) {
-        return new ViewHolder(view);
+        return new TestViewHolder(view);
     }
 
-    public class HeaderViewHolder extends ViewHolderBase {
-        @Bind(R.id.title)
-        TextView title;
-
-        public HeaderViewHolder(View itemView) {
-            super(itemView);
-
-            ButterKnife.bind(this, itemView);
-        }
-
-        @Override
-        public void render(Person data) {
-            title.setText(data.getSectionHeader());
-        }
-    }
-
-    public class ViewHolder extends ViewHolderBase {
+    public class TestViewHolder extends ViewHolderBase {
         @Bind(R.id.btn_delete)
         Button btnDelete;
         @Bind(R.id.tv_name)
@@ -78,8 +56,7 @@ public class TestHeaderSectionSwipeAdapter extends RecyclerViewHeaderSwipeBaseAd
         @Bind(R.id.swipe_layout)
         SwipeLayout swipeLayout;
 
-
-        public ViewHolder(View itemView) {
+        public TestViewHolder(View itemView) {
             super(itemView);
 
             ButterKnife.bind(this, itemView);

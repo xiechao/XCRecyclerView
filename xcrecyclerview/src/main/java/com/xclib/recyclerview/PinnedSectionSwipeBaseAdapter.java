@@ -11,10 +11,10 @@ import com.daimajia.swipe.util.Attributes;
 
 import java.util.List;
 
-public abstract class RecyclerViewHeaderSwipeBaseAdapter<T extends ISectionData> extends RecyclerViewHeaderBaseAdapter<T> implements SwipeItemMangerInterface, SwipeAdapterInterface {
+public abstract class PinnedSectionSwipeBaseAdapter<T extends ISectionData> extends PinnedSectionBaseAdapter<T> implements SwipeItemMangerInterface, SwipeAdapterInterface {
     private final SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
 
-    protected RecyclerViewHeaderSwipeBaseAdapter(Context context) {
+    protected PinnedSectionSwipeBaseAdapter(Context context) {
         super(context);
     }
 

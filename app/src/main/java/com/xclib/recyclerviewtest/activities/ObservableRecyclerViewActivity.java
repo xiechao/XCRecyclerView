@@ -13,14 +13,14 @@ import android.widget.TextView;
 
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.fragment.HeaderRecyclerFragment;
-import com.xclib.recyclerviewtest.fragment.TestFragment1;
-import com.xclib.recyclerviewtest.fragment.TestFragment2;
-import com.xclib.recyclerviewtest.fragment.TestFragment3;
+import com.xclib.recyclerviewtest.fragment.ObservableFragment1;
+import com.xclib.recyclerviewtest.fragment.ObservableFragment2;
+import com.xclib.recyclerviewtest.fragment.ObservableFragment3;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TestObservableScrollActivity extends AppCompatActivity implements HeaderRecyclerFragment.HeaderViewProvider {
+public class ObservableRecyclerViewActivity extends AppCompatActivity implements HeaderRecyclerFragment.HeaderViewProvider {
 
     private static final int TAB_COUNT = 3;
     private static final String[] tabTitles = new String[]{"Fragment1", "Fragment2", "Fragment3"};
@@ -38,7 +38,7 @@ public class TestObservableScrollActivity extends AppCompatActivity implements H
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_observable_scroll);
+        setContentView(R.layout.activity_observable_recycler_view);
 
         ButterKnife.bind(this);
 
@@ -82,11 +82,11 @@ public class TestObservableScrollActivity extends AppCompatActivity implements H
 
         Fragment fragment;
         if (position == 0) {
-            fragment = new TestFragment1();
+            fragment = new ObservableFragment1();
         } else if (position == 1) {
-            fragment = new TestFragment2();
+            fragment = new ObservableFragment2();
         } else {
-            fragment = new TestFragment3();
+            fragment = new ObservableFragment3();
         }
 
         Bundle args = new Bundle();

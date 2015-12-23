@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class RecyclerViewHeaderBaseAdapter<T extends ISectionData> extends RecyclerViewBaseAdapter<T> implements SectionIndexer {
+public abstract class PinnedSectionBaseAdapter<T extends ISectionData> extends RecyclerViewBaseAdapter<T> implements SectionIndexer {
     private final StickyHeadersAdapter<ViewHolderBase> stickyHeadersAdapter = new StickyHeadersAdapter<ViewHolderBase>() {
         @Override
         public ViewHolderBase onCreateViewHolder(ViewGroup parent) {
@@ -33,7 +33,7 @@ public abstract class RecyclerViewHeaderBaseAdapter<T extends ISectionData> exte
     };
     private final ArrayList<T> sectionList = new ArrayList<>();
 
-    protected RecyclerViewHeaderBaseAdapter(Context context) {
+    protected PinnedSectionBaseAdapter(Context context) {
         super(context);
 
         setHasStableIds(true);

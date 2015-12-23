@@ -3,17 +3,14 @@ package com.xclib.recyclerviewtest.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.eowise.recyclerview.stickyheaders.OnHeaderClickListener;
+import com.daimajia.swipe.util.Attributes;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersBuilder;
 import com.eowise.recyclerview.stickyheaders.StickyHeadersItemDecoration;
-import com.xclib.recyclerview.GroupSectionTitleIndicator;
+import com.xclib.recyclerview.PinnedSectionTitleIndicator;
 import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerviewtest.R;
-import com.xclib.recyclerviewtest.adapter.TestHeaderSectionAdapter;
+import com.xclib.recyclerviewtest.adapter.PinnedSectionSwipeAdapter;
 import com.xclib.recyclerviewtest.model.Person;
 
 import java.util.ArrayList;
@@ -23,7 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import xyz.danoz.recyclerviewfastscroller.vertical.VerticalRecyclerViewFastScroller;
 
-public class HeaderSectionActivity extends AppCompatActivity {
+public class PinnedSectionSwipeActivity extends AppCompatActivity {
 
 
     @Bind(R.id.recycler_view)
@@ -31,12 +28,12 @@ public class HeaderSectionActivity extends AppCompatActivity {
     @Bind(R.id.fast_scroller)
     VerticalRecyclerViewFastScroller fastScroller;
     @Bind(R.id.fast_scroller_section_title_indicator)
-    GroupSectionTitleIndicator fastScrollerSectionTitleIndicator;
+    PinnedSectionTitleIndicator fastScrollerSectionTitleIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_header_section);
+        setContentView(R.layout.activity_pinned_section);
         ButterKnife.bind(this);
 
         // Connect the recycler to the scroller (to let the scroller scroll the list)
@@ -48,6 +45,9 @@ public class HeaderSectionActivity extends AppCompatActivity {
         // Connect the section indicator to the scroller
         fastScroller.setSectionIndicator(fastScrollerSectionTitleIndicator);
 
+//        setRecyclerViewLayoutManager(recyclerView);
+
+
         String[] personInfos = this.getResources().getStringArray(R.array.person_info);
 
         List<Person> personList = new ArrayList<>();
@@ -55,25 +55,26 @@ public class HeaderSectionActivity extends AppCompatActivity {
             personList.add(new Person(personName));
         }
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(HeaderSectionActivity.this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(PinnedSectionSwipeActivity.this, LinearLayoutManager.VERTICAL, false));
 
-        TestHeaderSectionAdapter testHeaderSectionAdapter = new TestHeaderSectionAdapter(this);
-        testHeaderSectionAdapter.resetData(personList);
+        PinnedSectionSwipeAdapter pinnedSectionSwipeAdapter = new PinnedSectionSwipeAdapter(this);
+        pinnedSectionSwipeAdapter.resetData(personList);
+        pinnedSectionSwipeAdapter.setMode(Attributes.Mode.Single);
 
         StickyHeadersItemDecoration top = new StickyHeadersBuilder()
-                .setAdapter(testHeaderSectionAdapter)
+                .setAdapter(pinnedSectionSwipeAdapter)
                 .setRecyclerView(recyclerView)
-                .setStickyHeadersAdapter(testHeaderSectionAdapter.getStickyHeadersAdapter())
-                .setOnHeaderClickListener(new OnHeaderClickListener() {
-                    @Override
-                    public void onHeaderClick(View header, long headerId) {
-                        TextView text = (TextView) header.findViewById(R.id.title);
-                        Toast.makeText(getApplicationContext(), "Click on " + text.getText(), Toast.LENGTH_SHORT).show();
-                    }
-                })
+                .setStickyHeadersAdapter(pinnedSectionSwipeAdapter.getStickyHeadersAdapter())
+//                .setOnHeaderClickListener(new OnHeaderClickListener() {
+//                    @Override
+//                    public void onHeaderClick(View header, long headerId) {
+//                        TextView text = (TextView) header.findViewById(R.id.title);
+//                        Toast.makeText(getApplicationContext(), "Click on " + text.getText(), Toast.LENGTH_SHORT).show();
+//                    }
+//                })
                 .build();
 
-        recyclerView.setAdapter(testHeaderSectionAdapter);
+        recyclerView.setAdapter(pinnedSectionSwipeAdapter);
         recyclerView.addItemDecoration(top);
     }
 

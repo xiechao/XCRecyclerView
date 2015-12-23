@@ -10,7 +10,7 @@ import android.view.View;
 import com.daimajia.swipe.util.Attributes;
 import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerviewtest.R;
-import com.xclib.recyclerviewtest.adapter.TestRecycleViewSwipeAdapter;
+import com.xclib.recyclerviewtest.adapter.RecyclerViewSwipeAdapter;
 import com.xclib.recyclerviewtest.model.Person;
 
 import java.util.ArrayList;
@@ -19,13 +19,13 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ManagerLinearLayoutSwipeActivity extends AppCompatActivity {
+public class LinearLayoutManagerSwipeActivity extends AppCompatActivity {
 
     @Bind(R.id.recycleView)
     XCRecycleView recycleView;
 
 
-    private TestRecycleViewSwipeAdapter testRecycleViewAdapter;
+    private RecyclerViewSwipeAdapter testRecycleViewAdapter;
     private final XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
         @Override
         public void onLoadMore() {
@@ -41,7 +41,7 @@ public class ManagerLinearLayoutSwipeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_view_layout);
+        setContentView(R.layout.activity_recycler_view_common);
 
         ButterKnife.bind(this);
 
@@ -68,7 +68,7 @@ public class ManagerLinearLayoutSwipeActivity extends AppCompatActivity {
             personList.add(user);
         }
 
-        testRecycleViewAdapter = new TestRecycleViewSwipeAdapter(this, personList);
+        testRecycleViewAdapter = new RecyclerViewSwipeAdapter(this, personList);
         testRecycleViewAdapter.setMode(Attributes.Mode.Single);
 
         recycleView.setAdapter(testRecycleViewAdapter);

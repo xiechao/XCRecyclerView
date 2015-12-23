@@ -44,10 +44,10 @@ public class ObservableFragment1 extends HeaderRecyclerFragment {
     @SuppressWarnings("EmptyMethod")
     private void initData() {
         List<Person> personList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            Person user = new Person("Fragment1 Name " + i);
-            personList.add(user);
-        }
+//        for (int i = 0; i < 30; i++) {
+//            Person user = new Person("Fragment1 Name " + i);
+//            personList.add(user);
+//        }
 
         recyclerViewAdapter.resetData(personList);
     }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.daimajia.swipe.util.Attributes;
+import com.xclib.recyclerview.EmptyView;
 import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.adapter.RecyclerViewSwipeAdapter;
@@ -21,9 +22,10 @@ import butterknife.ButterKnife;
 
 public class LinearLayoutManagerSwipeActivity extends AppCompatActivity {
 
-    @Bind(R.id.recycleView)
+    @Bind(R.id.recycle_view)
     XCRecycleView recycleView;
-
+    @Bind(R.id.recycle_view_empty_view)
+    EmptyView recycleViewEmptyView;
 
     private RecyclerViewSwipeAdapter testRecycleViewAdapter;
     private final XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
@@ -44,6 +46,10 @@ public class LinearLayoutManagerSwipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recycler_view_common);
 
         ButterKnife.bind(this);
+
+        recycleViewEmptyView.setText("empty data!");
+
+        recycleView.setEmptyView(recycleViewEmptyView);
 
         recycleView.setLayoutManager(new LinearLayoutManager(this));
 

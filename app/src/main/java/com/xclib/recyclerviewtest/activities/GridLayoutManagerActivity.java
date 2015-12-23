@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.xclib.recyclerview.EmptyView;
 import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.adapter.RecyclerViewAdapter;
@@ -19,10 +20,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class GridLayoutManagerActivity extends AppCompatActivity {
-
-    @Bind(R.id.recycleView)
+    @Bind(R.id.recycle_view)
     XCRecycleView recycleView;
-
+    @Bind(R.id.recycle_view_empty_view)
+    EmptyView recycleViewEmptyView;
 
     private RecyclerViewAdapter recyclerViewAdapter;
     private final XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
@@ -43,6 +44,10 @@ public class GridLayoutManagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recycler_view_common);
 
         ButterKnife.bind(this);
+
+        recycleViewEmptyView.setText("empty data!");
+
+        recycleView.setEmptyView(recycleViewEmptyView);
 
         recycleView.setLayoutManager(new GridLayoutManager(this, 3));
 

@@ -139,7 +139,11 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
 
     @Override
     public int getItemCount() {
-        return headerViewList.size() + dataArrayList.size() + footerViewList.size() + (mIsLoading ? 1 : 0);
+        if (dataArrayList.size() > 0) {
+            return headerViewList.size() + dataArrayList.size() + footerViewList.size() + (mIsLoading ? 1 : 0);
+        } else {
+            return 0;
+        }
     }
 
     public int getCommonItemCount() {

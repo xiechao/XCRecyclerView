@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.xclib.recyclerview.EmptyView;
 import com.xclib.recyclerview.XCRecycleView;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.adapter.RecyclerViewAdapter;
@@ -20,9 +21,10 @@ import butterknife.ButterKnife;
 
 public class LinearLayoutManagerActivity extends AppCompatActivity {
 
-    @Bind(R.id.recycleView)
+    @Bind(R.id.recycle_view)
     XCRecycleView recycleView;
-
+    @Bind(R.id.recycle_view_empty_view)
+    EmptyView recycleViewEmptyView;
 
     private RecyclerViewAdapter recyclerViewAdapter;
     private final XCRecycleView.OnLoadMoreListener onLoadMoreListener = new XCRecycleView.OnLoadMoreListener() {
@@ -44,6 +46,10 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        recycleViewEmptyView.setText("empty data!");
+
+        recycleView.setEmptyView(recycleViewEmptyView);
+
         recycleView.setLayoutManager(new LinearLayoutManager(this));
 
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -62,10 +68,10 @@ public class LinearLayoutManagerActivity extends AppCompatActivity {
 
 
         List<Person> personList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            Person user = new Person("Name " + i);
-            personList.add(user);
-        }
+//        for (int i = 0; i < 30; i++) {
+//            Person user = new Person("Name " + i);
+//            personList.add(user);
+//        }
 
         recyclerViewAdapter = new RecyclerViewAdapter(this);
         recyclerViewAdapter.resetData(personList);

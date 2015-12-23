@@ -1,7 +1,7 @@
 package com.xclib.recyclerviewtest.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +34,7 @@ public class ObservableFragment3 extends HeaderRecyclerFragment {
 
     @Override
     protected RecyclerView.LayoutManager getLayoutManager() {
-        return new LinearLayoutManager(getContext());
+        return new GridLayoutManager(getContext(), 3);
     }
 
     private void initData() {

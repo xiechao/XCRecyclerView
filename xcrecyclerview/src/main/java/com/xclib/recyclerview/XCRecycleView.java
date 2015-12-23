@@ -30,6 +30,7 @@ public class XCRecycleView extends RecyclerView {
     };
     private final ArrayList<View> headerViewArrayList = new ArrayList<>();
     private final ArrayList<View> footerViewArrayList = new ArrayList<>();
+    private EmptyView emptyVIew;
 
     public XCRecycleView(Context context) {
         super(context);
@@ -159,10 +160,63 @@ public class XCRecycleView extends RecyclerView {
         super.setAdapter(adapter);
 
         if (getAdapter() instanceof RecyclerViewBaseAdapter) {
-            RecyclerViewBaseAdapter RecyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
+            RecyclerViewBaseAdapter recyclerViewBaseAdapter = (RecyclerViewBaseAdapter) getAdapter();
 
-            RecyclerViewBaseAdapter.resetHeaderViewsCount(headerViewArrayList);
-            RecyclerViewBaseAdapter.resetFooterViewsCount(footerViewArrayList);
+            recyclerViewBaseAdapter.resetHeaderViewsCount(headerViewArrayList);
+            recyclerViewBaseAdapter.resetFooterViewsCount(footerViewArrayList);
+        }
+
+        adapter.registerAdapterDataObserver(adapterDataObserver);
+    }
+
+    private AdapterDataObserver adapterDataObserver = new AdapterDataObserver() {
+        @Override
+        public void onChanged() {
+            super.onChanged();
+
+            doRefreshEmptyView();
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+            super.onItemRangeChanged(positionStart, itemCount);
+
+            doRefreshEmptyView();
+        }
+
+        @Override
+        public void onItemRangeInserted(int positionStart, int itemCount) {
+            super.onItemRangeInserted(positionStart, itemCount);
+
+            doRefreshEmptyView();
+        }
+
+        @Override
+        public void onItemRangeRemoved(int positionStart, int itemCount) {
+            super.onItemRangeRemoved(positionStart, itemCount);
+
+            doRefreshEmptyView();
+        }
+
+        @Override
+        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+            super.onItemRangeMoved(fromPosition, toPosition, itemCount);
+
+            doRefreshEmptyView();
+        }
+    };
+
+    private void doRefreshEmptyView() {
+        if (emptyVIew == null) {
+            return;
+        }
+
+        RecyclerView.Adapter adapter = getAdapter();
+
+        if (adapter == null || adapter.getItemCount() == 0) {
+            emptyVIew.setIsShow(true);
+        } else {
+            emptyVIew.setIsShow(false);
         }
     }
 
@@ -195,6 +249,10 @@ public class XCRecycleView extends RecyclerView {
                 }
             });
         }
+    }
+
+    public void setEmptyView(EmptyView emptyVIew) {
+        this.emptyVIew = emptyVIew;
     }
 
     public interface OnLoadMoreListener {

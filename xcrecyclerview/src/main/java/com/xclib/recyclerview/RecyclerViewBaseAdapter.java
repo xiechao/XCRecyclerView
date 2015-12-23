@@ -107,14 +107,14 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
                 viewItem = LayoutInflater.from(parent.getContext()).inflate(getCommonViewResourceId(viewType), parent, false);
             }
 
-            return onCommonCreateViewHolder(viewItem);
+            return onCommonCreateViewHolder(parent, viewItem, viewType);
         }
     }
 
 
     protected abstract int getCommonViewResourceId(int viewType);
 
-    protected abstract ViewHolderBase onCommonCreateViewHolder(View view);
+    protected abstract ViewHolderBase onCommonCreateViewHolder(ViewGroup parent, View viewItem, int viewType);
 
     @Override
     @SuppressWarnings("unchecked")

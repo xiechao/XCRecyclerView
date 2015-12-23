@@ -23,7 +23,7 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
 
     @Override
     public int getItemCount() {
-        return 1 + baseAdapter.getItemCount() + (baseAdapter.getItemCount() == 0 ? 1 : 0);
+        return super.getItemCount() + baseAdapter.getItemCount() + 1 + (baseAdapter.getItemCount() == 0 ? 1 : 0);
     }
 
 
@@ -38,17 +38,6 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
         }
     }
 
-    @Override
-    public ViewHolderBase onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == VIEW_TYPE_OBSERVABLE_SCROLL_HEADER) {
-            return new ObservableScrollHeaderViewHolder(headerView);
-        } else if (viewType == VIEW_TYPE_EMPTY_VIEW) {
-            return new EmptyViewHolder(emptyView);
-        } else {
-            return baseAdapter.onCreateViewHolder(parent, viewType);
-        }
-    }
-
     boolean isSupportSeparateSpan(int position) {
         return !(isHeaderType(position) || isEmptyViewType(position)) && baseAdapter.isSupportSeparateSpan(offsetPosition(position));
     }
@@ -59,8 +48,14 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
     }
 
     @Override
-    protected ViewHolderBase onCommonCreateViewHolder(View view) {
-        return null;
+    protected ViewHolderBase onCommonCreateViewHolder(ViewGroup parent, View viewItem, int viewType) {
+        if (viewType == VIEW_TYPE_OBSERVABLE_SCROLL_HEADER) {
+            return new ObservableScrollHeaderViewHolder(headerView);
+        } else if (viewType == VIEW_TYPE_EMPTY_VIEW) {
+            return new EmptyViewHolder(emptyView);
+        } else {
+            return baseAdapter.onCreateViewHolder(parent, viewType);
+        }
     }
 
     @Override
@@ -84,11 +79,11 @@ public class HeaderRecyclerViewAdapter extends RecyclerViewBaseAdapter {
     }
 
     public boolean isEmptyViewType(int position) {
-        return position == 1 && baseAdapter.getItemCount() == 0;
+        return position == (1 + getHeaderViewsCount()) && baseAdapter.getItemCount() == 0;
     }
 
     public int offsetPosition(int position) {
-        return position - (baseAdapter.getItemCount() == 0 ? 1 : 0) - 1;
+        return position - (baseAdapter.getItemCount() == 0 ? 1 : 0) - getHeaderViewsCount() - 1;
     }
 
     private class ObservableScrollHeaderViewHolder extends ViewHolderBase {

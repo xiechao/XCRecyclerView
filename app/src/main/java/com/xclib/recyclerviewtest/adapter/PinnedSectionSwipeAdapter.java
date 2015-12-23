@@ -2,6 +2,7 @@ package com.xclib.recyclerviewtest.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -50,8 +51,8 @@ public class PinnedSectionSwipeAdapter extends PinnedSectionSwipeBaseAdapter<Per
     }
 
     @Override
-    protected ViewHolderBase onCommonCreateViewHolder(View view) {
-        return new ViewHolder(view);
+    protected ViewHolderBase onCommonCreateViewHolder(ViewGroup parent, View viewItem, int viewType) {
+        return new ViewHolder(viewItem);
     }
 
     public class HeaderViewHolder extends ViewHolderBase {

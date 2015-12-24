@@ -543,12 +543,12 @@ public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter<Re
         notifyItemRangeInserted(getHeaderViewsCount() + getCommonItemCount(), getFooterViewsCount());
     }
 
-    public abstract class ViewHolderBase extends RecyclerView.ViewHolder {
+    public abstract class ViewHolderBase <T1> extends RecyclerView.ViewHolder {
         public ViewHolderBase(View itemView) {
             super(itemView);
         }
 
-        public abstract void render(T data);
+        public abstract void render(T1 data);
     }
 
     private class HeaderViewHolder extends ViewHolderBase {

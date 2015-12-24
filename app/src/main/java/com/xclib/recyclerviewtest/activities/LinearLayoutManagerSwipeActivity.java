@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -113,7 +112,7 @@ public class LinearLayoutManagerSwipeActivity extends BaseActivity {
 
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, recyclerView, header);
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, recyclerView, header) && !recyclerViewSwipeAdapter.isOpening(recyclerView);
             }
         });
 

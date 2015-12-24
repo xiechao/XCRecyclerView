@@ -47,7 +47,7 @@ public class PinnedSectionAdapter extends PinnedSectionBaseAdapter<Person> {
         return new ViewHolder(viewItem);
     }
 
-    public class HeaderViewHolder extends ViewHolderBase {
+    public class HeaderViewHolder extends ViewHolderBase<Person> {
         @Bind(R.id.title)
         TextView title;
 
@@ -63,7 +63,7 @@ public class PinnedSectionAdapter extends PinnedSectionBaseAdapter<Person> {
         }
     }
 
-    public class ViewHolder extends ViewHolderBase {
+    public class ViewHolder extends ViewHolderBase<Person> {
         @Bind(R.id.tv_name)
         TextView tvName;
         @Bind(R.id.root_layout)

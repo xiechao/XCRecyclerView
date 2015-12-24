@@ -49,7 +49,7 @@ public class RecyclerViewSwipeAdapter extends RecyclerViewSwipeBaseAdapter<Perso
         return new TestViewHolder(viewItem);
     }
 
-    public class TestViewHolder extends ViewHolderBase {
+    public class TestViewHolder extends ViewHolderBase<Person> {
         @Bind(R.id.btn_delete)
         Button btnDelete;
         @Bind(R.id.tv_name)

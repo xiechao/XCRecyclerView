@@ -7,8 +7,7 @@
         android:id="@+id/xc_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false" />
+        android:scrollbars="vertical" />
 
 </LinearLayout>
 

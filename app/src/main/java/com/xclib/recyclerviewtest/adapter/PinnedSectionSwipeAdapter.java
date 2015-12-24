@@ -59,7 +59,7 @@ public class PinnedSectionSwipeAdapter extends PinnedSectionSwipeBaseAdapter<Per
         return new ViewHolder(viewItem);
     }
 
-    public class HeaderViewHolder extends ViewHolderBase {
+    public class HeaderViewHolder extends ViewHolderBase<Person> {
         @Bind(R.id.title)
         TextView title;
 
@@ -75,7 +75,7 @@ public class PinnedSectionSwipeAdapter extends PinnedSectionSwipeBaseAdapter<Per
         }
     }
 
-    public class ViewHolder extends ViewHolderBase {
+    public class ViewHolder extends ViewHolderBase<Person> {
         @Bind(R.id.btn_delete)
         Button btnDelete;
         @Bind(R.id.tv_name)

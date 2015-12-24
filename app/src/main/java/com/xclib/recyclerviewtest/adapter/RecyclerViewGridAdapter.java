@@ -55,7 +55,7 @@ public class RecyclerViewGridAdapter extends RecyclerViewBaseAdapter<Person> {
         return new TestViewHolder(viewItem);
     }
 
-    public class TestViewHolder extends ViewHolderBase {
+    public class TestViewHolder extends ViewHolderBase<Person> {
         @Bind(R.id.tv_name)
         TextView tvName;
         @Bind(R.id.root_layout)

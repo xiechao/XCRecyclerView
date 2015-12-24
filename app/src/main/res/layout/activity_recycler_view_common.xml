@@ -31,7 +31,9 @@
             <com.xclib.recyclerview.XCRecycleView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                />
 
             <com.xclib.recyclerview.EmptyView
                 android:id="@+id/recycler_view_empty_view"

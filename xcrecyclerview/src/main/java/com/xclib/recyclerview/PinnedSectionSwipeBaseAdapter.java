@@ -1,6 +1,7 @@
 package com.xclib.recyclerview;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.daimajia.swipe.SwipeLayout;
@@ -82,5 +83,23 @@ public abstract class PinnedSectionSwipeBaseAdapter<T extends ISectionData> exte
         if (isSupportSwipe(position)) {
             mItemManger.bindView(view, position);
         }
+    }
+
+    public boolean isOpening(RecyclerView recyclerView) {
+        for (int position = 0; position < recyclerView.getChildCount(); position++) {
+            View childView = recyclerView.getChildAt(position);
+
+            if (childView != null) {
+                SwipeLayout swipeLayout = (SwipeLayout) childView.findViewById(getSwipeLayoutResourceId(position));
+
+                if (swipeLayout != null) {
+                    if (swipeLayout.getOpenStatus() == SwipeLayout.Status.Middle) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }

@@ -50,33 +50,6 @@ public abstract class PinnedSectionBaseAdapter<T extends ISectionData> extends R
 
     @Override
     public void setItems(List<T> dataList) {
-
-        Collections.sort(dataList, new Comparator<T>() {
-            @Override
-            public int compare(T lhs, T rhs) {
-                String lhsSortKey = lhs.getSortKey();
-                String rhsSortKey = rhs.getSortKey();
-
-                if (!TextUtils.isEmpty(lhsSortKey)) {
-                    lhsSortKey = lhsSortKey.trim().toUpperCase();
-                }
-
-                if (lhsSortKey == null) {
-                    lhsSortKey = "";
-                }
-
-                if (!TextUtils.isEmpty(rhsSortKey)) {
-                    rhsSortKey = rhsSortKey.trim().toUpperCase();
-                }
-
-                if (rhsSortKey == null) {
-                    rhsSortKey = "";
-                }
-
-                return lhsSortKey.compareTo(rhsSortKey);
-            }
-        });
-
         sectionList.clear();
         long sectionHeaderId = 0;
         for (T data : dataList) {

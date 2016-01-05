@@ -1,6 +1,7 @@
 package com.xclib.recyclerviewtest.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -11,6 +12,10 @@ import com.xclib.recyclerview.PinnedSectionBaseAdapter;
 import com.xclib.recyclerviewtest.R;
 import com.xclib.recyclerviewtest.model.Person;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -19,6 +24,37 @@ public class PinnedSectionAdapter extends PinnedSectionBaseAdapter<Person> {
 
     public PinnedSectionAdapter(Context context) {
         super(context);
+    }
+
+    @Override
+    public void setItems(List<Person> dataList) {
+        Collections.sort(dataList, new Comparator<Person>() {
+            @Override
+            public int compare(Person lhs, Person rhs) {
+                String lhsSortKey = lhs.getSortKey();
+                String rhsSortKey = rhs.getSortKey();
+
+                if (!TextUtils.isEmpty(lhsSortKey)) {
+                    lhsSortKey = lhsSortKey.trim().toUpperCase();
+                }
+
+                if (lhsSortKey == null) {
+                    lhsSortKey = "";
+                }
+
+                if (!TextUtils.isEmpty(rhsSortKey)) {
+                    rhsSortKey = rhsSortKey.trim().toUpperCase();
+                }
+
+                if (rhsSortKey == null) {
+                    rhsSortKey = "";
+                }
+
+                return lhsSortKey.compareTo(rhsSortKey);
+            }
+        });
+
+        super.setItems(dataList);
     }
 
     @Override

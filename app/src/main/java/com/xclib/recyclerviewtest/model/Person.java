@@ -17,10 +17,8 @@ public class Person implements ISectionData {
         return name;
     }
 
-    @Override
     public String getSortKey() {
         return getName();
-
     }
 
 
